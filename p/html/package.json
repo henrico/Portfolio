@@ -1,0 +1,23 @@
+{
+  "name": "portfolio",
+  "version": "1.0.0",
+  "description": "Henrico Robinson Portfolio",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Henrico Robinson",
+  "license": "ISC",
+  "devDependencies": {
+    "bower": "^1.8.2",
+    "gulp": "^3.9.1",
+    "gulp-clean": "^0.3.2",
+    "gulp-cli": "^1.4.0",
+    "gulp-inject": "^4.3.0",
+    "gulp-less": "^3.3.2",
+    "gulp-live-server": "0.0.30",
+    "gulp-main-bower-files": "^1.6.2",
+    "gulp-sequence": "^0.4.6",
+    "gulp-uglify": "^3.0.0"
+  }
+}

@@ -20,9 +20,10 @@ import za.co.henrico.portfolio.exactcoverproblem.SolutionUnsuccessfulException;
  * @param <E>
  *            Domain representation of a partial solution.
  */
-public class DancingLinks<E extends PartialSolutionObject> implements AlgorithmX<E> {
+public class DancingLinks<E extends PartialSolutionObject> implements AlgorithmX<E>, SolutionListener<E>{
 
 	private DancingLinksMatrix<E> startMatrix;
+	private Collection<Solution<E>> solutions = new LinkedList<Solution<E>>();
 
 	/**
 	 * Creates the Algorithm from the given starter matrix.
@@ -32,46 +33,19 @@ public class DancingLinks<E extends PartialSolutionObject> implements AlgorithmX
 	 */
 	public DancingLinks(DancingLinksMatrix<E> startMatrix) {
 		this.startMatrix = startMatrix;
+		startMatrix.setSolutionListener(this);
 	}
 
 	/**
 	 * {@inheritDoc}
 	 */
 	public Collection<Solution<E>> getSolution() {
-		Collection<Solution<E>> solutions = new LinkedList<Solution<E>>();
-
-		if (startMatrix.isEmpty()) {
-			solutions.add(new Solution<E>(startMatrix.getSolution()));
-		} else {
-			Collection<ExactCoverMatrix<E>> next;
-			try {
-				next = startMatrix.moveToNextBranch();
-			} catch (SolutionUnsuccessfulException e1) {
-				return solutions;
-			}
-
-			while (!next.isEmpty()) {
-
-				Collection<ExactCoverMatrix<E>> buildList = new LinkedList<ExactCoverMatrix<E>>();
-
-				for (ExactCoverMatrix<E> current : next) {
-					if (current.isEmpty() && current.isValid()) {
-						solutions.add(new Solution<E>(current.getSolution()));
-					} else {
-						try {
-							buildList.addAll(current.moveToNextBranch());
-						} catch (SolutionUnsuccessfulException e) {
-						}
-					}
-
-				}
-
-				next = buildList;
-			}
-		}
-
+		startMatrix.solve();
 		return solutions;
+	}
 
+	public void addSolution(Solution<E> solution) {
+		solutions.add(solution);
 	}
 
 }

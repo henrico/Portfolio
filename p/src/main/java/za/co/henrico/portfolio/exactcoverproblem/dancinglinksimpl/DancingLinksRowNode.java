@@ -28,13 +28,4 @@ class DancingLinksRowNode {
 	public DancingLinksRowNode() {
 	}
 
-	DancingLinksRowNode clone(DancingLinksRowNode previous) {
-		DancingLinksRowNode node = new DancingLinksRowNode();
-		node.column = column;
-		if (next != null)
-			node.next = next.clone(node);
-		node.previous = previous;
-		return node;
-	}
-
 }

@@ -21,4 +21,28 @@ public class Route extends AbstractPersistable<Long> {
 	@Basic
 	private Long distance;
 
+	public Port getDestinationA() {
+		return destinationA;
+	}
+
+	public void setDestinationA(Port destinationA) {
+		this.destinationA = destinationA;
+	}
+
+	public Port getDestinationB() {
+		return destinationB;
+	}
+
+	public void setDestinationB(Port destinationB) {
+		this.destinationB = destinationB;
+	}
+
+	public Long getDistance() {
+		return distance;
+	}
+
+	public void setDistance(Long distance) {
+		this.distance = distance;
+	}
+
 }

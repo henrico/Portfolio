@@ -1,0 +1,33 @@
+<div ng-controller="ships">
+    <div class="row" style="padding:20px">
+  <uib-accordion close-others="'true'">
+    <div uib-accordion-group class="panel-default" heading="New Ship" id="form">
+      <model-form heading="'Add New Ship'">
+      <form-field type="'text'" data="newRow" column="'name'" label="'Name'" field-id="'name'" placeholder="'Ship Name'"></form-field>
+      <form-field type="'number'" data="newRow" column="'speed'" label="'Speed (km/day)'" field-id="'speed'" placeholder="'Speed'"></form-field>
+      <form-field type="'number'" data="newRow" column="'capacity'" label="'Capacity (crates)'" field-id="'capacity'" placeholder="'Capacity'"></form-field>
+      </model-form>
+      <button class="btn btn-primary" ng-click="add()" ng-disabled="isInvalid(newRow)" ng-class="{'disabled':isInvalid(newRow)}">Add</button>'
+    </div>
+    <div uib-accordion-group class="panel-default" heading="Ships" is-open="'true'">
+      <div>
+
+        <div class="container" id="table">
+          <div class="row">
+            <table id="shipsTable"
+                     data-toolbar="#toolbar"
+                     data-search="true"
+                     data-detail-view="true"
+                     >
+              </table>
+          </div>
+        </div>
+
+
+      </div>
+    </div>
+  </uib-accordion>
+
+</div>
+
+</div>

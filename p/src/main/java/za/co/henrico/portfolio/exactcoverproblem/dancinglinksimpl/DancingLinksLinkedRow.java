@@ -1,6 +1,10 @@
 package za.co.henrico.portfolio.exactcoverproblem.dancinglinksimpl;
 
+import java.util.Collection;
+import java.util.HashMap;
 import java.util.Iterator;
+import java.util.LinkedList;
+import java.util.Map;
 
 import za.co.henrico.portfolio.exactcoverproblem.ExactCoverRow;
 import za.co.henrico.portfolio.exactcoverproblem.PartialSolutionObject;
@@ -18,9 +22,11 @@ import za.co.henrico.portfolio.exactcoverproblem.PartialSolutionObject;
  *            The solution object that is represented by this row.
  */
 public final class DancingLinksLinkedRow<E extends PartialSolutionObject> extends ExactCoverRow<E>
-		implements Iterable<Integer>, Cloneable {
+		implements Iterable<Integer> {
 
-	private DancingLinksRowNode first;
+	private DancingLinksRowNode header;
+	private DancingLinksRowNode tail;
+	private Map<Integer,DancingLinksRowNode> removed = new HashMap<Integer,DancingLinksRowNode>();
 
 	/**
 	 * {@inheritDoc}
@@ -40,49 +46,55 @@ public final class DancingLinksLinkedRow<E extends PartialSolutionObject> extend
 	 */
 	public DancingLinksLinkedRow(E partialSolutionObject, Boolean[] columns) {
 		this(partialSolutionObject);
+		
+		header = new DancingLinksRowNode(-1);
+		tail = new DancingLinksRowNode(-1);
 
 		DancingLinksRowNode node = null;
-		DancingLinksRowNode previous = null;
+		DancingLinksRowNode previous = header;
 
 		for (int column = 0; column < columns.length; column++) {
 			if (columns[column]) {
 				node = new DancingLinksRowNode(column);
-				node.previous = previous;
-				if (previous != null) {
-					previous.next = node;
-				} else {
-					first = node;
-				}
-				previous = node;
+				node.previous=previous;
+				previous.next=node;
+				previous=node;
 			}
+			
+		}
+		
+		previous.next = tail; 
+	}
+	
+	public void removeColumns(Map<Integer,Boolean> columns) {
+		Collection<DancingLinksRowNode> toRemove = new LinkedList<DancingLinksRowNode>();
+		DancingLinksRowNode current = header;
+		do {
+			current = current.next;
+			if (columns.get(current.column)!=null) {
+				toRemove.add(current);
+			}
+		} while (current.next!=null);
+		
+		for (DancingLinksRowNode currentRemove: toRemove) {
+			removed.put(currentRemove.column, currentRemove);
+			currentRemove.previous.next = currentRemove.next;
+			currentRemove.next.previous = current.previous;
 		}
 	}
-
-	/**
-	 * Creates a row from an existing first node.
-	 * 
-	 * @param partialSolutionObject
-	 *            The domain partial solution represented by this row.
-	 * @param newNode
-	 *            The existing first node in this row.
-	 */
-	private DancingLinksLinkedRow(E partialSolutionObject, DancingLinksRowNode newNode) {
-		this(partialSolutionObject);
-		first = newNode;
+	
+	public void addBackColumn(int column) {
+		DancingLinksRowNode node = removed.get(column);
+		node.previous.next=node;
+		node.next.previous = node;
+		removed.remove(column);
 	}
 
 	/**
 	 * {@inheritDoc}
 	 */
 	public Iterator<Integer> iterator() {
-		return new DancingLinksRowNodeIterator(first);
-	}
-
-	/**
-	 * {@inheritDoc}
-	 */
-	public DancingLinksLinkedRow<E> clone() {
-		return new DancingLinksLinkedRow<E>(partialSolutionObject, first.clone(null));
+		return new DancingLinksRowNodeIterator(header.next);
 	}
 
 	/**

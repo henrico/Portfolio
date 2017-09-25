@@ -20,7 +20,7 @@ import za.co.henrico.portfolio.exactcoverproblem.SolutionUnsuccessfulException;
  * @param <E>
  *            Domain representation of a partial solution.
  */
-public class DancingLinks<E extends PartialSolutionObject> implements AlgorithmX<E>, SolutionListener<E>{
+public class DancingLinks<E extends PartialSolutionObject> implements AlgorithmX<E>, SolutionListener<E> {
 
 	private DancingLinksMatrix<E> startMatrix;
 	private Collection<Solution<E>> solutions = new LinkedList<Solution<E>>();

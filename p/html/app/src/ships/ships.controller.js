@@ -44,6 +44,9 @@ angular.module("portfolio").controller('ships', [
                 $http.delete(host.name + '/ship/' + row.id).then(function(result) {
                   $('#shipsTable').bootstrapTable('load', result.data);
                   loadRows(result);
+                  $.toaster({ message : 'Ship deleted' });
+                },function(){
+                  swal("Oops!", "Something went wrong!", "error")
                 });
               }
             }
@@ -54,12 +57,8 @@ angular.module("portfolio").controller('ships', [
       $('#shipsTable').on('expand-row.bs.table', function(e, index, row, $detail) {
         $detail.html($compile(
           '<div class="container" style="padding:0px"><div class="row"><div class="col-md-10">'+
-          '<model-form heading="\'Maintain Ship\'">'+
-          '<form-field type="\'text\'" data="rows[\''+row.id+'\']" column="\'name\'" label="\'Name\'" field-id="\'name\'" placeholder="\'Ship Name\'"></form-field>'+
-          '<form-field type="\'number\'" data="rows[\''+row.id+'\']" column="\'speed\'" label="\'Speed (km/day)\'" field-id="\'speed\'" placeholder="\'Speed\'"></form-field>'+
-          '<form-field type="\'number\'" data="rows[\''+row.id+'\']" column="\'capacity\'" label="\'Capacity (crates)\'" field-id="\'capacity\'" placeholder="\'Capacity\'"></form-field>'+
-          '</model-form>'+
-          '<button class="btn btn-success" ng-click="save(\''+row.id+'\')" ng-disabled="isInvalid(rows[\''+row.id+'\'])" ng-class="{\'disabled\':isInvalid(rows[\''+row.id+'\'])}">Update</button>'+
+          '<ship-model row="rows[\''+row.id+'\']" label="\'Edit Ship\'"></ship-model>'+
+          '<button class="btn btn-success pull-right" ng-click="save(\''+row.id+'\')" ng-disabled="isInvalid(rows[\''+row.id+'\'])" ng-class="{\'disabled\':isInvalid(rows[\''+row.id+'\'])}">Update</button>'+
           '</div></div></div>'
         )($scope));
       });
@@ -67,12 +66,15 @@ angular.module("portfolio").controller('ships', [
       $http.get(host.name + '/ships').then(function(result) {
         $('#shipsTable').bootstrapTable('load', result.data);
         loadRows(result);
+      },function(){
+        swal("Oops!", "Something went wrong!", "error")
       });
 
       $scope.save = function(id){
         $http.put(host.name + '/ship/' + id,$scope.rows[id]).then(function(result) {
           $('#shipsTable').bootstrapTable('load', result.data);
           loadRows(result);
+          $.toaster({ message : 'Ship saved' });
         });
       }
 
@@ -88,6 +90,7 @@ angular.module("portfolio").controller('ships', [
           loadRows(result);
           $('form')[0].reset();
           createNewRow();
+          $.toaster({ message : 'Ship added' });
         });
       }
 

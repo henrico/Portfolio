@@ -10,7 +10,7 @@ import za.co.henrico.portfolio.repository.ProductRepository;
 
 @Component
 public class ProductServiceImpl implements ProductService {
-	
+
 	@Autowired
 	private ProductRepository productRepository;
 

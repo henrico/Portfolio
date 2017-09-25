@@ -48,18 +48,21 @@ public final class DancingLinksMatrix<E extends PartialSolutionObject> implement
 		this(columnCount);
 		this.matrixRows = matrixRows;
 	}
-	
+
 	/**
-	 * Creates a matrix given a list of rows, existing partial solution, removed rows and the column count.
+	 * Creates a matrix given a list of rows, existing partial solution, removed
+	 * rows and the column count.
 	 * 
 	 * @param exactCoverRows
 	 *            The rows that will be in this matrix.
 	 * @param partialSolutionRows
-	 * 			  The existing partial solution.
+	 *            The existing partial solution.
 	 * @param columnCount
 	 *            The number of columns in this matrix.
 	 */
-	public DancingLinksMatrix(Collection<DancingLinksLinkedRow<E>> matrixRows,Collection<ExactCoverRow<E>> partialSolutionRows,Collection<DancingLinksLinkedRow<E>> removedRows,Map<Integer, Boolean> allRemovedColumns, int columnCount) {
+	public DancingLinksMatrix(Collection<DancingLinksLinkedRow<E>> matrixRows,
+			Collection<ExactCoverRow<E>> partialSolutionRows, Collection<DancingLinksLinkedRow<E>> removedRows,
+			Map<Integer, Boolean> allRemovedColumns, int columnCount) {
 		this(matrixRows, columnCount);
 		this.partialSolutionRows = partialSolutionRows;
 		this.removedRows = removedRows;
@@ -84,40 +87,40 @@ public final class DancingLinksMatrix<E extends PartialSolutionObject> implement
 	}
 
 	public void solve() {
-		
+
 		try {
 			int column = findFirstColumnWithLeastAmountOf1s();
-			
+
 			Collection<DancingLinksLinkedRow<E>> solver = new LinkedList<DancingLinksLinkedRow<E>>();
-					
-			for (DancingLinksLinkedRow<E> current: matrixRows) {
+
+			for (DancingLinksLinkedRow<E> current : matrixRows) {
 				solver.add(current);
 			}
-			
-			for (DancingLinksLinkedRow<E> current: solver) {
+
+			for (DancingLinksLinkedRow<E> current : solver) {
 				if (current.hasColumn(column)) {
 					solveForRow(current);
 				}
 			}
-		} catch (SolutionUnsuccessfulException e) {}
-		
-		
+		} catch (SolutionUnsuccessfulException e) {
+		}
+
 	}
 
 	private void solveForRow(DancingLinksLinkedRow<E> row) {
-		
+
 		partialSolutionRows.add(row);
-		
+
 		Map<Integer, Boolean> removedColumns = new HashMap<Integer, Boolean>();
 		for (Integer current : row) {
 			removedColumns.put(current, true);
 			allRemovedColumns.put(current, true);
 		}
-		
+
 		Collection<DancingLinksLinkedRow<E>> currentRemovedRows = new LinkedList<DancingLinksLinkedRow<E>>();
-		
+
 		for (Integer column : removedColumns.keySet()) {
-			
+
 			Iterator<DancingLinksLinkedRow<E>> i = matrixRows.iterator();
 			while (i.hasNext()) {
 				DancingLinksLinkedRow<E> current = i.next();
@@ -127,28 +130,27 @@ public final class DancingLinksMatrix<E extends PartialSolutionObject> implement
 					currentRemovedRows.add(current);
 				}
 			}
-			
+
 		}
-		
-		if (matrixRows.isEmpty() && allRemovedColumns.size()==columnCount) {
+
+		if (matrixRows.isEmpty() && allRemovedColumns.size() == columnCount) {
 			solutionListener.addSolution(new Solution<E>(partialSolutionRows));
 			System.out.println("Solution");
 		} else {
 			solve();
 		}
-		
-		for (DancingLinksLinkedRow<E> current: currentRemovedRows) {
+
+		for (DancingLinksLinkedRow<E> current : currentRemovedRows) {
 			removedRows.remove(current);
 			matrixRows.add(current);
 		}
-		
-		for (Integer current: removedColumns.keySet()) {
+
+		for (Integer current : removedColumns.keySet()) {
 			allRemovedColumns.remove(current);
 		}
-		
+
 		partialSolutionRows.remove(row);
-		
-		
+
 	}
 
 	/**
@@ -190,7 +192,7 @@ public final class DancingLinksMatrix<E extends PartialSolutionObject> implement
 	}
 
 	public void setSolutionListener(SolutionListener<E> solutionListener) {
-		this.solutionListener=solutionListener;
+		this.solutionListener = solutionListener;
 	}
 
 }

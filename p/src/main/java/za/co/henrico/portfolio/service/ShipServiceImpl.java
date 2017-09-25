@@ -10,7 +10,7 @@ import za.co.henrico.portfolio.repository.ShipRepository;
 
 @Component
 public class ShipServiceImpl implements ShipService {
-	
+
 	@Autowired
 	private ShipRepository shipRepository;
 

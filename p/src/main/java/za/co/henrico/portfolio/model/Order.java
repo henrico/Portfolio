@@ -14,7 +14,7 @@ import javax.persistence.TemporalType;
 
 import org.springframework.data.jpa.domain.AbstractPersistable;
 
-@Entity
+@Entity(name="orders")
 public class Order extends AbstractPersistable<Long> {
 
 	@OneToOne

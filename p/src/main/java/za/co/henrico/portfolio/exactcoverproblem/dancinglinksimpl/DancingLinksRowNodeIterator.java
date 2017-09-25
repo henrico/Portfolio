@@ -11,7 +11,7 @@ public class DancingLinksRowNodeIterator implements Iterator<Integer> {
 	}
 
 	public boolean hasNext() {
-		return next != null && next.column!=-1;
+		return next != null && next.column != -1;
 	}
 
 	public Integer next() {

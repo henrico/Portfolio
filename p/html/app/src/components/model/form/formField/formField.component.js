@@ -9,7 +9,17 @@ angular.module('portfolio').directive('formField',function(){ return{
     placeholder: '=',
     data: '=',
     column: '=',
-    type: '='
+    type: '=',
+    max: '=',
+    min: '=',
+    required: '='
+  },
+  link: function(scope){
+    if (scope.required === undefined || scope.required === null){
+      scope.req=true;
+    } else {
+      scope.req=scope.required;
+    }
   }
 
 }});

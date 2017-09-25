@@ -14,7 +14,7 @@ import org.apache.commons.logging.LogFactory;
 
 @SpringBootApplication
 public class App {
-	
+
 	private static Log logger = LogFactory.getLog(App.class);
 
 	@Bean
@@ -38,5 +38,4 @@ public class App {
 		SpringApplication.run(App.class, args);
 	}
 
-	
 }

@@ -3,12 +3,15 @@ package za.co.henrico.portfolio.model;
 import java.math.BigDecimal;
 
 import javax.persistence.Basic;
+import javax.persistence.Column;
 import javax.persistence.DiscriminatorColumn;
 import javax.persistence.DiscriminatorType;
 import javax.persistence.Entity;
 import javax.persistence.Inheritance;
 import javax.persistence.InheritanceType;
+import javax.persistence.JoinColumn;
 import javax.persistence.MappedSuperclass;
+import javax.persistence.OneToOne;
 
 import org.springframework.data.jpa.domain.AbstractPersistable;
 
@@ -42,6 +45,22 @@ public abstract class Warehouse extends AbstractPersistable<Long> {
 		this.storageCost = storageCost;
 	}
 
+	public String getType() {
+		return type;
+	}
+
+	public void setType(String type) {
+		this.type = type;
+	}
+
+	public Port getPort() {
+		return port;
+	}
+
+	public void setPort(Port port) {
+		this.port = port;
+	}
+
 	@Basic
 	private String name;
 
@@ -50,5 +69,12 @@ public abstract class Warehouse extends AbstractPersistable<Long> {
 
 	@Basic
 	private BigDecimal storageCost;
+
+	@Column(name = "type", nullable = false, updatable = false, insertable = false)
+	private String type;
+	
+	@OneToOne
+	@JoinColumn(name="port")
+	private Port port;
 
 }

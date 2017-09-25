@@ -2,3 +2,5 @@
 /doc/
 /.classpath
 /.project
+/html/node-modules
+/html/bower-components

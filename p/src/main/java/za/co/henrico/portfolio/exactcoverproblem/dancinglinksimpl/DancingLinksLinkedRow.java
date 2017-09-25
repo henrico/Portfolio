@@ -26,7 +26,7 @@ public final class DancingLinksLinkedRow<E extends PartialSolutionObject> extend
 
 	private DancingLinksRowNode header;
 	private DancingLinksRowNode tail;
-	private Map<Integer,DancingLinksRowNode> removed = new HashMap<Integer,DancingLinksRowNode>();
+	private Map<Integer, DancingLinksRowNode> removed = new HashMap<Integer, DancingLinksRowNode>();
 
 	/**
 	 * {@inheritDoc}
@@ -46,7 +46,7 @@ public final class DancingLinksLinkedRow<E extends PartialSolutionObject> extend
 	 */
 	public DancingLinksLinkedRow(E partialSolutionObject, Boolean[] columns) {
 		this(partialSolutionObject);
-		
+
 		header = new DancingLinksRowNode(-1);
 		tail = new DancingLinksRowNode(-1);
 
@@ -56,36 +56,36 @@ public final class DancingLinksLinkedRow<E extends PartialSolutionObject> extend
 		for (int column = 0; column < columns.length; column++) {
 			if (columns[column]) {
 				node = new DancingLinksRowNode(column);
-				node.previous=previous;
-				previous.next=node;
-				previous=node;
+				node.previous = previous;
+				previous.next = node;
+				previous = node;
 			}
-			
+
 		}
-		
-		previous.next = tail; 
+
+		previous.next = tail;
 	}
-	
-	public void removeColumns(Map<Integer,Boolean> columns) {
+
+	public void removeColumns(Map<Integer, Boolean> columns) {
 		Collection<DancingLinksRowNode> toRemove = new LinkedList<DancingLinksRowNode>();
 		DancingLinksRowNode current = header;
 		do {
 			current = current.next;
-			if (columns.get(current.column)!=null) {
+			if (columns.get(current.column) != null) {
 				toRemove.add(current);
 			}
-		} while (current.next!=null);
-		
-		for (DancingLinksRowNode currentRemove: toRemove) {
+		} while (current.next != null);
+
+		for (DancingLinksRowNode currentRemove : toRemove) {
 			removed.put(currentRemove.column, currentRemove);
 			currentRemove.previous.next = currentRemove.next;
 			currentRemove.next.previous = current.previous;
 		}
 	}
-	
+
 	public void addBackColumn(int column) {
 		DancingLinksRowNode node = removed.get(column);
-		node.previous.next=node;
+		node.previous.next = node;
 		node.next.previous = node;
 		removed.remove(column);
 	}

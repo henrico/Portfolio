@@ -7,9 +7,11 @@
   <link rel="stylesheet" href="vendor/bootstrap-table/dist/bootstrap-table.css">
   <link rel="stylesheet" href="vendor/font-awesome/css/font-awesome.min.css">
   <link rel="stylesheet" href="vendor/PACE/themes/blue/pace-theme-center-simple.css">
+  <link rel="stylesheet" href="vendor/sweetalert2/dist/sweetalert2.css">
   <!-- endinject  -->
 
   <!-- inject:css -->
+  <link rel="stylesheet" href="src/bootstrap.min.css">
   <link rel="stylesheet" href="src/index.css">
   <!-- endinject -->
 </head>
@@ -20,18 +22,31 @@
   <script src="vendor/angular/angular.js"></script>
   <script src="vendor/angular-bootstrap/ui-bootstrap-tpls.js"></script>
   <script src="vendor/angular-route/angular-route.js"></script>
-  <script src="vendor/bootstrap/dist/js/bootstrap.js"></script>
   <script src="vendor/bootstrap-table/dist/bootstrap-table.min.js"></script>
   <script src="vendor/angular-auto-validate/dist/jcs-auto-validate.js"></script>
   <script src="vendor/PACE/pace.js"></script>
+  <script src="vendor/sweetalert2/dist/sweetalert2.js"></script>
+  <script src="vendor/jquery.toaster/jquery.toaster.js"></script>
   <!-- endinject -->
 
   <!-- inject:js -->
   <script src="src/index.js"></script>
+  <script src="src/products.controller.js"></script>
+  <script src="src/products0.controller.js"></script>
+  <script src="src/orders/orders.controller.js"></script>
+  <script src="src/ports/ports.controller.js"></script>
   <script src="src/products/products.controller.js"></script>
-  <script src="src/warehouses/warehouses.controller.js"></script>
+  <script src="src/routes/routes.controller.js"></script>
   <script src="src/ships/ships.controller.js"></script>
+  <script src="src/warehouses/warehouses.controller.js"></script>
+  <script src="src/orders/model/orderModel.component.js"></script>
+  <script src="src/ports/model/portsModel.component.js"></script>
+  <script src="src/products/model/productModel.component.js"></script>
+  <script src="src/routes/model/routeModel.component.js"></script>
+  <script src="src/ships/model/shipModel.component.js"></script>
+  <script src="src/warehouses/model/warehouseModel.component.js"></script>
   <script src="src/components/model/form/form.component.js"></script>
+  <script src="src/components/model/form/domainSelect/domainSelect.component.js"></script>
   <script src="src/components/model/form/formField/formField.component.js"></script>
   <!-- endinject -->
 
@@ -44,12 +59,13 @@
       </div> -->
       <ul class="nav navbar-nav">
         <li ng-class="{ active: isActive('/') }" ><a href="#">Home</a></li>
-        <li ng-class="{ active: isActive('/orders') }"><a href="#!orders">Orders</a></li>
+        <li ng-class="{ active: isActive('/ships') }"><a href="#!ships">Ships</a></li>
+        <li ng-class="{ active: isActive('/products') }"><a href="#!products">Products</a></li>
         <li ng-class="{ active: isActive('/ports') }"><a href="#!ports">Ports</a></li>
         <li ng-class="{ active: isActive('/warehouses') }"><a href="#!warehouses">Warehouses</a></li>
-        <li ng-class="{ active: isActive('/products') }"><a href="#!products">Products</a></li>
         <li ng-class="{ active: isActive('/routes') }"><a href="#!routes">Routes</a></li>
-        <li ng-class="{ active: isActive('/ships') }"><a href="#!ships">Ships</a></li>
+        <li ng-class="{ active: isActive('/orders') }"><a href="#!orders">Orders</a></li>
+
       </ul>
     </div>
   </nav>

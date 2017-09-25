@@ -24,13 +24,15 @@
     "bootstrap-table": "^1.11.1",
     "font-awesome": "font-awsome#^4.7.0",
     "angular-auto-validate": "^1.19.6",
-    "PACE": "pace#^1.0.2"
+    "PACE": "pace#^1.0.2",
+    "sweetalert2": "^6.9.1",
+    "jquery.toaster": "^1.2.0"
   },
   "overrides": {
     "bootstrap": {
       "main": [
         "dist/css/bootstrap.css",
-        "dist/js/bootstrap.js"
+        "fonts/*"
       ]
     },
     "bootstrap-table": {

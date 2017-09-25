@@ -10,7 +10,7 @@ import za.co.henrico.portfolio.repository.RouteRepository;
 
 @Component
 public class RouteServiceImpl implements RouteService {
-	
+
 	@Autowired
 	private RouteRepository routeRepository;
 

@@ -1,20 +1,13 @@
 package za.co.henrico.portfolio.service;
 
-import java.math.BigDecimal;
-import java.math.BigInteger;
-import java.math.RoundingMode;
-import java.util.Calendar;
 import java.util.Collection;
-import java.util.Date;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.Example;
 import org.springframework.stereotype.Component;
 
 import za.co.henrico.portfolio.model.Port;
 import za.co.henrico.portfolio.model.Route;
 import za.co.henrico.portfolio.model.Schedule;
-import za.co.henrico.portfolio.repository.PortRepository;
 import za.co.henrico.portfolio.repository.RouteRepository;
 import za.co.henrico.portfolio.repository.ScheduleRepository;
 import za.co.henrico.portfolio.utils.Utils;

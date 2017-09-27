@@ -3,7 +3,6 @@ package za.co.henrico.portfolio.controller;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Collection;
-import java.util.Date;
 
 import javax.transaction.Transactional;
 
@@ -17,9 +16,8 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.RestController;
 
-import za.co.henrico.portfolio.model.ExternalWarehouse;
-import za.co.henrico.portfolio.model.InternalWarehouse;
 import za.co.henrico.portfolio.model.Order;
 import za.co.henrico.portfolio.model.Port;
 import za.co.henrico.portfolio.model.Product;
@@ -35,7 +33,7 @@ import za.co.henrico.portfolio.service.ScheduleService;
 import za.co.henrico.portfolio.service.ShipService;
 import za.co.henrico.portfolio.service.WarehouseService;
 
-@Controller
+@RestController
 @CrossOrigin(origins = "*")
 public class AppController {
 

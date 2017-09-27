@@ -1,8 +1,5 @@
 package za.co.henrico.portfolio.service;
 
-import java.math.BigDecimal;
-import java.math.RoundingMode;
-import java.util.Calendar;
 import java.util.Collection;
 import java.util.Date;
 import java.util.Iterator;

@@ -3,8 +3,6 @@ package za.co.henrico.portfolio.repository;
 import java.util.Collection;
 import java.util.Date;
 
-import javax.persistence.NamedQuery;
-
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import za.co.henrico.portfolio.model.Order;

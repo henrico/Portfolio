@@ -8,7 +8,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import za.co.henrico.portfolio.model.Port;
-import za.co.henrico.portfolio.model.Product;
 import za.co.henrico.portfolio.repository.PortRepository;
 import za.co.henrico.portfolio.repository.ProductRepository;
 import za.co.henrico.portfolio.repository.ScheduleRepository;

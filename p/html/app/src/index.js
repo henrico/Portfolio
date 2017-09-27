@@ -31,7 +31,7 @@ app.config(function($routeProvider) {
 });
 
 app.constant('host', {
-    name: 'http://localhost:8080'
+    name: '/portfolio/'
 });
 
 app.controller('indexCtrl',['$scope', '$location', function($scope,$location) {

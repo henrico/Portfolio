@@ -27,7 +27,6 @@ gulp.task('vendor', function() {
 });
 
 gulp.task('indexVendor', function() {
-console.log("####################");
   var bowerStreamJS = gulp.src('./bower.json').pipe(mainBowerFiles(), {read: false});
 
 
@@ -74,3 +73,5 @@ gulp.task('server', function() {
 });
 
 gulp.task('serve', gulpSequence('index', 'indexVendor', 'server'));
+
+gulp.task('build', gulpSequence('index', 'indexVendor'));

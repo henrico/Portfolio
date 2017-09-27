@@ -32,7 +32,7 @@
     "bootstrap": {
       "main": [
         "dist/css/bootstrap.css",
-        "fonts/*"
+        "dist/fonts/*"
       ]
     },
     "bootstrap-table": {

@@ -13,16 +13,26 @@ angular.module("portfolio").controller('warehouses', [
       }
     }
 
+    $scope.newRow = {
+      name: '',
+      type: "-1",
+      capacity: '',
+      storageCost: '',
+      transportCost: '',
+      port: {id:"-1"},
+      new: true
+    }
+
     function createNewRow(){
-      $scope.newRow = {
-        name: '',
-        type: '',
-        capacity: '',
-        storageCost: '',
-        transportCost: '',
-        port: {},
-        new: true
-      }
+
+        $scope.newRow.id= '';
+        $scope.newRow.name= '';
+        $scope.newRow.type= "-1";
+        $scope.newRow.capacity= '';
+        $scope.newRow.storageCost= '';
+        $scope.newRow.transportCost= '';
+        $scope.newRow.port= {id:"-1"};
+
     }
 
     $timeout(function(){
@@ -86,9 +96,14 @@ angular.module("portfolio").controller('warehouses', [
       });
 
       $scope.save = function(id){
-        $http.put(host.name + '/warehouse/'+$scope.rows[id].type+"/" + id,$scope.rows[id]).then(function(result) {
-          $('#warehousesTable').bootstrapTable('load', result.data);
-          loadRows(result);
+        $http.put(host.name + '/warehouse/'+ id,$scope.rows[id]).then(function(result) {
+          $.toaster({ message : 'All related Schedules Have been removed', priority : 'info' });
+          $http.get(host.name + '/warehouses').then(function(result) {
+            $('#warehousesTable').bootstrapTable('load', result.data);
+            loadRows(result);
+          },function(){
+            swal("Oops!", "Something went wrong!", "error")
+          });
           $.toaster({ message : 'Warehouse saved' });
         },function(){
           swal("Oops!", "Something went wrong!", "error")
@@ -98,20 +113,24 @@ angular.module("portfolio").controller('warehouses', [
       $scope.isInvalid = function(row){
         if (!row.transportCost || row.transportCost === '' || row.transportCost ===0) transportCost=0;
         if (!row.name || row.name==='') return true;
-        if (!row.port || !row.port.name) return true;
-        if (!row.type || row.type==='') return true;
+        if (!row.port || row.port.id===-1) return true;
+        if (!row.type || row.type===-1) return true;
         if (!row.capacity || row.capacity === '' || row.capacity ===0) return true;
         if (!row.storageCost || row.storageCost === '' || row.storageCost ===0) return true;
       }
 
       $scope.add = function(){
-        $http.post(host.name + '/warehouse/'+$scope.newRow.type,$scope.newRow).then(function(result) {
-          $('#warehousesTable').bootstrapTable('load', result.data);
-          loadRows(result);
-          $('form')[0].reset();
+        $http.post(host.name + '/warehouse',$scope.newRow).then(function(result) {
+          $http.get(host.name + '/warehouses').then(function(result) {
+            $('#warehousesTable').bootstrapTable('load', result.data);
+            loadRows(result);
+          },function(){
+            swal("Oops!", "Something went wrong!", "error")
+          });
+          $scope.formData.$setPristine();
           createNewRow();
           $.toaster({ message : 'Warehouse added' });
-        },function(){
+        },function(e){
           swal("Oops!", "Something went wrong!", "error")
         });
       }

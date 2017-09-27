@@ -1,12 +1,16 @@
 package za.co.henrico.portfolio.model;
 
+import java.util.Collection;
 import java.util.Date;
 
 import javax.persistence.Basic;
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
+import javax.persistence.FetchType;
 import javax.persistence.JoinColumn;
+import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Temporal;
@@ -14,7 +18,9 @@ import javax.persistence.TemporalType;
 
 import org.springframework.data.jpa.domain.AbstractPersistable;
 
-@Entity(name="orders")
+@Entity(name = "orders")
+@NamedQuery(name = "Order.findUnfilledOrders", query = "select o from orders o where o.orderStatus = za.co.henrico.portfolio.model.OrderStatus.PLACED"
+		+ " and o.quantity > (select COALESCE(sum(s.capacity),0) from Ship s,Schedule sc where s.id = sc.ship.id and sc.order=o)")
 public class Order extends AbstractPersistable<Long> {
 
 	@OneToOne
@@ -34,6 +40,9 @@ public class Order extends AbstractPersistable<Long> {
 
 	@Enumerated(EnumType.STRING)
 	private OrderStatus orderStatus;
+
+	@OneToMany(mappedBy = "order", fetch = FetchType.LAZY, cascade = CascadeType.REMOVE)
+	private Collection<Schedule> schedules;
 
 	public Port getDestination() {
 		return destination;

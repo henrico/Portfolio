@@ -22,7 +22,12 @@ app.config(function($routeProvider) {
     })
     .when("/orders", {
         templateUrl : "src/orders/orders.html"
+    })
+    .when("/schedules", {
+        templateUrl : "src/schedules/schedules.html"
     });
+
+    $.toaster({ settings : {timeout: 6000} });
 });
 
 app.constant('host', {

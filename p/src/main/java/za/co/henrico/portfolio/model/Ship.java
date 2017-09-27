@@ -1,7 +1,12 @@
 package za.co.henrico.portfolio.model;
 
+import java.util.Collection;
+
 import javax.persistence.Basic;
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.OneToMany;
 
 import org.springframework.data.jpa.domain.AbstractPersistable;
 
@@ -16,6 +21,9 @@ public class Ship extends AbstractPersistable<Long> {
 
 	@Basic
 	public Integer capacity;
+
+	@OneToMany(mappedBy = "ship", fetch = FetchType.LAZY, cascade = CascadeType.REMOVE)
+	private Collection<Schedule> schedules;
 
 	public String getName() {
 		return name;

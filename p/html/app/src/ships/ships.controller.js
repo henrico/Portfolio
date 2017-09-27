@@ -13,13 +13,17 @@ angular.module("portfolio").controller('ships', [
       }
     }
 
+
+    $scope.newRow = {
+      name:'',
+      speed:'',
+      capacity:'',
+      new:true
+    }
     function createNewRow(){
-      $scope.newRow = {
-        name:'',
-        speed:'',
-        capacity:'',
-        new:true
-      }
+      $scope.newRow.name='';
+      $scope.newRow.speed='';
+      $scope.newRow.capacity='';
     }
 
     $timeout(function(){
@@ -72,6 +76,7 @@ angular.module("portfolio").controller('ships', [
 
       $scope.save = function(id){
         $http.put(host.name + '/ship/' + id,$scope.rows[id]).then(function(result) {
+          $.toaster({ message : 'All related Schedules Have been removed', priority : 'info' });
           $('#shipsTable').bootstrapTable('load', result.data);
           loadRows(result);
           $.toaster({ message : 'Ship saved' });
@@ -88,7 +93,7 @@ angular.module("portfolio").controller('ships', [
         $http.post(host.name + '/ship/',$scope.newRow).then(function(result) {
           $('#shipsTable').bootstrapTable('load', result.data);
           loadRows(result);
-          $('form')[0].reset();
+          $scope.formData.$setPristine();
           createNewRow();
           $.toaster({ message : 'Ship added' });
         });

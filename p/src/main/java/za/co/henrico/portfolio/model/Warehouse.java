@@ -1,20 +1,33 @@
 package za.co.henrico.portfolio.model;
 
 import java.math.BigDecimal;
+import java.util.Collection;
 
 import javax.persistence.Basic;
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.DiscriminatorColumn;
 import javax.persistence.DiscriminatorType;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.Inheritance;
 import javax.persistence.InheritanceType;
 import javax.persistence.JoinColumn;
-import javax.persistence.MappedSuperclass;
-import javax.persistence.OneToOne;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
+import javax.persistence.Transient;
 
 import org.springframework.data.jpa.domain.AbstractPersistable;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonSubTypes;
+import com.fasterxml.jackson.annotation.JsonTypeInfo;
+
+@JsonIgnoreProperties(ignoreUnknown = true)
+@JsonTypeInfo(use = JsonTypeInfo.Id.NAME, include = JsonTypeInfo.As.PROPERTY, property = "type")
+@JsonSubTypes({ @JsonSubTypes.Type(value = InternalWarehouse.class, name = "INTERNAL"),
+
+		@JsonSubTypes.Type(value = ExternalWarehouse.class, name = "EXTERNAL") })
 @SuppressWarnings("serial")
 @Inheritance(strategy = InheritanceType.SINGLE_TABLE)
 @DiscriminatorColumn(discriminatorType = DiscriminatorType.STRING, name = "type")
@@ -72,9 +85,20 @@ public abstract class Warehouse extends AbstractPersistable<Long> {
 
 	@Column(name = "type", nullable = false, updatable = false, insertable = false)
 	private String type;
-	
-	@OneToOne
-	@JoinColumn(name="port")
+
+	@ManyToOne
+	@JoinColumn(name = "port")
 	private Port port;
+
+	@OneToMany(mappedBy = "warehouse", fetch = FetchType.LAZY, cascade = CascadeType.REMOVE)
+	private Collection<Schedule> schedules;
+
+	@Transient
+	public BigDecimal getCost(long days) {
+		return (storageCost.multiply(new BigDecimal(days))).add(getAditionalCost());
+	}
+
+	@Transient
+	protected abstract BigDecimal getAditionalCost();
 
 }

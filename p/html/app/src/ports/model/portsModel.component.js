@@ -60,6 +60,9 @@ angular.module('portfolio').component('portModel', {
         });
 
         $http.get(host.name + '/products').then(function(result) {
+          if (result.data.length==0){
+            $.toaster({ message : 'There are no Products', priority : 'warning' });
+          }
           $('#portsTable' + $scope.$ctrl.row.id).bootstrapTable('load', result.data);
           var table = angular.element('#portsTable' + $scope.$ctrl.row.id);
           $compile(table)($scope);

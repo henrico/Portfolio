@@ -1,6 +1,7 @@
 package za.co.henrico.portfolio.service;
 
 import java.util.Collection;
+import java.util.Date;
 
 import za.co.henrico.portfolio.model.Warehouse;
 
@@ -10,6 +11,8 @@ public interface WarehouseService {
 
 	Collection<Warehouse> deleteWarehouse(long id);
 
-	Collection<Warehouse> saveWarehouse(Warehouse warehouse);
+	void saveWarehouse(Warehouse warehouse);
+
+	Collection<Warehouse> getAvailibeWarehouses(long orderId, long portId, long shipId, Date parse);
 
 }

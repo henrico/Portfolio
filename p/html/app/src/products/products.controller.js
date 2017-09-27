@@ -12,12 +12,13 @@ angular.module("portfolio").controller('products', [
         $scope.rows[result.data[cur].id] = result.data[cur];
       }
     }
-
+    $scope.newRow = {
+      name:'',
+      collectionDate:null,
+      new:true
+    }
     function createNewRow(){
-      $scope.newRow = {
-        name:'',
-        new:true
-      }
+      $scope.newRow.name='';
     }
 
     $timeout(function(){
@@ -80,7 +81,7 @@ angular.module("portfolio").controller('products', [
         $http.post(host.name + '/product/',$scope.newRow).then(function(result) {
           $('#productsTable').bootstrapTable('load', result.data);
           loadRows(result);
-          $('form')[0].reset();
+          $scope.formData.$setPristine();
           createNewRow();
           $.toaster({ message : 'Product added' });
         },function(){

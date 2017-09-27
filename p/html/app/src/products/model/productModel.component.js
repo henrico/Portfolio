@@ -4,6 +4,6 @@ angular.module('portfolio').component('productModel',{
   bindings:{
     row: '=',
     label: '='
-  }
+  },
 
 });

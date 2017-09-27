@@ -33,12 +33,18 @@ angular.module('portfolio').component('orderModel',{
     }
 
     $http.get(host.name + '/ports').then(function(result) {
+      if (result.data.length==0){
+        $.toaster({ message : 'There are no Ports', priority : 'warning' });
+      }
       $scope.$ctrl.portmodels = result.data;
     }, function() {
       swal("Oops!", "Something went wrong!", "error")
     });
 
     $http.get(host.name + '/products').then(function(result) {
+      if (result.data.length==0){
+        $.toaster({ message : 'There are no Products', priority : 'warning' });
+      }
       $scope.$ctrl.productsmodels = result.data;
     }, function() {
       swal("Oops!", "Something went wrong!", "error")

@@ -13,26 +13,29 @@ angular.module("portfolio").controller('orders', [
       }
     }
 
+    $scope.newRow = {
+      destination:{id:"-1"},
+      product:{id:"-1"},
+      quantity:'',
+      orderStatus: 'PLACED',
+      deliveryDate: new Date(),
+      new:true
+    }
+
     function createNewRow(){
 
-      var date = null;
-      if ($scope.newRow){
-        date = newRow.deliveryDate;
-      }
-
-      $scope.newRow = {
-        destination:{},
-        product:{},
-        quantity:'',
-        orderStatus: 'PLACED',
-        deliveryDate: date,
-        new:true
-      }
+        $scope.newRow.quantity='';
+        $scope.newRow.destination={id:"-1"};
+        $scope.newRow.product={id:"-1"};
     }
 
     $timeout(function(){
       $('#ordersTable').bootstrapTable({
         columns: [
+            {
+              title: 'Number',
+              field: 'id',
+           },
            {
             title: 'Destination',
               formatter: function(index, row, element) {
@@ -109,6 +112,7 @@ angular.module("portfolio").controller('orders', [
       });
 
       $scope.save = function(id){
+        $.toaster({ message : 'All related Schedules Have been removed', priority : 'info' });
         $http.put(host.name + '/order/' + id,$scope.rows[id]).then(function(result) {
           $('#ordersTable').bootstrapTable('load', result.data);
           loadRows(result);
@@ -128,8 +132,8 @@ angular.module("portfolio").controller('orders', [
         $http.post(host.name + '/order/',$scope.newRow).then(function(result) {
           $('#ordersTable').bootstrapTable('load', result.data);
           loadRows(result);
-          $('form')[0].reset();
           createNewRow();
+          $scope.formData.$setPristine();
           $.toaster({ message : 'Order added' });
         },function(){
           swal("Oops!", "Something went wrong!", "error")

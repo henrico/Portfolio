@@ -13,13 +13,16 @@ angular.module("portfolio").controller('ports', [
       }
     }
 
-    function createNewRow(){
       $scope.newRow = {
         name:'',
         id: '-1',
         products: [],
         new:true
       }
+
+    function createNewRow(){
+      $scope.newRow.name='';
+      $scope.newRow.id= '-1';
     }
 
     $timeout(function(){
@@ -66,6 +69,7 @@ angular.module("portfolio").controller('ports', [
 
       $scope.save = function(id){
         $http.put(host.name + '/port/' + id,$scope.rows[id]).then(function(result) {
+          $.toaster({ message : 'All related Schedules Have been removed', priority : 'info' });
           $('#portsTable').bootstrapTable('load', result.data);
           loadRows(result);
           $.toaster({ message : 'Port saved' });
@@ -82,7 +86,7 @@ angular.module("portfolio").controller('ports', [
         $http.post(host.name + '/port/',$scope.newRow).then(function(result) {
           $('#portsTable').bootstrapTable('load', result.data);
           loadRows(result);
-          $('form')[0].reset();
+          $scope.formData.$setPristine();
           createNewRow();
           $.toaster({ message : 'Port added' });
         },function(){

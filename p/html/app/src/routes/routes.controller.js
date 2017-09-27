@@ -13,13 +13,16 @@ angular.module("portfolio").controller('routes', [
       }
     }
 
+    $scope.newRow = {
+      destinationA: {id:"-1"},
+      destinationB: {id:"-1"},
+      distance: '',
+      new:true
+    }
     function createNewRow(){
-      $scope.newRow = {
-        destinationA: {},
-        destinationB: {},
-        distance: '',
-        new:true
-      }
+      $scope.newRow.distance='';
+      $scope.newRow.destinationA={id:"-1"};
+      $scope.newRow.destinationB={id:"-1"};
     }
 
     $timeout(function(){
@@ -94,7 +97,7 @@ angular.module("portfolio").controller('routes', [
         $http.post(host.name + '/route/',$scope.newRow).then(function(result) {
           $('#routesTable').bootstrapTable('load', result.data);
           loadRows(result);
-          $('form')[0].reset();
+          $scope.formData.$setPristine();
           $.toaster({ message : 'Route added' });
           createNewRow();
         });

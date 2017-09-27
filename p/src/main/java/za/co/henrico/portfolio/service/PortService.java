@@ -11,5 +11,7 @@ public interface PortService {
 	Collection<Port> deletePort(long id);
 
 	Collection<Port> savePort(Port port);
+	
+	Collection<Port> getPortsProducingProduct(long id);
 
 }

@@ -1,4 +1,4 @@
-angular.module('portfolio').directive('formSelect', function() {
+angular.module('portfolio').directive('formSelect',['$timeout', function($timeout) {
   return {
 
     templateUrl: 'src/components/model/form/domainSelect/domainSelect.html',
@@ -11,13 +11,23 @@ angular.module('portfolio').directive('formSelect', function() {
         } else {
           scope.field = scope.data[scope.column];
         }
+
+        var selecting=false;
         scope.$watch('field', function(n, o) {
           if (n && n != o) {
+            selecting=true;
             if (scope.applyModel){
               scope.data[scope.column] = getModelById(n);
             } else {
-              scope.data[scope.column] = getModelById(n)['id'];
+              if (n!=-1)
+                scope.data[scope.column] = getModelById(n)['id'];
+              else
+                scope.data[scope.column] = '';
             }
+            $timeout(function(){
+              selecting=false;
+            });
+
 
           }
         })
@@ -29,6 +39,16 @@ angular.module('portfolio').directive('formSelect', function() {
             }
           }
         }
+
+        scope.$watch('data.'+scope.column, function(n,o){
+          if (!selecting && n && n!=o){
+            if (scope.applyModel){
+              scope.field = scope.data[scope.column].id;
+            } else {
+              scope.field = scope.data[scope.column];
+            }
+          }
+        })
       },
     scope: {
       label: '=',
@@ -43,4 +63,4 @@ angular.module('portfolio').directive('formSelect', function() {
     }
 
   }
-});
+}]);

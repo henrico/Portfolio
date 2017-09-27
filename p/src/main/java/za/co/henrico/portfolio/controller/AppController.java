@@ -1,13 +1,17 @@
 package za.co.henrico.portfolio.controller;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.Collection;
+import java.util.Date;
 
 import javax.transaction.Transactional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -20,12 +24,14 @@ import za.co.henrico.portfolio.model.Order;
 import za.co.henrico.portfolio.model.Port;
 import za.co.henrico.portfolio.model.Product;
 import za.co.henrico.portfolio.model.Route;
+import za.co.henrico.portfolio.model.Schedule;
 import za.co.henrico.portfolio.model.Ship;
 import za.co.henrico.portfolio.model.Warehouse;
 import za.co.henrico.portfolio.service.OrderService;
 import za.co.henrico.portfolio.service.PortService;
 import za.co.henrico.portfolio.service.ProductService;
 import za.co.henrico.portfolio.service.RouteService;
+import za.co.henrico.portfolio.service.ScheduleService;
 import za.co.henrico.portfolio.service.ShipService;
 import za.co.henrico.portfolio.service.WarehouseService;
 
@@ -35,7 +41,7 @@ public class AppController {
 
 	@Autowired
 	ShipService shipService;
-	
+
 	@Autowired
 	OrderService orderService;
 
@@ -50,6 +56,9 @@ public class AppController {
 
 	@Autowired
 	WarehouseService warehouseService;
+
+	@Autowired
+	ScheduleService scheduleService;
 
 	@RequestMapping("/ships")
 	@Transactional
@@ -74,7 +83,32 @@ public class AppController {
 	public @ResponseBody Collection<Ship> addShips(@RequestBody Ship ship) {
 		return shipService.saveShip(ship);
 	}
-	
+
+	@RequestMapping("/schedules")
+	@Transactional
+	public @ResponseBody Collection<Schedule> getSchedules() {
+		return scheduleService.getSchedules();
+	}
+
+	@RequestMapping(value = "/schedule/{id}", method = RequestMethod.DELETE)
+	@Transactional
+	public @ResponseBody Collection<Schedule> deleteSchedules(@PathVariable("id") long id) {
+		return scheduleService.deleteSchedule(id);
+	}
+
+	@RequestMapping(value = "/schedule/{id}", method = RequestMethod.PUT)
+	@Transactional
+	public @ResponseBody Collection<Schedule> saveSchedule(@PathVariable("id") long id,
+			@RequestBody Schedule schedule) {
+		return scheduleService.saveSchedule(schedule);
+	}
+
+	@RequestMapping(value = "/schedule", method = RequestMethod.POST)
+	@Transactional
+	public @ResponseBody Collection<Schedule> addSchedules(@RequestBody Schedule schedule) {
+		return scheduleService.saveSchedule(schedule);
+	}
+
 	@RequestMapping("/orders")
 	@Transactional
 	public @ResponseBody Collection<Order> getOrders() {
@@ -183,30 +217,46 @@ public class AppController {
 		return warehouseService.deleteWarehouse(id);
 	}
 
-	@RequestMapping(value = "/warehouse/EXTERNAL/{id}", method = RequestMethod.PUT)
+	@SuppressWarnings("rawtypes")
+	@RequestMapping(value = "/warehouse/{id}", method = RequestMethod.PUT)
 	@Transactional
-	public @ResponseBody Collection<Warehouse> saveExternalWarehouse(@PathVariable("id") long id,
-			@RequestBody ExternalWarehouse warehouse) {
-		return warehouseService.saveWarehouse(warehouse);
+	public @ResponseBody ResponseEntity saveWarehouse(@PathVariable("id") long id, @RequestBody Warehouse warehouse) {
+		warehouseService.saveWarehouse(warehouse);
+		return new ResponseEntity(new EmptyJsonResponse(), HttpStatus.OK);
 	}
 
-	@RequestMapping(value = "/warehouse/INTERNAL/{id}", method = RequestMethod.PUT)
+	@SuppressWarnings("rawtypes")
+	@RequestMapping(value = "/warehouse", method = RequestMethod.POST)
 	@Transactional
-	public @ResponseBody Collection<Warehouse> saveInternalWarehouse(@PathVariable("id") long id,
-			@RequestBody InternalWarehouse warehouse) {
-		return warehouseService.saveWarehouse(warehouse);
+	public @ResponseBody ResponseEntity addWarehouse(@RequestBody Warehouse warehouse) {
+		warehouseService.saveWarehouse(warehouse);
+		return new ResponseEntity(new EmptyJsonResponse(), HttpStatus.OK);
 	}
 
-	@RequestMapping(value = "/warehouse/EXTERNAL", method = RequestMethod.POST)
+	@RequestMapping("/unfilledOrders")
 	@Transactional
-	public @ResponseBody Collection<Warehouse> addExternalWarehouses(@RequestBody ExternalWarehouse warehouse) {
-		return warehouseService.saveWarehouse(warehouse);
+	public @ResponseBody Collection<Order> getUnfilledOrders() {
+		return orderService.findUnfilledOrders();
 	}
-
-	@RequestMapping(value = "/warehouse/INTERNAL", method = RequestMethod.POST)
+	
+	@RequestMapping("/portsProducingProduct/{productId}")
 	@Transactional
-	public @ResponseBody Collection<Warehouse> addInternalWarehouses(@RequestBody InternalWarehouse warehouse) {
-		return warehouseService.saveWarehouse(warehouse);
+	public @ResponseBody Collection<Port> getPortsProducingProduct(@PathVariable("productId") long id) {
+		return portService.getPortsProducingProduct(id);
+	}
+	
+	@RequestMapping("/shipsForOrder/{orderId}/{portId}/{date}")
+	@Transactional
+	public @ResponseBody Collection<Ship> getShipsForOrder(@PathVariable("orderId") long orderId,@PathVariable("portId") long portId,@PathVariable("date") String date) throws ParseException {
+		SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+		return shipService.getAvailibeShipsForOrder(orderId, portId, dateFormat.parse(date));
+	}
+	
+	@RequestMapping("/warehousesForOrder/{orderId}/{portId}/{shipId}/{date}")
+	@Transactional
+	public @ResponseBody Collection<Warehouse> getShipsForOrder(@PathVariable("orderId") long orderId,@PathVariable("portId") long portId,@PathVariable("shipId") long shipId,@PathVariable("date") String date) throws ParseException {
+		SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+		return warehouseService.getAvailibeWarehouses(orderId, portId, shipId, dateFormat.parse(date));
 	}
 
 }

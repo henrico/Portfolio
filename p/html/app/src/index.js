@@ -30,8 +30,13 @@ app.config(function($routeProvider) {
     $.toaster({ settings : {timeout: 6000} });
 });
 
+var server = '@restServerName@';
+if (server === '@'+'restServerName@'){
+  server  = 'http://localhost:8080';
+}
+
 app.constant('host', {
-    name: '/portfolio/'
+    name: server
 });
 
 app.controller('indexCtrl',['$scope', '$location', function($scope,$location) {

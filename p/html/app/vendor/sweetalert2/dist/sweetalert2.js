@@ -1,5 +1,5 @@
 /*!
- * sweetalert2 v6.9.1
+ * sweetalert2 v6.10.2
  * Released under the MIT License.
  */
 (function (global, factory) {
@@ -7,6 +7,24 @@
 	typeof define === 'function' && define.amd ? define(factory) :
 	(global.Sweetalert2 = factory());
 }(this, (function () { 'use strict';
+
+function __$styleInject(css, returnValue) {
+  if (typeof document === 'undefined') {
+    return returnValue;
+  }
+  css = css || '';
+  var head = document.head || document.getElementsByTagName('head')[0];
+  var style = document.createElement('style');
+  style.type = 'text/css';
+  head.appendChild(style);
+  
+  if (style.styleSheet){
+    style.styleSheet.cssText = css;
+  } else {
+    style.appendChild(document.createTextNode(css));
+  }
+  return returnValue;
+}
 
 var defaultParams = {
   title: '',
@@ -77,6 +95,8 @@ var swalClasses = prefix(['container', 'shown', 'iosfix', 'modal', 'overlay', 'f
 
 var iconTypes = prefix(['success', 'warning', 'info', 'question', 'error']);
 
+var consolePrefix = 'SweetAlert2:';
+
 /*
  * Set hover, active and focus-states for buttons (source: http://www.sitepoint.com/javascript-generate-lighter-darker-color)
  */
@@ -109,6 +129,22 @@ var uniqueArray = function uniqueArray(arr) {
   return result;
 };
 
+/**
+ * Standardise console warnings
+ * @param message
+ */
+var warn = function warn(message) {
+  console.warn(consolePrefix + ' ' + message);
+};
+
+/**
+ * Standardise console errors
+ * @param message
+ */
+var error = function error(message) {
+  console.error(consolePrefix + ' ' + message);
+};
+
 // Remember state in cases where opening and handling a modal will fiddle with it.
 var states = {
   previousWindowKeyDown: null,
@@ -126,7 +162,7 @@ var states = {
   }
 
   if (typeof document === 'undefined') {
-    console.error('SweetAlert2 requires document to initialize');
+    error('SweetAlert2 requires document to initialize');
     return;
   }
 
@@ -148,15 +184,6 @@ var states = {
 
   input.oninput = function () {
     sweetAlert.resetValidationError();
-  };
-
-  input.onkeydown = function (event) {
-    setTimeout(function () {
-      if (event.keyCode === 13 && params.allowEnterKey) {
-        event.stopPropagation();
-        sweetAlert.clickConfirm();
-      }
-    }, 0);
   };
 
   file.onchange = function () {
@@ -223,10 +250,6 @@ var getImage = function getImage() {
   return elementByClass(swalClasses.image);
 };
 
-var getButtonsWrapper = function getButtonsWrapper() {
-  return elementByClass(swalClasses.buttonswrapper);
-};
-
 var getProgressSteps = function getProgressSteps() {
   return elementByClass(swalClasses.progresssteps);
 };
@@ -241,6 +264,10 @@ var getConfirmButton = function getConfirmButton() {
 
 var getCancelButton = function getCancelButton() {
   return elementByClass(swalClasses.cancel);
+};
+
+var getButtonsWrapper = function getButtonsWrapper() {
+  return elementByClass(swalClasses.buttonswrapper);
 };
 
 var getCloseButton = function getCloseButton() {
@@ -562,12 +589,20 @@ var queue = [];
 var swal2Observer = void 0;
 
 /*
+ * Check for the existence of Promise
+ * Hopefully to avoid many github issues
+ */
+if (typeof Promise === 'undefined') {
+  error('This package requires a Promise library, please include a shim to enable it in this browser (See: https://github.com/limonte/sweetalert2/wiki/Migration-from-SweetAlert-to-SweetAlert2#1-ie-support)');
+}
+
+/*
  * Set type, text and actions on modal
  */
 var setParameters = function setParameters(params) {
   // If a custom element is set, determine if it is valid
   if (typeof params.target === 'string' && !document.querySelector(params.target) || typeof params.target !== 'string' && !params.target.appendChild) {
-    console.warn('SweetAlert2: Target parameter is not valid, defaulting to "body"');
+    warn('Target parameter is not valid, defaulting to "body"');
     params.target = 'body';
   }
 
@@ -583,7 +618,7 @@ var setParameters = function setParameters(params) {
 
   for (var param in params) {
     if (!sweetAlert.isValidParameter(param)) {
-      console.warn('SweetAlert2: Unknown parameter "' + param + '"');
+      warn('Unknown parameter "' + param + '"');
     }
   }
 
@@ -653,7 +688,7 @@ var setParameters = function setParameters(params) {
     show(progressStepsContainer);
     empty(progressStepsContainer);
     if (currentProgressStep >= params.progressSteps.length) {
-      console.warn('SweetAlert2: Invalid currentProgressStep parameter, it should be less than progressSteps.length ' + '(currentProgressStep like JS arrays starts from 0)');
+      warn('Invalid currentProgressStep parameter, it should be less than progressSteps.length ' + '(currentProgressStep like JS arrays starts from 0)');
     }
     params.progressSteps.forEach(function (step, index) {
       var circle = document.createElement('li');
@@ -688,7 +723,7 @@ var setParameters = function setParameters(params) {
       }
     }
     if (!validType) {
-      console.error('SweetAlert2: Unknown alert type: ' + params.type);
+      error('Unknown alert type: ' + params.type);
       return false;
     }
     var icon = modal.querySelector('.' + swalClasses.icon + '.' + iconTypes[params.type]);
@@ -801,7 +836,7 @@ var setParameters = function setParameters(params) {
 
   // showLoaderOnConfirm && preConfirm
   if (params.showLoaderOnConfirm && !params.preConfirm) {
-    console.warn('SweetAlert2: showLoaderOnConfirm is set to true, but preConfirm is not defined.\n' + 'showLoaderOnConfirm should be used together with preConfirm, see usage example:\n' + 'https://limonte.github.io/sweetalert2/#ajax-request');
+    warn('showLoaderOnConfirm is set to true, but preConfirm is not defined.\n' + 'showLoaderOnConfirm should be used together with preConfirm, see usage example:\n' + 'https://limonte.github.io/sweetalert2/#ajax-request');
   }
 };
 
@@ -891,7 +926,7 @@ var sweetAlert = function sweetAlert() {
   }
 
   if (args[0] === undefined) {
-    console.error('SweetAlert2 expects at least 1 attribute!');
+    error('SweetAlert2 expects at least 1 attribute!');
     return false;
   }
 
@@ -938,7 +973,7 @@ var sweetAlert = function sweetAlert() {
       break;
 
     default:
-      console.error('SweetAlert2: Unexpected type of argument! Expected "string" or "object", got ' + _typeof(args[0]));
+      error('Unexpected type of argument! Expected "string" or "object", got ' + _typeof(args[0]));
       return false;
   }
 
@@ -1019,10 +1054,10 @@ var sweetAlert = function sweetAlert() {
         params.preConfirm(value, params.extraParams).then(function (preConfirmValue) {
           sweetAlert.closeModal(params.onClose);
           resolve(preConfirmValue || value);
-        }, function (error) {
+        }, function (error$$1) {
           sweetAlert.hideLoading();
-          if (error) {
-            sweetAlert.showValidationError(error);
+          if (error$$1) {
+            sweetAlert.showValidationError(error$$1);
           }
         });
       } else {
@@ -1086,11 +1121,11 @@ var sweetAlert = function sweetAlert() {
                   sweetAlert.enableButtons();
                   sweetAlert.enableInput();
                   confirm(inputValue);
-                }, function (error) {
+                }, function (error$$1) {
                   sweetAlert.enableButtons();
                   sweetAlert.enableInput();
-                  if (error) {
-                    sweetAlert.showValidationError(error);
+                  if (error$$1) {
+                    sweetAlert.showValidationError(error$$1);
                   }
                 });
               } else {
@@ -1185,26 +1220,26 @@ var sweetAlert = function sweetAlert() {
 
     var handleKeyDown = function handleKeyDown(event) {
       var e = event || window.event;
-      var keyCode = e.keyCode || e.which;
 
-      if ([9, 13, 32, 27, 37, 38, 39, 40].indexOf(keyCode) === -1) {
-        // Don't do work on keys we don't care about.
-        return;
-      }
-
-      var targetElement = e.target || e.srcElement;
-
-      var focusableElements = getFocusableElements(params.focusCancel);
-      var btnIndex = -1; // Find the button - note, this is a nodelist, not an array.
-      for (var _i4 = 0; _i4 < focusableElements.length; _i4++) {
-        if (targetElement === focusableElements[_i4]) {
-          btnIndex = _i4;
-          break;
+      if (e.key === 'Enter') {
+        if (e.target === getInput()) {
+          sweetAlert.clickConfirm();
+          e.preventDefault();
         }
-      }
 
-      // TAB
-      if (keyCode === 9) {
+        // TAB
+      } else if (e.key === 'Tab') {
+        var targetElement = e.target || e.srcElement;
+
+        var focusableElements = getFocusableElements(params.focusCancel);
+        var btnIndex = -1; // Find the button - note, this is a nodelist, not an array.
+        for (var _i4 = 0; _i4 < focusableElements.length; _i4++) {
+          if (targetElement === focusableElements[_i4]) {
+            btnIndex = _i4;
+            break;
+          }
+        }
+
         if (!e.shiftKey) {
           // Cycle to the next button
           setFocus(btnIndex, 1);
@@ -1216,7 +1251,7 @@ var sweetAlert = function sweetAlert() {
         e.preventDefault();
 
         // ARROWS - switch focus between buttons
-      } else if (keyCode === 37 || keyCode === 38 || keyCode === 39 || keyCode === 40) {
+      } else if (['ArrowLeft', 'ArrowRight', 'ArrowUp', 'Arrowdown'].includes(e.key)) {
         // focus Cancel button if Confirm button is currently focused
         if (document.activeElement === confirmButton && isVisible(cancelButton)) {
           cancelButton.focus();
@@ -1226,7 +1261,7 @@ var sweetAlert = function sweetAlert() {
         }
 
         // ESC
-      } else if (keyCode === 27 && params.allowEscapeKey === true) {
+      } else if (e.key === 'Escape' && params.allowEscapeKey === true) {
         sweetAlert.closeModal(params.onClose);
         if (params.useRejections) {
           reject('esc');
@@ -1350,9 +1385,9 @@ var sweetAlert = function sweetAlert() {
     }, 50);
 
     // Show block with validation error
-    sweetAlert.showValidationError = function (error) {
+    sweetAlert.showValidationError = function (error$$1) {
       var validationError = getValidationError();
-      validationError.innerHTML = error;
+      validationError.innerHTML = error$$1;
       show(validationError);
 
       var input = getInput();
@@ -1537,7 +1572,7 @@ var sweetAlert = function sweetAlert() {
       case null:
         break;
       default:
-        console.error('SweetAlert2: Unexpected type of input! Expected "text", "email", "password", "number", "tel", "select", "radio", "checkbox", "textarea", "file" or "url", got "' + params.input + '"');
+        error('Unexpected type of input! Expected "text", "email", "password", "number", "tel", "select", "radio", "checkbox", "textarea", "file" or "url", got "' + params.input + '"');
         break;
     }
 
@@ -1551,7 +1586,7 @@ var sweetAlert = function sweetAlert() {
       } else if (_typeof(params.inputOptions) === 'object') {
         populateInputOptions(params.inputOptions);
       } else {
-        console.error('SweetAlert2: Unexpected type of inputOptions! Expected object or Promise, got ' + _typeof(params.inputOptions));
+        error('Unexpected type of inputOptions! Expected object or Promise, got ' + _typeof(params.inputOptions));
       }
     }
 
@@ -1739,12 +1774,12 @@ sweetAlert.isValidParameter = function (paramName) {
 */
 sweetAlert.setDefaults = function (userParams) {
   if (!userParams || (typeof userParams === 'undefined' ? 'undefined' : _typeof(userParams)) !== 'object') {
-    return console.error('SweetAlert2: the argument for setDefaults() is required and has to be a object');
+    return error('the argument for setDefaults() is required and has to be a object');
   }
 
   for (var param in userParams) {
     if (!sweetAlert.isValidParameter(param)) {
-      console.warn('SweetAlert2: Unknown parameter "' + param + '"');
+      warn('Unknown parameter "' + param + '"');
       delete userParams[param];
     }
   }
@@ -1761,7 +1796,7 @@ sweetAlert.resetDefaults = function () {
 
 sweetAlert.noop = function () {};
 
-sweetAlert.version = '6.9.1';
+sweetAlert.version = '6.10.2';
 
 sweetAlert.default = sweetAlert;
 

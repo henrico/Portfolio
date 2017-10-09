@@ -81,7 +81,7 @@
 		<finalName>portfolio</finalName>
 		<resources>
 			<resource>
-				<directory>/html/app</directory>
+				<directory>${basedir}/html/app</directory>
 			</resource>
 
 			<resource>
@@ -100,7 +100,7 @@
 				<executions>
 					<execution>
 						<id>copy-resources</id>
-						<phase>package</phase>
+						<phase>compile</phase>
 						<goals>
 							<goal>copy-resources</goal>
 						</goals>
@@ -108,7 +108,7 @@
 							<outputDirectory>${basedir}/public</outputDirectory>
 							<resources>
 								<resource>
-									<directory>/html/app</directory>
+									<directory>${basedir}/html/app</directory>
 									<filtering>true</filtering>
 								</resource>
 							</resources>
@@ -116,7 +116,7 @@
 					</execution>
 					<execution>
 						<id>copy-resources-target</id>
-						<phase>package</phase>
+						<phase>compile</phase>
 						<goals>
 							<goal>copy-resources</goal>
 						</goals>
@@ -124,7 +124,7 @@
 							<outputDirectory>${basedir}/target/portfolio</outputDirectory>
 							<resources>
 								<resource>
-									<directory>/html/app</directory>
+									<directory>${basedir}/html/app</directory>
 									<filtering>true</filtering>
 								</resource>
 							</resources>

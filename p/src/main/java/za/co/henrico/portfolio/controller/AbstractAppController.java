@@ -50,13 +50,13 @@ public abstract class AbstractAppController<E extends AbstractPersistable> {
 		return getService().getList();
 	}
 
-	@RequestMapping(value = "", method = RequestMethod.DELETE)
+	@RequestMapping(value = "/{id}", method = RequestMethod.DELETE)
 	@Transactional
 	public @ResponseBody Collection<E> delete(@PathVariable("id") long id) {
 		return getService().delete(id);
 	}
 
-	@RequestMapping(value = "", method = RequestMethod.PUT)
+	@RequestMapping(value = "/{id}", method = RequestMethod.PUT)
 	@Transactional
 	public @ResponseBody Collection<E> saveShip(@PathVariable("id") long id, @RequestBody E object) {
 		return getService().save(object);

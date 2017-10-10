@@ -82,7 +82,7 @@ angular.module("portfolio").controller('orders', [
               events: {
 
                 'click .remove': function(e, value, row, index) {
-                  $http.delete(host.name + '/order/' + row.id).then(function(result) {
+                  $http.delete(host.name + '/rest/order/' + row.id).then(function(result) {
                     $('#ordersTable').bootstrapTable('load', result.data);
                     loadRows(result);
                     $.toaster({ message : 'Order deleted' });
@@ -104,7 +104,7 @@ angular.module("portfolio").controller('orders', [
         )($scope));
       });
 
-      $http.get(host.name + '/orders').then(function(result) {
+      $http.get(host.name + '/rest/order').then(function(result) {
         $('#ordersTable').bootstrapTable('load', result.data);
         loadRows(result);
       },function(){
@@ -113,7 +113,7 @@ angular.module("portfolio").controller('orders', [
 
       $scope.save = function(id){
         $.toaster({ message : 'All related Schedules Have been removed', priority : 'info' });
-        $http.put(host.name + '/order/' + id,$scope.rows[id]).then(function(result) {
+        $http.put(host.name + '/rest/order/' + id,$scope.rows[id]).then(function(result) {
           $('#ordersTable').bootstrapTable('load', result.data);
           loadRows(result);
           $.toaster({ message : 'Order saved' });
@@ -129,7 +129,7 @@ angular.module("portfolio").controller('orders', [
       }
 
       $scope.add = function(){
-        $http.post(host.name + '/order/',$scope.newRow).then(function(result) {
+        $http.post(host.name + '/rest/order/',$scope.newRow).then(function(result) {
           $('#ordersTable').bootstrapTable('load', result.data);
           loadRows(result);
           createNewRow();

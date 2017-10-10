@@ -4,14 +4,8 @@ import java.util.Collection;
 
 import za.co.henrico.portfolio.model.Port;
 
-public interface PortService {
+public interface PortService extends RestService<Port> {
 
-	Collection<Port> getPorts();
-
-	Collection<Port> deletePort(long id);
-
-	Collection<Port> savePort(Port port);
-	
 	Collection<Port> getPortsProducingProduct(long id);
 
 }

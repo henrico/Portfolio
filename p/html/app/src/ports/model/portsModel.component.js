@@ -59,7 +59,7 @@ angular.module('portfolio').component('portModel', {
           ]
         });
 
-        $http.get(host.name + '/products').then(function(result) {
+        $http.get(host.name + '/rest/product').then(function(result) {
           if (result.data.length==0){
             $.toaster({ message : 'There are no Products', priority : 'warning' });
           }

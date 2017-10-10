@@ -14,13 +14,13 @@ import org.springframework.data.jpa.domain.AbstractPersistable;
 public class Ship extends AbstractPersistable<Long> {
 
 	@Basic
-	public String name;
+	private String name;
 
 	@Basic
-	public Integer speed;
+	private Integer speed;
 
 	@Basic
-	public Integer capacity;
+	private Integer capacity;
 
 	@OneToMany(mappedBy = "ship", fetch = FetchType.LAZY, cascade = CascadeType.REMOVE)
 	private Collection<Schedule> schedules;

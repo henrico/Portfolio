@@ -38,7 +38,7 @@ angular.module('portfolio').component('scheduleModel',{
 
     $scope.$on("RELOAD ORDERS",function(){
       $scope.$ctrl.row.order={id:"-1"};
-      $http.get(host.name + '/unfilledOrders').then(function(result) {
+      $http.get(host.name + '/rest/schedule/unfilledOrders').then(function(result) {
         $scope.$ctrl.orders = result.data;
         if (result.data.length==0){
           $.toaster({ message : 'There are no Unfilled Orders', priority : 'info' });
@@ -53,7 +53,7 @@ angular.module('portfolio').component('scheduleModel',{
       });
     })
 
-    $http.get(host.name + '/unfilledOrders').then(function(result) {
+    $http.get(host.name + '/rest/schedule/unfilledOrders').then(function(result) {
       $scope.$ctrl.orders = result.data;
       if (result.data.length==0){
         $.toaster({ message : 'There are no Unfilled Orders.', priority : 'info' });
@@ -71,7 +71,7 @@ angular.module('portfolio').component('scheduleModel',{
       $scope.$ctrl.row.ship={id:"-1"};
       $scope.$ctrl.row.warehouse={id:"-1"};
 
-      $http.get(host.name + '/shipsForOrder/'+$scope.$ctrl.row.order.id+'/'+$scope.$ctrl.row.source.id+"/"+$scope.$ctrl.row.collectionDate).then(function(result) {
+      $http.get(host.name + '/rest/schedule/shipsForOrder/'+$scope.$ctrl.row.order.id+'/'+$scope.$ctrl.row.source.id+"/"+$scope.$ctrl.row.collectionDate).then(function(result) {
         $scope.$ctrl.ships = result.data;
         if (result.data.length==0 && $scope.$ctrl.row.source.id!=-1){
           $.toaster({ message : 'There are no ships that can make this delivery in the give time frame.', priority : 'warning' });
@@ -87,7 +87,7 @@ angular.module('portfolio').component('scheduleModel',{
         $scope.$ctrl.row.ship={id:"-1"};
         $scope.$ctrl.row.source={id:"-1"};
         $scope.$ctrl.row.warehouse={id:"-1"};
-        $http.get(host.name + '/portsProducingProduct/'+$scope.$ctrl.row.order.product.id).then(function(result) {
+        $http.get(host.name + '/rest/schedule/portsProducingProduct/'+$scope.$ctrl.row.order.product.id).then(function(result) {
           if (result.data.length==0){
             $.toaster({ message : 'There are no ports that can supply this order.', priority : 'warning' });
           }
@@ -101,7 +101,7 @@ angular.module('portfolio').component('scheduleModel',{
     $scope.$watch('$ctrl.row.ship',function(n,o){
       if (n!==o){
         $scope.$ctrl.row.warehouse={id:"-1"};
-        $http.get(host.name + '/warehousesForOrder/'+$scope.$ctrl.row.order.id+'/'+$scope.$ctrl.row.source.id+"/"+$scope.$ctrl.row.ship.id+'/'+$scope.$ctrl.row.collectionDate).then(function(result) {
+        $http.get(host.name + '/rest/schedule/warehousesForOrder/'+$scope.$ctrl.row.order.id+'/'+$scope.$ctrl.row.source.id+"/"+$scope.$ctrl.row.ship.id+'/'+$scope.$ctrl.row.collectionDate).then(function(result) {
           $scope.$ctrl.warehouses = result.data;
           if (result.data.length==0 && $scope.$ctrl.row.ship.id!=-1){
             $.toaster({ message : 'There are no warehouses with capacity to store the product with the given time frame.', priority : 'warning' });

@@ -66,7 +66,7 @@ angular.module("portfolio").controller('warehouses', [
             },
             events: {
               'click .remove': function(e, value, row, index) {
-                $http.delete(host.name + '/warehouse/' + row.id).then(function(result) {
+                $http.delete(host.name + '/rest/warehouse/' + row.id).then(function(result) {
                   $('#warehousesTable').bootstrapTable('load', result.data);
                   loadRows(result);
                   $.toaster({ message : 'Warehous deleted' });
@@ -88,7 +88,7 @@ angular.module("portfolio").controller('warehouses', [
         )($scope));
       });
 
-      $http.get(host.name + '/warehouses').then(function(result) {
+      $http.get(host.name + '/rest/warehouse').then(function(result) {
         $('#warehousesTable').bootstrapTable('load', result.data);
         loadRows(result);
       },function(){
@@ -96,9 +96,9 @@ angular.module("portfolio").controller('warehouses', [
       });
 
       $scope.save = function(id){
-        $http.put(host.name + '/warehouse/'+ id,$scope.rows[id]).then(function(result) {
+        $http.put(host.name + '/rest/warehouse/'+ id,$scope.rows[id]).then(function(result) {
           $.toaster({ message : 'All related Schedules Have been removed', priority : 'info' });
-          $http.get(host.name + '/warehouses').then(function(result) {
+          $http.get(host.name + '/rest/warehouse').then(function(result) {
             $('#warehousesTable').bootstrapTable('load', result.data);
             loadRows(result);
           },function(){
@@ -120,8 +120,8 @@ angular.module("portfolio").controller('warehouses', [
       }
 
       $scope.add = function(){
-        $http.post(host.name + '/warehouse',$scope.newRow).then(function(result) {
-          $http.get(host.name + '/warehouses').then(function(result) {
+        $http.post(host.name + '/rest/warehouse',$scope.newRow).then(function(result) {
+          $http.get(host.name + '/rest/warehouse').then(function(result) {
             $('#warehousesTable').bootstrapTable('load', result.data);
             loadRows(result);
           },function(){

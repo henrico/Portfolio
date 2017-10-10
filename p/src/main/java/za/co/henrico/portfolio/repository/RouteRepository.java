@@ -6,7 +6,7 @@ import za.co.henrico.portfolio.model.Port;
 import za.co.henrico.portfolio.model.Route;
 
 public interface RouteRepository extends JpaRepository<Route, Long> {
-	
-	Route findRouteFromPorts(Port portA,Port portB);
+
+	Route findRouteFromPorts(Port portA, Port portB);
 
 }

@@ -50,7 +50,7 @@ angular.module("portfolio").controller('routes', [
             },
             events: {
               'click .remove': function(e, value, row, index) {
-                $http.delete(host.name + '/route/' + row.id).then(function(result) {
+                $http.delete(host.name + '/rest/route/' + row.id).then(function(result) {
                   $('#routesTable').bootstrapTable('load', result.data);
                   loadRows(result);
                   $.toaster({ message : 'Route deleted' });
@@ -72,7 +72,7 @@ angular.module("portfolio").controller('routes', [
         )($scope));
       });
 
-      $http.get(host.name + '/routes').then(function(result) {
+      $http.get(host.name + '/rest/route').then(function(result) {
         $('#routesTable').bootstrapTable('load', result.data);
         loadRows(result);
       },function(){
@@ -80,7 +80,7 @@ angular.module("portfolio").controller('routes', [
       });
 
       $scope.save = function(id){
-        $http.put(host.name + '/route/' + id,$scope.rows[id]).then(function(result) {
+        $http.put(host.name + '/rest/route/' + id,$scope.rows[id]).then(function(result) {
           $('#routesTable').bootstrapTable('load', result.data);
           loadRows(result);
           $.toaster({ message : 'Route saved' });
@@ -94,7 +94,7 @@ angular.module("portfolio").controller('routes', [
       }
 
       $scope.add = function(){
-        $http.post(host.name + '/route/',$scope.newRow).then(function(result) {
+        $http.post(host.name + '/rest/route/',$scope.newRow).then(function(result) {
           $('#routesTable').bootstrapTable('load', result.data);
           loadRows(result);
           $scope.formData.$setPristine();

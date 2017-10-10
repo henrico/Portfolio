@@ -15,15 +15,16 @@ import za.co.henrico.portfolio.model.Ship;
 @Scope("singleton")
 public class Utils {
 
-	public Date getEndDateFromDays(Date from,Ship ship,Route route) {
-		int days = new BigDecimal(route.getDistance()).divide(new BigDecimal(ship.getSpeed()),RoundingMode.CEILING).intValue();
-		
+	public Date getEndDateFromDays(Date from, Ship ship, Route route) {
+		int days = new BigDecimal(route.getDistance()).divide(new BigDecimal(ship.getSpeed()), RoundingMode.CEILING)
+				.intValue();
+
 		Calendar c = Calendar.getInstance();
 		Date deliverDate = new Date(from.getTime());
 		c.setTime(deliverDate);
 		c.add(Calendar.DATE, days);
-		
+
 		return c.getTime();
 	}
-	
+
 }

@@ -20,12 +20,11 @@ import org.springframework.data.jpa.domain.AbstractPersistable;
 @SuppressWarnings("serial")
 @Entity
 @NamedQueries({
-@NamedQuery(name = "Schedule.findDateReleventSchedule", query = "select sc from Schedule sc where sc.collectionDate<?1 and sc.deliveryDate >?2 and ship=?3"),
-@NamedQuery(name = "Schedule.findDateReleventScheduleByWarehouse", query = "select sc from Schedule sc where sc.deliveryDate < ?1 and sc.order.deliveryDate > ?2 and warehouse=?3"),
-@NamedQuery(name = "Schedule.findLastScheduleRelatedToShip", query = "select sc from Schedule sc where sc.ship=? order by sc.deliveryDate desc"),
-@NamedQuery(name = "Schedule.findByProduct", query = "select sc from Schedule sc where sc.order.product = ?"),
-@NamedQuery(name = "Schedule.findFirstScheduleRelatedToShipFromDate", query = "select sc from Schedule sc where sc.ship = ?1 and sc.collectionDate >= ?2 order by sc.collectionDate asc")
-})
+		@NamedQuery(name = "Schedule.findDateReleventSchedule", query = "select sc from Schedule sc where sc.collectionDate<?1 and sc.deliveryDate >?2 and ship=?3"),
+		@NamedQuery(name = "Schedule.findDateReleventScheduleByWarehouse", query = "select sc from Schedule sc where sc.deliveryDate < ?1 and sc.order.deliveryDate > ?2 and warehouse=?3"),
+		@NamedQuery(name = "Schedule.findLastScheduleRelatedToShip", query = "select sc from Schedule sc where sc.ship=? order by sc.deliveryDate desc"),
+		@NamedQuery(name = "Schedule.findByProduct", query = "select sc from Schedule sc where sc.order.product = ?"),
+		@NamedQuery(name = "Schedule.findFirstScheduleRelatedToShipFromDate", query = "select sc from Schedule sc where sc.ship = ?1 and sc.collectionDate >= ?2 order by sc.collectionDate asc") })
 public class Schedule extends AbstractPersistable<Long> {
 
 	@ManyToOne
@@ -35,7 +34,7 @@ public class Schedule extends AbstractPersistable<Long> {
 	@Basic
 	@Temporal(TemporalType.DATE)
 	private Date collectionDate;
-	
+
 	@Basic
 	@Temporal(TemporalType.DATE)
 	private Date deliveryDate;
@@ -51,7 +50,7 @@ public class Schedule extends AbstractPersistable<Long> {
 	@ManyToOne
 	@JoinColumn(name = "warehouse")
 	private Warehouse warehouse;
-	
+
 	@Basic
 	private Integer storedCrates;
 
@@ -110,12 +109,13 @@ public class Schedule extends AbstractPersistable<Long> {
 	public void setStoredCrates(int i) {
 		this.storedCrates = i;
 	}
-	
+
 	@Transient
 	public BigDecimal getCost() {
 		Calendar c = Calendar.getInstance();
-		long days = TimeUnit.DAYS.convert(order.getDeliveryDate().getTime() - deliveryDate.getTime(), TimeUnit.MILLISECONDS);
-		
+		long days = TimeUnit.DAYS.convert(order.getDeliveryDate().getTime() - deliveryDate.getTime(),
+				TimeUnit.MILLISECONDS);
+
 		return warehouse.getCost(days);
 	}
 

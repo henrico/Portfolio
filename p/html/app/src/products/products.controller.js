@@ -34,7 +34,7 @@ angular.module("portfolio").controller('products', [
             },
             events: {
               'click .remove': function(e, value, row, index) {
-                $http.delete(host.name + '/product/' + row.id).then(function(result) {
+                $http.delete(host.name + '/rest/product/' + row.id).then(function(result) {
                   $('#productsTable').bootstrapTable('load', result.data);
                   loadRows(result);
                   $.toaster({ message : 'Product deleted' });
@@ -56,7 +56,7 @@ angular.module("portfolio").controller('products', [
         )($scope));
       });
 
-      $http.get(host.name + '/products').then(function(result) {
+      $http.get(host.name + '/rest/product').then(function(result) {
         $('#productsTable').bootstrapTable('load', result.data);
         loadRows(result);
       },function(){
@@ -64,7 +64,7 @@ angular.module("portfolio").controller('products', [
       });
 
       $scope.save = function(id){
-        $http.put(host.name + '/product/' + id,$scope.rows[id]).then(function(result) {
+        $http.put(host.name + '/rest/product/' + id,$scope.rows[id]).then(function(result) {
           $('#productsTable').bootstrapTable('load', result.data);
           loadRows(result);
           $.toaster({ message : 'Product saved' });
@@ -78,7 +78,7 @@ angular.module("portfolio").controller('products', [
       }
 
       $scope.add = function(){
-        $http.post(host.name + '/product/',$scope.newRow).then(function(result) {
+        $http.post(host.name + '/rest/product/',$scope.newRow).then(function(result) {
           $('#productsTable').bootstrapTable('load', result.data);
           loadRows(result);
           $scope.formData.$setPristine();

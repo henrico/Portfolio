@@ -90,7 +90,7 @@ angular.module("portfolio").controller('schedules', [
               },
             events: {
               'click .remove': function(e, value, row, index) {
-                $http.delete(host.name + '/schedule/' + row.id).then(function(result) {
+                $http.delete(host.name + '/rest/schedule/' + row.id).then(function(result) {
                   $('#schedulesTable').bootstrapTable('load', result.data);
                   loadRows(result);
                   $.toaster({ message : 'Schedule deleted' });
@@ -104,7 +104,7 @@ angular.module("portfolio").controller('schedules', [
         ]
       });
 
-      $http.get(host.name + '/schedules').then(function(result) {
+      $http.get(host.name + '/rest/schedule').then(function(result) {
         $('#schedulesTable').bootstrapTable('load', result.data);
         loadRows(result);
       },function(){
@@ -116,7 +116,7 @@ angular.module("portfolio").controller('schedules', [
       }
 
       $scope.add = function(){
-        $http.post(host.name + '/schedule/',$scope.newRow).then(function(result) {
+        $http.post(host.name + '/rest/schedule/',$scope.newRow).then(function(result) {
           $('#schedulesTable').bootstrapTable('load', result.data);
           loadRows(result);
           $scope.formData.$setPristine();

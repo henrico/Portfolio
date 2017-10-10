@@ -13,8 +13,8 @@ import za.co.henrico.portfolio.model.Warehouse;
 
 public interface ScheduleRepository extends JpaRepository<Schedule, Long> {
 
-	Collection<Schedule> findDateReleventSchedule(Date deliverDate,Date collectionDate, Ship current);
-	
+	Collection<Schedule> findDateReleventSchedule(Date deliverDate, Date collectionDate, Ship current);
+
 	Schedule findLastScheduleRelatedToShip(Ship ship);
 
 	Collection<Schedule> findBySource(Port source);
@@ -28,5 +28,5 @@ public interface ScheduleRepository extends JpaRepository<Schedule, Long> {
 	Collection<Schedule> findByProduct();
 
 	Schedule findFirstScheduleRelatedToShipFromDate(Ship current, Date endDate);
-	
+
 }

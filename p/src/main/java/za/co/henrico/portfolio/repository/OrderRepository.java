@@ -9,7 +9,7 @@ import za.co.henrico.portfolio.model.OrderStatus;
 
 public interface OrderRepository extends JpaRepository<Order, Long> {
 
-	 Collection<Order> findUnfilledOrders();
+	Collection<Order> findUnfilledOrders();
 
 	Collection<Order> findByOrderStatus(OrderStatus placed);
 

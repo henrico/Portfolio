@@ -38,7 +38,7 @@ angular.module("portfolio").controller('ports', [
             },
             events: {
               'click .remove': function(e, value, row, index) {
-                $http.delete(host.name + '/port/' + row.id).then(function(result) {
+                $http.delete(host.name + '/rest/port/' + row.id).then(function(result) {
                   $('#portsTable').bootstrapTable('load', result.data);
                   loadRows(result);
                   $.toaster({ message : 'Port deleted' });
@@ -60,7 +60,7 @@ angular.module("portfolio").controller('ports', [
         )($scope));
       });
 
-      $http.get(host.name + '/ports').then(function(result) {
+      $http.get(host.name + '/rest/port').then(function(result) {
         $('#portsTable').bootstrapTable('load', result.data);
         loadRows(result);
       },function(){
@@ -68,7 +68,7 @@ angular.module("portfolio").controller('ports', [
       });
 
       $scope.save = function(id){
-        $http.put(host.name + '/port/' + id,$scope.rows[id]).then(function(result) {
+        $http.put(host.name + '/rest/port/' + id,$scope.rows[id]).then(function(result) {
           $.toaster({ message : 'All related Schedules Have been removed', priority : 'info' });
           $('#portsTable').bootstrapTable('load', result.data);
           loadRows(result);
@@ -83,7 +83,7 @@ angular.module("portfolio").controller('ports', [
       }
 
       $scope.add = function(){
-        $http.post(host.name + '/port/',$scope.newRow).then(function(result) {
+        $http.post(host.name + '/rest/port/',$scope.newRow).then(function(result) {
           $('#portsTable').bootstrapTable('load', result.data);
           loadRows(result);
           $scope.formData.$setPristine();

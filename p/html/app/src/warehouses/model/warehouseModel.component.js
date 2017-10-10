@@ -7,7 +7,7 @@ angular.module('portfolio').component('warehouseModel',{
   },
   controller:['$scope', '$http','host', function($scope, $http, host){
 
-    $http.get(host.name + '/ports').then(function(result) {
+    $http.get(host.name + '/rest/port').then(function(result) {
       if (result.data.length==0){
         $.toaster({ message : 'There are no Ports', priority : 'warning' });
       }

@@ -32,7 +32,7 @@ angular.module('portfolio').component('orderModel',{
       }
     }
 
-    $http.get(host.name + '/ports').then(function(result) {
+    $http.get(host.name + '/rest/port').then(function(result) {
       if (result.data.length==0){
         $.toaster({ message : 'There are no Ports', priority : 'warning' });
       }
@@ -41,7 +41,7 @@ angular.module('portfolio').component('orderModel',{
       swal("Oops!", "Something went wrong!", "error")
     });
 
-    $http.get(host.name + '/products').then(function(result) {
+    $http.get(host.name + '/rest/product').then(function(result) {
       if (result.data.length==0){
         $.toaster({ message : 'There are no Products', priority : 'warning' });
       }

@@ -8,7 +8,7 @@ import za.co.henrico.portfolio.model.Port;
 import za.co.henrico.portfolio.model.Warehouse;
 
 public interface WarehouseRepository extends JpaRepository<Warehouse, Long> {
-	
+
 	List<Warehouse> findByPort(Port port);
-	
+
 }

@@ -1,0 +1,100 @@
+<div ng-controller="neuralNetCtrl">
+
+<h3>Color Scheme Generator</h3>
+
+<div ng-if="isTraining">
+<p>The Network is currently training.</p>
+<p>Iteration: {{interation}}</p>
+<p>Network Error: {{error}}</p>
+</div>
+
+<div ng-if="!isTraining">
+
+<p>The below color scheme is generated using a Perceptron Neural Network.</p>
+
+<div>
+<button style="vertical-align: top;" class="btn" ng-click="random()">Generate next random Scheme</button>
+<div class="inl-bl" style="vertical-align: top; padding-top:10px"> or </div>
+
+<button style="vertical-align: top;" class="btn" ng-click="fromColor()">Generate from color:</button>
+&nbsp;
+<div id="cp" class="inl-bl"></div>
+
+</div>
+<br />
+  <table style="background-color: black;">
+    <tr style="border-bottom: 10px solid white;">
+      <td>
+        <div style = "margin:10px; background-color: rgb({{randomscheme.colors[0].r}},{{randomscheme.colors[0].g}},{{randomscheme.colors[0].b}}); width:100px; height: 100px; ">
+          &nbsp;
+        </div>
+      </td>
+      <td>
+        <div style = "margin:10px; background-color: rgb({{randomscheme.colors[1].r}},{{randomscheme.colors[1].g}},{{randomscheme.colors[1].b}}); width:100px; height: 100px; ">
+          &nbsp;
+        </div>
+      </td>
+      <td>
+        <div style = "margin:10px; background-color: rgb({{randomscheme.colors[2].r}},{{randomscheme.colors[2].g}},{{randomscheme.colors[2].b}}); width:100px; height: 100px; ">
+          &nbsp;
+        </div>
+      </td>
+      <td>
+        <div style = "margin:10px; background-color: rgb({{randomscheme.colors[3].r}},{{randomscheme.colors[3].g}},{{randomscheme.colors[3].b}}); width:100px; height: 100px; ">
+          &nbsp;
+        </div>
+      </td>
+      <td>
+        <div style = "margin:10px; background-color: rgb({{randomscheme.colors[4].r}},{{randomscheme.colors[4].g}},{{randomscheme.colors[4].b}}); width:100px; height: 100px; ">
+          &nbsp;
+        </div>
+      </td>
+    </tr>
+  </table>
+
+<p>The Neural Network learns how to generate a color scheme by analyzing the relationships between the colors' red, green and blue values.</p>
+<p>A training color scheme is sorted using each of the colors' red poperty, and a value is calculated to indicate on avarage how varied the reds are.</p>
+<p>The net has 21 inputs:
+  <ul>
+    <li>1 for the variance in red.</li>
+    <li>5 x 3 for each of the colors inputs</li>
+    <li>5 x 1 indicators for each of the colors, that indicate that the color at this index is part of the input.</li>
+  </ul>
+  Only one color acts as an input at a time as per the above indicator.
+</p>
+
+<h3>Training Data</h3>
+
+<table style="background-color: black;">
+  <tr ng-repeat = "scheme in schemes" style="border-bottom: 10px solid white;">
+    <td>
+      <div style = "margin:10px; background-color: rgb({{scheme.colors[0].r}},{{scheme.colors[0].g}},{{scheme.colors[0].b}}); width:100px; height: 100px; ">
+        &nbsp;
+      </div>
+    </td>
+    <td>
+      <div style = "margin:10px; background-color: rgb({{scheme.colors[1].r}},{{scheme.colors[1].g}},{{scheme.colors[1].b}}); width:100px; height: 100px; ">
+        &nbsp;
+      </div>
+    </td>
+    <td>
+      <div style = "margin:10px; background-color: rgb({{scheme.colors[2].r}},{{scheme.colors[2].g}},{{scheme.colors[2].b}}); width:100px; height: 100px; ">
+        &nbsp;
+      </div>
+    </td>
+    <td>
+      <div style = "margin:10px; background-color: rgb({{scheme.colors[3].r}},{{scheme.colors[3].g}},{{scheme.colors[3].b}}); width:100px; height: 100px; ">
+        &nbsp;
+      </div>
+    </td>
+    <td>
+      <div style = "margin:10px; background-color: rgb({{scheme.colors[4].r}},{{scheme.colors[4].g}},{{scheme.colors[4].b}}); width:100px; height: 100px; ">
+        &nbsp;
+      </div>
+    </td>
+  </tr>
+</table>
+
+</div>
+
+</div>

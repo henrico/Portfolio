@@ -6,25 +6,28 @@ app.config(function($routeProvider) {
         templateUrl : "src/main/main.html"
     })
     .when("/warehouses", {
-        templateUrl : "src/warehouses/warehouses.html"
+        templateUrl : "src/routePlanner/warehouses/warehouses.html"
     })
     .when("/ports", {
-        templateUrl : "src/ports/ports.html"
+        templateUrl : "src/routePlanner/ports/ports.html"
     })
     .when("/products", {
-        templateUrl : "src/products/products.html"
+        templateUrl : "src/routePlanner/products/products.html"
     })
     .when("/routes", {
-        templateUrl : "src/routes/routes.html"
+        templateUrl : "src/routePlanner/routes/routes.html"
     })
     .when("/ships", {
-        templateUrl : "src/ships/ships.html"
+        templateUrl : "src/routePlanner/ships/ships.html"
     })
     .when("/orders", {
-        templateUrl : "src/orders/orders.html"
+        templateUrl : "src/routePlanner/orders/orders.html"
     })
     .when("/schedules", {
-        templateUrl : "src/schedules/schedules.html"
+        templateUrl : "src/routePlanner/schedules/schedules.html"
+    })
+    .when("/neuralNet", {
+        templateUrl : "src/machineLearning/neuralNet/neuralNet.html"
     });
 
     $.toaster({ settings : {timeout: 6000} });
@@ -44,4 +47,6 @@ app.controller('indexCtrl',['$scope', '$location', function($scope,$location) {
    var active = (viewLocation === $location.path());
    return active;
  };
+
+ $scope.app = 'home';
 }]);

@@ -26,7 +26,8 @@
     "angular-auto-validate": "^1.19.6",
     "PACE": "pace#^1.0.2",
     "sweetalert2": "^6.9.1",
-    "jquery.toaster": "^1.2.0"
+    "jquery.toaster": "^1.2.0",
+    "bootstrap-colorpicker": "^2.5.1"
   },
   "overrides": {
     "bootstrap": {

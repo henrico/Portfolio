@@ -2,8 +2,9 @@ angular.module('portfolio').component('orderModel',{
 
   templateUrl: 'src/routePlanner/orders/model/orderModel.html',
   bindings:{
-    row: '=',
-    label: '='
+    row: '<',
+    label: '<',
+    readOnly: '<'
   },
   controller:[
   '$scope',

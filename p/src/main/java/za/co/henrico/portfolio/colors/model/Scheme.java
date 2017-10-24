@@ -40,6 +40,59 @@ public class Scheme extends AbstractPersistable<Long>{
 		  }
 	}
 
+	private static Scheme varyN(int n){
+
+		Scheme s = new Scheme();
+
+		int r,g,b;
+
+		Random rand = new Random();
+
+
+		r = rand.nextInt(255);
+		g = rand.nextInt(255);
+		b = rand.nextInt(255);
+
+		s.colors = new LinkedList<za.co.henrico.portfolio.colors.model.Color>();
+
+		s.colors.add(new za.co.henrico.portfolio.colors.model.Color(r,g,b));
+
+		float[] hsbVals = new float[3];
+		hsbVals = Color.RGBtoHSB(r,g,b,hsbVals);
+
+		int mod = 1;
+
+		if (hsbVals[n]>0.5) {
+			  mod = -1;
+		  }
+
+
+
+		for (int i=0; i<4; i++) {
+			  //hsbVals[2] += (1-hsbVals[2])*((rand.nextFloat()/2)*mod);
+			  hsbVals[n]+=(0.1*mod);
+			  Color cur = Color.getHSBColor(hsbVals[0], hsbVals[1], hsbVals[2]);
+			  s.colors.add(new za.co.henrico.portfolio.colors.model.Color(cur.getRed(),cur.getGreen(),cur.getBlue()));
+		  }
+
+		orderColorsByRed(s.colors);
+
+		return s;
+
+	}
+
+	public static Scheme createTintsAndShades(){
+
+		return varyN(2);
+
+	}
+
+	public static Scheme createTones(){
+
+		return varyN(1);
+
+	}
+
 	public static Scheme createRandomColorWheel(){
 
 		Scheme s = new Scheme();

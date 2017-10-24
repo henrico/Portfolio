@@ -1,31 +1,17 @@
-<div ng-controller="warehouses"><form novalidate name="formData">
-    <div class="row" style="padding:20px">
-  <uib-accordion close-others="true">
-    <div uib-accordion-group class="panel-default" heading="Add New Warehouse" id="form">
-      <warehouse-model row="newRow" label="'Add New Warehous'"></warehouse-model>
-      <div class="container">
-        <button class="btn btn-primary pull-right" ng-click="add()" ng-disabled="isInvalid(newRow)" ng-class="{'disabled':isInvalid(newRow)}">Add</button>
-      </div>
-    </div>
-    <div uib-accordion-group class="panel-default" heading="View Warehouses" is-open="'true'">
-      <div>
+<div ng-controller="warehouses">
+<basic
+  new-row="newRow"
+  create-new-row="createNewRow"
+  columns="columns"
+  expand-string="expandString"
+  rest-name="restName"
+  heading="heading"
+  description="description"
+  saved="saved"
+  is-invalid="isInvalid"
+  force-reload = "'true'">
 
-        <div class="container" id="table">
-          <div class="row">
-            <table id="warehousesTable"
-                     data-toolbar="#toolbar"
-                     data-search="true"
-                     data-detail-view="true"
-                     >
-              </table>
-          </div>
-        </div>
+  <warehouse-model read-only="readOnly['+row.id+']" row="newRow" label="'Add New Warehous'"></warehouse-model>
 
-
-      </div>
-    </div>
-  </uib-accordion>
-
-</div>
-</form>
+</basic>
 </div>

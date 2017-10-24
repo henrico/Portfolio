@@ -2,8 +2,9 @@ angular.module('portfolio').component('warehouseModel',{
 
   templateUrl: 'src/routePlanner/warehouses/model/warehouseModel.html',
   bindings:{
-    row: '=',
-    label: '='
+    row: '<',
+    label: '<',
+    readOnly: '<'
   },
   controller:['$scope', '$http','host', function($scope, $http, host){
 

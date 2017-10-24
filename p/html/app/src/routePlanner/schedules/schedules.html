@@ -1,30 +1,19 @@
-<div ng-controller="schedules"><form novalidate name="formData">
-    <div class="row" style="padding:20px">
-  <uib-accordion close-others="true">
-    <div uib-accordion-group class="panel-default" heading="Add New Schedule" id="form">
-      <schedule-model row="newRow" label="'Add New Schedule'"></schedule-model>
-      <div class="container">
-        <button class="btn btn-primary pull-right" ng-click="add()" ng-disabled="isInvalid(newRow)" ng-class="{'disabled':isInvalid(newRow)}">Add</button>
-      </div>
-    </div>
-    <div uib-accordion-group class="panel-default" heading="View Schedules" is-open="'true'">
-      <div>
+<div ng-controller="schedules">
 
-        <div class="container" id="table">
-          <div class="row">
-            <table id="schedulesTable"
-                     data-toolbar="#toolbar"
-                     data-search="true"
-                     >
-              </table>
-          </div>
-        </div>
+<basic
+  new-row="newRow"
+  create-new-row="createNewRow"
+  columns="columns"
+  expand-string="expandString"
+  rest-name="restName"
+  heading="heading"
+  description="description"
+  saved="saved"
+  is-invalid="isInvalid"
+  added="added"
+  cant-collapse='true'>
 
+  <schedule-model read-only="readOnly['+row.id+']" row="newRow" label="'Add New Schedule'"></schedule-model>
 
-      </div>
-    </div>
-  </uib-accordion>
-
-</div>
-</form>
+</basic>
 </div>

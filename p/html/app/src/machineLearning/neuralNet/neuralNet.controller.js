@@ -4,12 +4,12 @@ angular.module("portfolio").controller('neuralNetCtrl', [
   '$timeout',
   'host',
   function($scope, $http, $timeout, host) {
-    $http.get(host.name+"/colors").then((result)=>{
+    $http.get(host.name+"/colors").then(function (result){
       $scope.schemes = result.data;
     });
 
     $scope.random = function(){
-      $http.get(host.name+"/colors/random").then((result)=>{
+      $http.get(host.name+"/colors/random").then(function (result){
         $scope.randomscheme = result.data;
       });
     }
@@ -23,14 +23,25 @@ angular.module("portfolio").controller('neuralNetCtrl', [
               return r+"/"+g+"/"+b;
       }
 
-      $http.get(host.name+"/colors/fromcolor/"+hexToRGB(val)).then((result)=>{
+      $http.get(host.name+"/colors/fromcolor/"+hexToRGB(val)).then(function (result){
         $scope.randomscheme = result.data;
+      });
+    }
+
+    $scope.changeType = function(type){
+      $http.get(host.name+"/colors/changeSceme/"+type+"/").then(function (){
+
+        isTraining();
+        $http.get(host.name+"/colors").then(function (result){
+          $scope.schemes = result.data;
+        });
+
       });
     }
 
     function isTraining(){
       $scope.isTraining=true;
-      $http.get(host.name+"/colors/training/").then((result)=>{
+      $http.get(host.name+"/colors/training/").then(function (result){
         $scope.isTraining=result.data.training;
         $scope.interation = result.data.interation;
         $scope.error = result.data.errorFactor;

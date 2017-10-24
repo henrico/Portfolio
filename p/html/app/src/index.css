@@ -11,13 +11,13 @@
 #sidebar {
     min-width: 250px;
     max-width: 250px;
-    background-color: #18bc9c;
+    background-color: #eeeeee;
     min-height: 100vh;
     font-size: 20px;
 }
 
 #sidebar a{
-  color: white;
+  color: #d9230f;
   text-decoration: none;
 }
 
@@ -27,7 +27,7 @@
 }
 
 #sidebar li.active a{
-  color: #18bc9c;;
+  color: black;
 }
 
 #sidebar li.active{
@@ -47,4 +47,29 @@
 
 .colorpicker-alpha{
   display:none !important;
+}
+
+nav.nav-wizard{
+  margin-top:10px;
+}
+
+.nav-wizard > li.active > a, .nav-wizard > li.active > a:hover, .nav-wizard > li.active > a:focus {
+  background-color: #d9230f !important;
+}
+
+.nav-wizard > li.active > a:after {
+  border-left-color: #d9230f !important;
+}
+
+.bs-bars {
+  width:100%;
+}
+
+.bootstrap-table {
+  margin-right: 10px;
+}
+
+.container{
+  margin:0px;
+  width:100%;
 }

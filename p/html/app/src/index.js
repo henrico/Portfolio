@@ -30,7 +30,7 @@ app.config(function($routeProvider) {
         templateUrl : "src/machineLearning/neuralNet/neuralNet.html"
     });
 
-    $.toaster({ settings : {timeout: 6000} });
+    $.toaster({ settings : {timeout: 6000, easing : { in : 'swing', out : 'linear' }} });
 });
 
 var server = '@restServerName@';

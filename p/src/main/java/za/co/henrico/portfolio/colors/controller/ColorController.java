@@ -29,7 +29,7 @@ public class ColorController implements LearningEventListener {
 	@Autowired
 	protected SchemeService schemeService;
 
-	private MultiLayerPerceptron neuralNet = new MultiLayerPerceptron((1 + (3*5) + 5), 15, (3*5));
+	private MultiLayerPerceptron neuralNet;
 
 	private String status = "generating";
 
@@ -39,8 +39,13 @@ public class ColorController implements LearningEventListener {
 	private String error;
 	private boolean done = false;
 
+	private int type=1;
+
 	@PostConstruct
 	public void init(){
+
+		neuralNet = new MultiLayerPerceptron((1 + (3*5) + 5), 15, (3*5));
+		done = false;
 
 		schemeService.deleteAll();
 
@@ -48,7 +53,17 @@ public class ColorController implements LearningEventListener {
 
 		for (int r=0; r<100; r++) {
 
-			  Scheme s = Scheme.createRandomColorWheel();
+			  Scheme s = null;
+			  if (type==1) {
+				    s = Scheme.createRandomColorWheel();
+			    }
+			  if (type==2) {
+				    s = Scheme.createTintsAndShades();
+			    }
+			  if (type==3) {
+				    s = Scheme.createTones();
+			    }
+
 			  schemeService.save(s);
 
 			  for (DataSetRow cur : s.getDatasetRows()) {
@@ -61,8 +76,8 @@ public class ColorController implements LearningEventListener {
 		MomentumBackpropagation learningRule = (MomentumBackpropagation) neuralNet.getLearningRule();
 
 		learningRule.setLearningRate(0.05);
-		learningRule.setMaxError(0.01);
-		learningRule.setMaxIterations(100000);
+		learningRule.setMaxError(0.001);
+		learningRule.setMaxIterations(1000);
 
 		learningRule.addListener(this);
 
@@ -74,6 +89,12 @@ public class ColorController implements LearningEventListener {
 	@RequestMapping("")
 	public @ResponseBody Collection<Scheme> getList() {
 		return schemeService.getList();
+	}
+
+	@RequestMapping("/changeSceme/{type}")
+	public @ResponseBody void changeType(@PathVariable("type") int type) {
+		this.type=type;
+		init();
 	}
 
 	@RequestMapping("/training")
@@ -125,9 +146,9 @@ public class ColorController implements LearningEventListener {
 
 		double[] output = neuralNet.getOutput();
 
-		output[(c*3)] = ((double)r)/255;
-		output[1+(c*3)] = ((double)g)/255;
-		output[2+(c*3)] = ((double)b)/255;
+		// output[(c*3)] = ((double)r)/255;
+		// output[1+(c*3)] = ((double)g)/255;
+		// output[2+(c*3)] = ((double)b)/255;
 
 		return new Scheme(output);
 	}

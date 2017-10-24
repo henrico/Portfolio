@@ -1,3 +1,4 @@
+<fieldset ng-disabled="$ctrl.readOnly">
 <model-form heading="$ctrl.label">
   <form-select apply-model="'true'" data="$ctrl.row" column="'destination'" label="'Destination'" field-id="'destination'" models="$ctrl.portmodels" display-column="'name'"></form-select>
 
@@ -14,3 +15,4 @@
   <form-field type="'number'" max="'500'" min="'1'" data="$ctrl.row" column="'quantity'" label="'Quantity (Crates)'" field-id="'quantity'" placeholder="'Quantity'"></form-field>
   <form-select type="'text'" data="$ctrl.row" column="'orderStatus'" label="'Status'" field-id="'name'" models="$ctrl.models" display-column="'name'"></form-select>
 </model-form>
+</fieldset>

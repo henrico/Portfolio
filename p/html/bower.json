@@ -27,13 +27,15 @@
     "PACE": "pace#^1.0.2",
     "sweetalert2": "^6.9.1",
     "jquery.toaster": "^1.2.0",
-    "bootstrap-colorpicker": "^2.5.1"
+    "bootstrap-colorpicker": "^2.5.1",
+    "bootstrap-nav-wizard": "^0.0.3"
   },
   "overrides": {
     "bootstrap": {
       "main": [
         "dist/css/bootstrap.css",
-        "dist/fonts/*"
+        "dist/fonts/*",
+        "dist/js/bootstrap.js"
       ]
     },
     "bootstrap-table": {
@@ -52,6 +54,11 @@
       "main": [
         "pace.js",
         "themes/blue/pace-theme-center-simple.css"
+      ]
+    },
+    "bootstrap-nav-wizard": {
+      "main": [
+        "bootstrap-nav-wizard.css"
       ]
     }
   }

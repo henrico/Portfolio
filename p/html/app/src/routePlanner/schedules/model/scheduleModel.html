@@ -1,4 +1,4 @@
-
+<fieldset ng-disabled="$ctrl.readOnly">
   <model-form heading="$ctrl.label">
 
     <form-select apply-model="'true'" data="$ctrl.row" column="'order'" label="'Order'" field-id="'order'" models="$ctrl.orders" display-column="'displayText'"></form-select>
@@ -17,3 +17,4 @@
     <form-select ng-if="$ctrl.row.ship && $ctrl.row.ship.id!=-1" apply-model="'true'" data="$ctrl.row" column="'warehouse'" label="'Warehouse'" field-id="'warehouse'" models="$ctrl.warehouses" display-column="'name'"></form-select>
 
   </model-form>
+</fieldset>

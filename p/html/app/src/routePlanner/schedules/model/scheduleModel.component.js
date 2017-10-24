@@ -2,8 +2,9 @@ angular.module('portfolio').component('scheduleModel',{
 
   templateUrl: 'src/routePlanner/schedules/model/scheduleModel.html',
   bindings:{
-    row: '=',
-    label: '='
+    row: '<',
+    label: '<',
+    readOnly: '<'
   },
   controller:[
   '$scope',

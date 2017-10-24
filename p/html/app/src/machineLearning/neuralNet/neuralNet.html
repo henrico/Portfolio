@@ -22,33 +22,40 @@
 
 </div>
 <br />
+
+Generate a network from another type of color scheme:<br/>
+<button style="vertical-align: top;" class="btn" ng-click="changeType(1)">Color Weel</button>
+<button style="vertical-align: top;" class="btn" ng-click="changeType(2)">Tints and Shades</button>
+<button style="vertical-align: top;" class="btn" ng-click="changeType(3)">Tones</button>
+<br/>
+<br />
   <table style="background-color: black;">
     <tr style="border-bottom: 10px solid white;">
-      <td>
+      <td style="border: 1px solid white">
         <div style = "margin:10px; background-color: rgb({{randomscheme.colors[0].r}},{{randomscheme.colors[0].g}},{{randomscheme.colors[0].b}}); width:100px; height: 100px; ">
           &nbsp;
         </div>
-      </td>
-      <td>
+      </td style="border: 1px solid white">
+      <td style="border: 1px solid white">
         <div style = "margin:10px; background-color: rgb({{randomscheme.colors[1].r}},{{randomscheme.colors[1].g}},{{randomscheme.colors[1].b}}); width:100px; height: 100px; ">
           &nbsp;
         </div>
-      </td>
-      <td>
+      </td style="border: 1px solid white">
+      <td style="border: 1px solid white">
         <div style = "margin:10px; background-color: rgb({{randomscheme.colors[2].r}},{{randomscheme.colors[2].g}},{{randomscheme.colors[2].b}}); width:100px; height: 100px; ">
           &nbsp;
         </div>
-      </td>
-      <td>
+      </td style="border: 1px solid white">
+      <td style="border: 1px solid white">
         <div style = "margin:10px; background-color: rgb({{randomscheme.colors[3].r}},{{randomscheme.colors[3].g}},{{randomscheme.colors[3].b}}); width:100px; height: 100px; ">
           &nbsp;
         </div>
-      </td>
-      <td>
+      </td style="border: 1px solid white">
+      <td style="border: 1px solid white">
         <div style = "margin:10px; background-color: rgb({{randomscheme.colors[4].r}},{{randomscheme.colors[4].g}},{{randomscheme.colors[4].b}}); width:100px; height: 100px; ">
           &nbsp;
         </div>
-      </td>
+      </td style="border: 1px solid white">
     </tr>
   </table>
 
@@ -67,31 +74,31 @@
 
 <table style="background-color: black;">
   <tr ng-repeat = "scheme in schemes" style="border-bottom: 10px solid white;">
-    <td>
+    <td style="border: 1px solid white">
       <div style = "margin:10px; background-color: rgb({{scheme.colors[0].r}},{{scheme.colors[0].g}},{{scheme.colors[0].b}}); width:100px; height: 100px; ">
         &nbsp;
       </div>
-    </td>
-    <td>
+    </td style="border: 1px solid white">
+    <td style="border: 1px solid white">
       <div style = "margin:10px; background-color: rgb({{scheme.colors[1].r}},{{scheme.colors[1].g}},{{scheme.colors[1].b}}); width:100px; height: 100px; ">
         &nbsp;
       </div>
-    </td>
-    <td>
+    </td style="border: 1px solid white">
+    <td style="border: 1px solid white">
       <div style = "margin:10px; background-color: rgb({{scheme.colors[2].r}},{{scheme.colors[2].g}},{{scheme.colors[2].b}}); width:100px; height: 100px; ">
         &nbsp;
       </div>
-    </td>
-    <td>
+    </td style="border: 1px solid white">
+    <td style="border: 1px solid white">
       <div style = "margin:10px; background-color: rgb({{scheme.colors[3].r}},{{scheme.colors[3].g}},{{scheme.colors[3].b}}); width:100px; height: 100px; ">
         &nbsp;
       </div>
-    </td>
-    <td>
+    </td style="border: 1px solid white">
+    <td style="border: 1px solid white">
       <div style = "margin:10px; background-color: rgb({{scheme.colors[4].r}},{{scheme.colors[4].g}},{{scheme.colors[4].b}}); width:100px; height: 100px; ">
         &nbsp;
       </div>
-    </td>
+    </td style="border: 1px solid white">
   </tr>
 </table>
 

@@ -2,8 +2,9 @@ angular.module('portfolio').component('routeModel',{
 
   templateUrl: 'src/routePlanner/routes/model/routeModel.html',
   bindings:{
-    row: '=',
-    label: '='
+    row: '<',
+    label: '<',
+    readOnly: '<'
   },
   controller:[
   '$scope',

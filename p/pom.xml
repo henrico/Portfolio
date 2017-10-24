@@ -103,6 +103,15 @@
 			<plugin>
 				<artifactId>maven-resources-plugin</artifactId>
 				<version>3.0.2</version>
+				<configuration>
+	        <nonFilteredFileExtensions>
+						<nonFilteredFileExtension>eot</nonFilteredFileExtension>
+						<nonFilteredFileExtension>svg</nonFilteredFileExtension>
+						<nonFilteredFileExtension>ttf</nonFilteredFileExtension>
+						<nonFilteredFileExtension>woff</nonFilteredFileExtension>
+						<nonFilteredFileExtension>woff2</nonFilteredFileExtension>
+	        </nonFilteredFileExtensions>
+	      </configuration>
 				<executions>
 					<execution>
 						<id>copy-resources</id>
@@ -112,6 +121,13 @@
 						</goals>
 						<configuration>
 							<outputDirectory>${basedir}/public</outputDirectory>
+							<nonFilteredFileExtensions>
+								<nonFilteredFileExtension>eot</nonFilteredFileExtension>
+								<nonFilteredFileExtension>svg</nonFilteredFileExtension>
+								<nonFilteredFileExtension>ttf</nonFilteredFileExtension>
+								<nonFilteredFileExtension>woff</nonFilteredFileExtension>
+								<nonFilteredFileExtension>woff2</nonFilteredFileExtension>
+					    </nonFilteredFileExtensions>
 							<resources>
 								<resource>
 									<directory>${basedir}/html/app</directory>
@@ -128,6 +144,13 @@
 						</goals>
 						<configuration>
 							<outputDirectory>${basedir}/target/portfolio</outputDirectory>
+							<nonFilteredFileExtensions>
+					      <nonFilteredFileExtension>eot</nonFilteredFileExtension>
+								<nonFilteredFileExtension>svg</nonFilteredFileExtension>
+								<nonFilteredFileExtension>ttf</nonFilteredFileExtension>
+								<nonFilteredFileExtension>woff</nonFilteredFileExtension>
+								<nonFilteredFileExtension>woff2</nonFilteredFileExtension>
+					    </nonFilteredFileExtensions>
 							<resources>
 								<resource>
 									<directory>${basedir}/html/app</directory>

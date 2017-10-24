@@ -9,6 +9,7 @@
   <link rel="stylesheet" href="vendor/PACE/themes/blue/pace-theme-center-simple.css">
   <link rel="stylesheet" href="vendor/sweetalert2/dist/sweetalert2.css">
   <link rel="stylesheet" href="vendor/bootstrap-colorpicker/dist/css/bootstrap-colorpicker.css">
+  <link rel="stylesheet" href="vendor/bootstrap-nav-wizard/bootstrap-nav-wizard.css">
   <!-- endinject  -->
 
   <!-- inject:css -->
@@ -23,6 +24,7 @@
   <script src="vendor/angular/angular.js"></script>
   <script src="vendor/angular-bootstrap/ui-bootstrap-tpls.js"></script>
   <script src="vendor/angular-route/angular-route.js"></script>
+  <script src="vendor/bootstrap/dist/js/bootstrap.js"></script>
   <script src="vendor/bootstrap-table/dist/bootstrap-table.min.js"></script>
   <script src="vendor/angular-auto-validate/dist/jcs-auto-validate.js"></script>
   <script src="vendor/PACE/pace.js"></script>
@@ -34,20 +36,21 @@
   <!-- inject:js -->
   <script src="src/index.js"></script>
   <script src="src/machineLearning/neuralNet/neuralNet.controller.js"></script>
+  <script src="src/routePlanner/basic/basic.component.js"></script>
   <script src="src/routePlanner/orders/orders.controller.js"></script>
   <script src="src/routePlanner/ports/ports.controller.js"></script>
   <script src="src/routePlanner/products/products.controller.js"></script>
   <script src="src/routePlanner/schedules/schedules.controller.js"></script>
-  <script src="src/routePlanner/routes/routes.controller.js"></script>
   <script src="src/routePlanner/ships/ships.controller.js"></script>
+  <script src="src/routePlanner/routes/routes.controller.js"></script>
   <script src="src/routePlanner/warehouses/warehouses.controller.js"></script>
   <script src="src/components/model/form/form.component.js"></script>
   <script src="src/routePlanner/orders/model/orderModel.component.js"></script>
   <script src="src/routePlanner/ports/model/portsModel.component.js"></script>
   <script src="src/routePlanner/schedules/model/scheduleModel.component.js"></script>
   <script src="src/routePlanner/products/model/productModel.component.js"></script>
-  <script src="src/routePlanner/routes/model/routeModel.component.js"></script>
   <script src="src/routePlanner/ships/model/shipModel.component.js"></script>
+  <script src="src/routePlanner/routes/model/routeModel.component.js"></script>
   <script src="src/routePlanner/warehouses/model/warehouseModel.component.js"></script>
   <script src="src/components/model/form/domainSelect/domainSelect.component.js"></script>
   <script src="src/components/model/form/formField/formField.component.js"></script>
@@ -68,6 +71,8 @@
 
             <li ng-class="{'active': isActive('/neuralNet')}"><a href="#!neuralNet">Neural Net</a></li>
 
+            <li><a href="javascript:window.open('https://github.com/henrico/Portfolio')">Source Code</a></li>
+
         </ul>
 
       </nav>
@@ -75,12 +80,12 @@
       <!-- Page Content -->
       <div id="content">
         <div ng-if="isActive('/ships')||isActive('/products')||isActive('/ports')||isActive('/warehouses')||isActive('/routes')||isActive('/orders')||isActive('/schedules')">
-          <nav class="navbar navbar-default">
+          <nav class="navbar nav-wizard">
             <div class="container-fluid">
               <!-- <div class="navbar-header">
                 <a class="navbar-brand" href="#">WebSiteName</a>
               </div> -->
-              <ul class="nav navbar-nav">
+              <ul class="nav nav-wizard">
                 <li ng-class="{ active: isActive('/ships') }"><a href="#!ships">Ships</a></li>
                 <li ng-class="{ active: isActive('/products') }"><a href="#!products">Products</a></li>
                 <li ng-class="{ active: isActive('/ports') }"><a href="#!ports">Ports</a></li>

@@ -1,20 +1,18 @@
 <div ng-controller="ships"><form novalidate name="formData">
   <div class="container">
 
-    <div class="row" style="padding:20px">
+    <div class="row" style="padding-left:15px; padding-right:20px">
       <div class="col-sm-12" style="text-align:center">
-        <h2>{{$ctrl.heading}}</h2>
-        <p>{{$ctrl.description}}</p>
+        <h1>{{$ctrl.heading}}</h1>
+        <h4>{{$ctrl.description}}</h4>
       </div>
     </div>
 
-    <div class="row" style="padding:20px">
+    <div ng-if="showNewForm" class="row" style="padding-left:15px; padding-right:20px; padding-bottom:20px">
       <div class="col-md-12">
         <div>
-          <button class="btn btn-basic" ng-click="showForm(true)" ng-if="showNewForm == false">
-            <i class="glyphicon glyphicon-plus icon-plus"></i> Add
-          </button>
-          <div ng-if="showNewForm" class="jumbotron"><div ng-transclude></div></div>
+
+          <div class="jumbotron"><div ng-transclude></div></div>
           <div class="pull-right">
             <button class="btn btn-default" ng-click="showForm(false);$ctrl.createNewRow()" ng-if="showNewForm">
               Cancel
@@ -30,8 +28,14 @@
         </div>
       </div>
     </div>
-    <div class="row" style="padding:20px">
+    <div class="row" style="padding-left:15px; padding-right:20px">
       <div class="col-md-12">
+        <div>
+        <div id="toolbar">
+          <button class="btn btn-basic" ng-click="showForm(true)" ng-if="showNewForm == false">
+            <i class="glyphicon glyphicon-plus icon-plus"></i> Add
+          </button>
+        </div>
         <table style="margin-right:100px" id="displayTable"
                  data-toolbar="#toolbar"
                  data-search="true"
@@ -41,6 +45,7 @@
                  data-page-list="[5, 10, 20, 50, 100, 200]"
                  >
           </table>
+        </div>
       </div>
     </div>
 

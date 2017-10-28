@@ -37,7 +37,7 @@ angular.module("portfolio").controller('ships', [
 
     $scope.expandString = function(row){
       return '<div class="container" style="padding:0px"><div class="row"><div class="col-md-10">'+
-      '<ship-model read-only="readOnly[\''+row.id+'\']" row="rows[\''+row.id+'\']" label="\'Edit Ship\'"></ship-model>'+
+      '<ship-model read-only="readOnly[\''+row.id+'\']" row="rows[\''+row.id+'\']" label="\'Editing Ship\'"></ship-model>'+
       '<button class="btn btn-success pull-right" ng-click="save(\''+row.id+'\')" ng-disabled="$ctrl.isInvalid(rows[\''+row.id+'\'])||readOnly[\''+row.id+'\']" ng-class="{\'disabled\':isInvalid(rows[\''+row.id+'\'])}">Update</button>'+
       '</div></div></div>'
     }

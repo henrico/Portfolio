@@ -101,6 +101,17 @@
 		<plugins>
 
 			<plugin>
+				<groupId>org.apache.tomcat.maven</groupId>
+				<artifactId>tomcat7-maven-plugin</artifactId>
+				<version>2.2</version>
+				<configuration>
+					<url>http://henricor.jvmhost.net/manager/text</url>
+					<server>TomcatServer</server>
+					<path>/portfolio</path>
+				</configuration>
+			</plugin>
+
+			<plugin>
 				<artifactId>maven-resources-plugin</artifactId>
 				<version>3.0.2</version>
 				<configuration>
@@ -110,6 +121,7 @@
 						<nonFilteredFileExtension>ttf</nonFilteredFileExtension>
 						<nonFilteredFileExtension>woff</nonFilteredFileExtension>
 						<nonFilteredFileExtension>woff2</nonFilteredFileExtension>
+						<nonFilteredFileExtension>ico</nonFilteredFileExtension>
 	        </nonFilteredFileExtensions>
 	      </configuration>
 				<executions>
@@ -127,6 +139,7 @@
 								<nonFilteredFileExtension>ttf</nonFilteredFileExtension>
 								<nonFilteredFileExtension>woff</nonFilteredFileExtension>
 								<nonFilteredFileExtension>woff2</nonFilteredFileExtension>
+								<nonFilteredFileExtension>ico</nonFilteredFileExtension>
 					    </nonFilteredFileExtensions>
 							<resources>
 								<resource>
@@ -150,6 +163,7 @@
 								<nonFilteredFileExtension>ttf</nonFilteredFileExtension>
 								<nonFilteredFileExtension>woff</nonFilteredFileExtension>
 								<nonFilteredFileExtension>woff2</nonFilteredFileExtension>
+								<nonFilteredFileExtension>ico</nonFilteredFileExtension>
 					    </nonFilteredFileExtensions>
 							<resources>
 								<resource>

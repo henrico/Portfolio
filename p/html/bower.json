@@ -53,7 +53,7 @@
     "PACE": {
       "main": [
         "pace.js",
-        "themes/blue/pace-theme-center-simple.css"
+        "themes/red/pace-theme-flash.css"
       ]
     },
     "bootstrap-nav-wizard": {

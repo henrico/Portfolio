@@ -7,7 +7,7 @@ angular.module("portfolio").controller('products', [
   function($scope, $http, $compile, $timeout, host) {
 
     $scope.heading = "Products";
-    $scope.description = "Manage your products then add them to a port"
+    $scope.description = "Manage your products then make them available in a Port"
 
     $scope.newRow = {
       name:''
@@ -26,7 +26,7 @@ angular.module("portfolio").controller('products', [
 
     $scope.expandString = function(row){
       return '<div class="container" style="padding:0px"><div class="row"><div class="col-md-10">'+
-      '<product-model read-only="readOnly[\''+row.id+'\']" row="rows[\''+row.id+'\']" label="\'Edit Product\'"></product-model>'+
+      '<product-model read-only="readOnly[\''+row.id+'\']" row="rows[\''+row.id+'\']" label="\'Editing Product\'"></product-model>'+
       '<button class="btn btn-success pull-right" ng-click="save(\''+row.id+'\')" ng-disabled="$ctrl.isInvalid(rows[\''+row.id+'\'])||readOnly[\''+row.id+'\']" ng-class="{\'disabled\':isInvalid(rows[\''+row.id+'\'])}">Update</button>'+
       '</div></div></div>'
     }

@@ -58,7 +58,7 @@ angular.module("portfolio").controller('warehouses', [
 
     $scope.expandString = function(row){
       return '<div class="container" style="padding:0px"><div class="row"><div class="col-md-10">'+
-      '<warehouse-model read-only="readOnly[\''+row.id+'\']" row="rows[\''+row.id+'\']" label="\'Edit Warehouse\'"></warehouse-model>'+
+      '<warehouse-model read-only="readOnly[\''+row.id+'\']" row="rows[\''+row.id+'\']" label="\'Editing Warehouse\'"></warehouse-model>'+
       '<button class="btn btn-success pull-right" ng-click="save(\''+row.id+'\')" ng-disabled="$ctrl.isInvalid(rows[\''+row.id+'\'])||readOnly[\''+row.id+'\']" ng-class="{\'disabled\':isInvalid(rows[\''+row.id+'\'])}">Update</button>'+
       '</div></div></div>'
     }

@@ -51,22 +51,32 @@ angular.module('portfolio').component('basic',{
           events: {
             'click .remove': function(e, value, row, index) {
 
-              expandedRows[index] = false;
+              swal({
+                text: "Remove "+($scope.$ctrl.heading.substr(0,$scope.$ctrl.heading.length-1))+' '+(row.name || (row.destinationA?(row.destinationA.name+' to '+row.destinationB.name):null) || (row.order?row.order.id:null) || row.id) + "?",
+                type: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#469408',
+                confirmButtonText: 'Remove'
+              }).then(function () {
+                expandedRows[index] = false;
 
-              for (var cur in expandedRows){
-                if (expandedRows[cur] && cur > index){
-                  expandedRows[cur-1] = true;
-                  expandedRows[cur] = false;
+                for (var cur in expandedRows){
+                  if (expandedRows[cur] && cur > index){
+                    expandedRows[cur-1] = true;
+                    expandedRows[cur] = false;
+                  }
                 }
-              }
 
-              $http.delete(host.name + '/rest/'+ $scope.$ctrl.restName + '/' + row.id).then(function(result) {
-                $('#displayTable').bootstrapTable('load', result.data);
-                loadRows(result);
-                $.toaster({ message : $scope.$ctrl.heading + ' deleted' });
-              },function(){
-                swal("Oops!", "Something went wrong!", "error")
-              });
+                $http.delete(host.name + '/rest/'+ $scope.$ctrl.restName + '/' + row.id).then(function(result) {
+                  $('#displayTable').bootstrapTable('load', result.data);
+                  loadRows(result);
+                  $.toaster({ message : ($scope.$ctrl.heading.substr(0,$scope.$ctrl.heading.length-1)) + ' removed' });
+                },function(){
+                  swal("Oops!", "Something went wrong!", "error")
+                });
+              })
+
+
             },
             'click .edit': function(e, value, row, index) {
               $('#displayTable').bootstrapTable('expandRow', index);

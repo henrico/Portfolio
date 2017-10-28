@@ -1,12 +1,15 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>My index</title>
+
+<link rel="shortcut icon" href="src/favicon.ico" />
+
+  <title>Portfolio</title>
   <!-- vendor:css -->
   <link rel="stylesheet" href="vendor/bootstrap/dist/css/bootstrap.css">
   <link rel="stylesheet" href="vendor/bootstrap-table/dist/bootstrap-table.css">
   <link rel="stylesheet" href="vendor/font-awesome/css/font-awesome.min.css">
-  <link rel="stylesheet" href="vendor/PACE/themes/blue/pace-theme-center-simple.css">
+  <link rel="stylesheet" href="vendor/PACE/themes/red/pace-theme-flash.css">
   <link rel="stylesheet" href="vendor/sweetalert2/dist/sweetalert2.css">
   <link rel="stylesheet" href="vendor/bootstrap-colorpicker/dist/css/bootstrap-colorpicker.css">
   <link rel="stylesheet" href="vendor/bootstrap-nav-wizard/bootstrap-nav-wizard.css">
@@ -40,18 +43,18 @@
   <script src="src/routePlanner/orders/orders.controller.js"></script>
   <script src="src/routePlanner/ports/ports.controller.js"></script>
   <script src="src/routePlanner/products/products.controller.js"></script>
-  <script src="src/routePlanner/schedules/schedules.controller.js"></script>
-  <script src="src/routePlanner/ships/ships.controller.js"></script>
   <script src="src/routePlanner/routes/routes.controller.js"></script>
+  <script src="src/routePlanner/schedules/schedules.controller.js"></script>
   <script src="src/routePlanner/warehouses/warehouses.controller.js"></script>
+  <script src="src/routePlanner/ships/ships.controller.js"></script>
   <script src="src/components/model/form/form.component.js"></script>
   <script src="src/routePlanner/orders/model/orderModel.component.js"></script>
-  <script src="src/routePlanner/ports/model/portsModel.component.js"></script>
-  <script src="src/routePlanner/schedules/model/scheduleModel.component.js"></script>
   <script src="src/routePlanner/products/model/productModel.component.js"></script>
-  <script src="src/routePlanner/ships/model/shipModel.component.js"></script>
+  <script src="src/routePlanner/ports/model/portsModel.component.js"></script>
   <script src="src/routePlanner/routes/model/routeModel.component.js"></script>
+  <script src="src/routePlanner/schedules/model/scheduleModel.component.js"></script>
   <script src="src/routePlanner/warehouses/model/warehouseModel.component.js"></script>
+  <script src="src/routePlanner/ships/model/shipModel.component.js"></script>
   <script src="src/components/model/form/domainSelect/domainSelect.component.js"></script>
   <script src="src/components/model/form/formField/formField.component.js"></script>
   <!-- endinject -->
@@ -67,7 +70,7 @@
 
         <ul class="list-unstyled components">
             <li ng-class="{'active': isActive('/')}"><a href="#">Home</a></li>
-            <li ng-class="{'active': isActive('/ships')||isActive('/products')||isActive('/ports')||isActive('/warehouses')||isActive('/routes')||isActive('/orders')||isActive('/schedules')}"><a href="#!ships">Route Planner</a></li>
+            <li ng-class="{'active': isActive('/ships')||isActive('/products')||isActive('/ports')||isActive('/warehouses')||isActive('/routes')||isActive('/orders')||isActive('/schedules')}"><a href="#!products">Route Planner</a></li>
 
             <li ng-class="{'active': isActive('/neuralNet')}"><a href="#!neuralNet">Neural Net</a></li>
 

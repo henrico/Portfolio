@@ -61,15 +61,35 @@ nav.nav-wizard{
   border-left-color: #d9230f !important;
 }
 
-.bs-bars {
-  width:100%;
-}
-
-.bootstrap-table {
-  margin-right: 10px;
-}
-
 .container{
   margin:0px;
   width:100%;
 }
+
+.jumbotron {
+  padding-top:20px;
+  padding-bottom:20px;
+  margin-bottom: 3px;
+}
+
+.swal2-icon.swal2-warning{
+  color: #d9230f;
+  border-color: #d9230f;
+}
+
+.col-md-12{
+  padding-left:0px;
+}
+
+.pace .pace-progress {
+  background: #d9230f
+}
+
+/*.nav-wizard > li:not(:last-child) > a:after, .nav-wizard > li:not(:first-child) > a:before { {
+  border-top: 23px inset transparent;
+  border-bottom: 23px inset transparent;
+}
+
+.nav-wizard .container-fluid {
+  font-size: 20px !important;
+}*/

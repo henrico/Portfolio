@@ -22,8 +22,8 @@ import org.springframework.data.jpa.domain.AbstractPersistable;
 @NamedQueries({
 		@NamedQuery(name = "Schedule.findDateReleventSchedule", query = "select sc from Schedule sc where sc.collectionDate<?1 and sc.deliveryDate >?2 and ship=?3"),
 		@NamedQuery(name = "Schedule.findDateReleventScheduleByWarehouse", query = "select sc from Schedule sc where sc.deliveryDate < ?1 and sc.order.deliveryDate > ?2 and warehouse=?3"),
-		@NamedQuery(name = "Schedule.findLastScheduleRelatedToShip", query = "select sc from Schedule sc where sc.ship=? order by sc.deliveryDate desc"),
-		@NamedQuery(name = "Schedule.findByProduct", query = "select sc from Schedule sc where sc.order.product = ?"),
+		@NamedQuery(name = "Schedule.findLastScheduleRelatedToShip", query = "select sc from Schedule sc where sc.ship=?1 order by sc.deliveryDate desc"),
+		@NamedQuery(name = "Schedule.findByProduct", query = "select sc from Schedule sc where sc.order.product = ?1"),
 		@NamedQuery(name = "Schedule.findFirstScheduleRelatedToShipFromDate", query = "select sc from Schedule sc where sc.ship = ?1 and sc.collectionDate >= ?2 order by sc.collectionDate asc") })
 public class Schedule extends AbstractPersistable<Long> {
 

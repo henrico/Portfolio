@@ -54,7 +54,7 @@ public class WarehousServiceImpl extends AbstractRestServiceImpl<Warehouse> impl
 	@Transactional
 	public Collection<Warehouse> save(Warehouse warehouse) {
 		if (warehouse.getId() != null)
-			warehouseRepository.delete(warehouse.getId());
+			warehouseRepository.delete(warehouse);
 		warehouseRepository.save(warehouse);
 
 		return getList();
@@ -63,9 +63,9 @@ public class WarehousServiceImpl extends AbstractRestServiceImpl<Warehouse> impl
 	@Override
 	public Collection<Warehouse> getAvailibeWarehouses(long orderId, long portId, long shipId, Date collectionDate) {
 
-		Ship ship = shipRepository.findOne(shipId);
-		Port port = portRepository.findOne(portId);
-		Order order = orderRepository.findOne(orderId);
+		Ship ship = shipRepository.getOne(shipId);
+		Port port = portRepository.getOne(portId);
+		Order order = orderRepository.getOne(orderId);
 
 		if (ship == null || port == null || order == null) {
 			return new LinkedList<Warehouse>();

@@ -61,8 +61,8 @@ gulp.task('index', function() {
 
 gulp.task('server', function() {
 
-  var server = gls.static(['app'], 8888);
-  server.start();
+  var server = gls.static('app');
+  //server.start();
 
   //use gulp.watch to trigger server actions(notify, start or stop)
   gulp.watch([
@@ -72,6 +72,6 @@ gulp.task('server', function() {
   });
 });
 
-gulp.task('serve', gulpSequence('index', 'indexVendor', 'server'));
+gulp.task('serve', gulp.series('index', 'indexVendor', 'server'));
 
-gulp.task('build', gulpSequence('index', 'indexVendor'));
+gulp.task('build', gulp.series('index', 'indexVendor'));

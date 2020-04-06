@@ -9,7 +9,7 @@
 	<parent>
 		<groupId>org.springframework.boot</groupId>
 		<artifactId>spring-boot-starter-parent</artifactId>
-		<version>1.5.7.RELEASE</version>
+		<version>2.2.6.RELEASE</version>
 	</parent>
 
 	<profiles>
@@ -101,9 +101,15 @@
 		<plugins>
 
 			<plugin>
+			  <groupId>org.apache.maven.plugins</groupId>
+			  <artifactId>maven-war-plugin</artifactId>
+			  <version>3.2.2</version>
+			</plugin>
+
+			<plugin>
 				<groupId>org.apache.tomcat.maven</groupId>
 				<artifactId>tomcat7-maven-plugin</artifactId>
-				<version>2.2</version>
+				<version>7.0</version>
 				<configuration>
 					<url>http://henricor.jvmhost.net/manager/text</url>
 					<server>TomcatServer</server>
@@ -113,7 +119,7 @@
 
 			<plugin>
 				<artifactId>maven-resources-plugin</artifactId>
-				<version>3.0.2</version>
+				<version>3.1.0</version>
 				<configuration>
 	        <nonFilteredFileExtensions>
 						<nonFilteredFileExtension>eot</nonFilteredFileExtension>
@@ -202,7 +208,7 @@
 
 			<plugin>
 				<artifactId>maven-compiler-plugin</artifactId>
-				<version>2.0.2</version>
+				<version>3.8.1</version>
 			</plugin>
 			<plugin>
 				<groupId>org.codehaus.mojo</groupId>
@@ -219,7 +225,7 @@
 			<plugin>
       <groupId>org.apache.maven.plugins</groupId>
       <artifactId>maven-dependency-plugin</artifactId>
-      <version>2.8</version>
+      <version>3.1.2</version>
       <executions>
        <execution>
         <id>build-classpath</id>

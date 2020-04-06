@@ -49,7 +49,7 @@ public class ShipServiceImpl extends AbstractRestServiceImpl<Ship> implements Sh
 	@Override
 	public Collection<Ship> save(Ship ship) {
 		if (ship.getId() != null)
-			scheduleRepository.delete(scheduleRepository.findByShip(ship));
+			scheduleRepository.deleteAll(scheduleRepository.findByShip(ship));
 
 		return super.save(ship);
 	}
@@ -61,8 +61,8 @@ public class ShipServiceImpl extends AbstractRestServiceImpl<Ship> implements Sh
 	@Override
 	public Collection<Ship> getAvailibeShipsForOrder(Long orderId, Long sourceId, Date collectionDate) {
 
-		Port port = portRepository.findOne(sourceId);
-		Order order = orderRepository.findOne(orderId);
+		Port port = portRepository.getOne(sourceId);
+		Order order = orderRepository.getOne(orderId);
 
 		if (port == null || order == null) {
 			return new LinkedList<Ship>();

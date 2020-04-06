@@ -26,7 +26,7 @@ public class OrderServiceImpl extends AbstractRestServiceImpl<Order> implements 
 	public Collection<Order> save(Order order) {
 
 		if (order.getId() != null)
-			scheduleRepository.delete(scheduleRepository.findByOrder(order));
+			scheduleRepository.deleteAll(scheduleRepository.findByOrder(order));
 
 		return super.save(order);
 	}

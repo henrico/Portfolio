@@ -30,7 +30,7 @@ public class PortServiceImpl extends AbstractRestServiceImpl<Port> implements Po
 	public Collection<Port> save(Port port) {
 
 		if (port.getId() != null)
-			scheduleRepository.delete(scheduleRepository.findBySource(port));
+			scheduleRepository.deleteAll(scheduleRepository.findBySource(port));
 
 		return super.save(port);
 	}

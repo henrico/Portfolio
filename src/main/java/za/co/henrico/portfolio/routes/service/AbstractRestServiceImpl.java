@@ -16,7 +16,7 @@ public abstract class AbstractRestServiceImpl<O extends AbstractPersistable> imp
 
 	@Override
 	public Collection<O> delete(long id) {
-		getRepository().delete(id);
+		getRepository().deleteById(id);
 		return getList();
 	}
 

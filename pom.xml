@@ -234,7 +234,7 @@
           <goal>build-classpath</goal>
         </goals>
          <configuration>
-            <outputFile>.classpath</outputFile>
+            <outputFile>.mvnclasspath</outputFile>
          </configuration>
        </execution>
      </executions>

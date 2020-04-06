@@ -1,8 +1,7 @@
 var gulp = require('gulp');
 
-var gls = require('gulp-live-server');
 var clean = require('gulp-clean');
-var mainBowerFiles = require('gulp-main-bower-files');
+var mainFiles = require('npmfiles');
 var inject = require('gulp-inject');
 var less = require('gulp-less');
 var path = require('path');
@@ -23,31 +22,18 @@ gulp.task('vendor', function() {
     './app/vendor/**/*.js', './app/vendor/**/*.css'
   ], {read: false});
 
-  return gulp.src('./bower.json').pipe(mainBowerFiles()).pipe(gulp.dest('app/vendor'));
+  return gulp.src(mainFiles()).pipe(gulp.dest('app/vendor'));
 });
 
 gulp.task('indexVendor', function() {
-  var bowerStreamJS = gulp.src('./bower.json').pipe(mainBowerFiles(), {read: false});
-
-
-  // var bowerStreamCSS = gulp.src(mainBowerFiles('**/*.css'));
+  var bowerStreamJS = gulp.src(mainFiles(), {read: false});
 
   bowerStreamJS = bowerStreamJS.pipe(gulp.dest('app/vendor'));
-  // bowerStreamCSS = bowerStreamCSS.pipe(gulp.dest('app/vendor'));
 
   return gulp.src('./app/index.html').pipe(inject(bowerStreamJS, {
     relative: true,
     name: 'vendor'
-  // })).pipe(inject(bowerStreamCSS, {
-  //   relative: true,
-  //   name: 'vendor'
   })).pipe(gulp.dest('./app'));
-
-  // var target = gulp.src('./app/index.html');
-  // var sources = gulp.src(mainBowerFiles( ), {read: false});
-  //
-  // return target.pipe(inject(sources,{relative: true, name: 'vendor'}))
-  //   .pipe(gulp.dest('./app'));
 });
 
 gulp.task('index', function() {
@@ -58,20 +44,5 @@ gulp.task('index', function() {
 
   return target.pipe(inject(sources, {relative: true})).pipe(gulp.dest('./app'));
 });
-
-gulp.task('server', function() {
-
-  var server = gls.static('app');
-  //server.start();
-
-  //use gulp.watch to trigger server actions(notify, start or stop)
-  gulp.watch([
-    '**/*.css', '**/*.html'
-  ], function(file) {
-    server.notify.apply(server, [file]);
-  });
-});
-
-gulp.task('serve', gulp.series('index', 'indexVendor', 'server'));
 
 gulp.task('build', gulp.series('index', 'indexVendor'));

@@ -7,3 +7,5 @@
 /public/
 *.class
 /.settings/*
+.mvnclasspath
+html/yarn-error.log

@@ -1,0 +1,25 @@
+table.training-table {
+  background-color: black;
+}
+
+table.training-table > tr {
+  border-bottom: 10px solid white;
+}
+
+.trainin-table-td {
+  border: 1px solid white;
+}
+
+.trainin-table-div {
+  margin: 10px;
+  width: 100px;
+  height: 100px;
+}
+
+.generate-button {
+  vertical-align: top;
+}
+
+.sketch-picker{
+  display: inline-block;
+}

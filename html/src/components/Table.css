@@ -1,0 +1,10 @@
+.icon-button,
+.icon-button:focus {
+  border: none;
+  outline-style: none;
+}
+
+.clickable-icon {
+  cursor: pointer;
+  font-size: 14px;
+}

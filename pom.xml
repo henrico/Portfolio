@@ -87,7 +87,7 @@
 		<finalName>portfolio</finalName>
 		<resources>
 			<resource>
-				<directory>${basedir}/html/app</directory>
+				<directory>${basedir}/html/dist</directory>
 			</resource>
 
 			<resource>
@@ -149,7 +149,7 @@
 					    </nonFilteredFileExtensions>
 							<resources>
 								<resource>
-									<directory>${basedir}/html/app</directory>
+									<directory>${basedir}/html/dist</directory>
 									<filtering>true</filtering>
 								</resource>
 							</resources>
@@ -173,7 +173,7 @@
 					    </nonFilteredFileExtensions>
 							<resources>
 								<resource>
-									<directory>${basedir}/html/app</directory>
+									<directory>${basedir}/html/dist</directory>
 									<filtering>true</filtering>
 								</resource>
 							</resources>

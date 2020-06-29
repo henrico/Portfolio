@@ -12,6 +12,10 @@ import com.fasterxml.jackson.annotation.JsonTypeName;
 @Entity
 public class InternalWarehouse extends Warehouse {
 
+	public InternalWarehouse(){
+		setType("INTERNAL");
+	}
+
 	@Override
 	protected BigDecimal getAditionalCost() {
 		return BigDecimal.ZERO;

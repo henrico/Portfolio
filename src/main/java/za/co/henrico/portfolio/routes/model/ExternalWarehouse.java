@@ -17,6 +17,10 @@ public class ExternalWarehouse extends Warehouse {
 	@Basic
 	private BigDecimal transportCost;
 
+	public ExternalWarehouse(){
+		setType("EXTERNAL");
+	}
+
 	public BigDecimal getTransportCost() {
 		return transportCost;
 	}

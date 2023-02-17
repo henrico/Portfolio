@@ -2,12 +2,11 @@ package za.co.henrico.portfolio.routes.service;
 
 import java.util.Collection;
 
-import javax.transaction.Transactional;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Component;
 
+import jakarta.transaction.Transactional;
 import za.co.henrico.portfolio.routes.model.Port;
 import za.co.henrico.portfolio.routes.model.Route;
 import za.co.henrico.portfolio.routes.model.Schedule;
@@ -16,7 +15,7 @@ import za.co.henrico.portfolio.routes.repository.ScheduleRepository;
 import za.co.henrico.portfolio.routes.utils.Utils;
 
 @Component
-public class ScheduleServiceImpl extends AbstractRestServiceImpl<Schedule> implements ScheduleService {
+public class ScheduleServiceImpl extends AbstractRestServiceImpl<Schedule, Long> implements ScheduleService {
 
 	@Autowired
 	private ScheduleRepository scheduleRepository;

@@ -93,7 +93,7 @@ export default class Warehouses extends React.Component {
       <Entities
         columns={this.state.columns}
         keyField="id"
-        rest="/rest/warehouse/"
+        rest="/rest/warehouse"
         entityName="Warehouse"
         heading="Warehouses"
         description="Add a Warehouse and select a Port it will supply."

@@ -1,40 +1,26 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
-
-	<groupId>za.co.henrico</groupId>
-	<artifactId>portfolio</artifactId>
-	<version>0.0.1</version>
-
 	<parent>
 		<groupId>org.springframework.boot</groupId>
 		<artifactId>spring-boot-starter-parent</artifactId>
-		<version>2.2.6.RELEASE</version>
+		<version>3.0.2</version>
+		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
-
-	<profiles>
-        <profile>
-            <id>dev</id>
-            <activation>
-                <activeByDefault>true</activeByDefault>
-            </activation>
-            <properties>
-                <build.profile.id>dev</build.profile.id>
-                <profileActive>dev</profileActive>
-								<restServerName></restServerName>
-            </properties>
-        </profile>
-        <profile>
-            <id>prod</id>
-            <properties>
-                <build.profile.id>prod</build.profile.id>
-                <profileActive>prod</profileActive>
-								<restServerName>/portfolio/</restServerName>
-            </properties>
-        </profile>
-    </profiles>
-
+	<groupId>za.co.henrico</groupId>
+	<artifactId>portfolio</artifactId>
+	<version>0.0.1-SNAPSHOT</version>
+	<name>portfolio</name>
+	<description>Route Planner Portfolio Project</description>
+	<properties>
+		<java.version>17</java.version>
+	</properties>
 	<dependencies>
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-data-jpa</artifactId>
+		</dependency>
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-web</artifactId>
@@ -42,206 +28,29 @@
 
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
-			<artifactId>spring-boot-starter-data-jpa</artifactId>
-		</dependency>
-
-		<dependency>
-			<groupId>org.springframework.boot</groupId>
-			<artifactId>spring-boot-starter-tomcat</artifactId>
-			<scope>provided</scope>
+			<artifactId>spring-boot-devtools</artifactId>
+			<scope>runtime</scope>
+			<optional>true</optional>
 		</dependency>
 		<dependency>
-			<groupId>org.springframework</groupId>
-			<artifactId>spring-webmvc</artifactId>
+			<groupId>com.h2database</groupId>
+			<artifactId>h2</artifactId>
+			<scope>runtime</scope>
 		</dependency>
-
-		<dependency>
-			<groupId>mysql</groupId>
-			<artifactId>mysql-connector-java</artifactId>
-		</dependency>
-
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-test</artifactId>
 			<scope>test</scope>
 		</dependency>
-
-		<dependency>
-			<groupId>com.h2database</groupId>
-			<artifactId>h2</artifactId>
-		</dependency>
-
-		<dependency>
-		    <groupId>org.beykery</groupId>
-		    <artifactId>neuroph</artifactId>
-		    <version>2.92</version>
-		</dependency>
-
 	</dependencies>
 
-	<properties>
-		<java.version>1.8</java.version>
-	</properties>
-
 	<build>
-		<finalName>portfolio</finalName>
-		<resources>
-			<resource>
-				<directory>${basedir}/html/dist</directory>
-			</resource>
-
-			<resource>
-				<directory>src/main/resources</directory>
-				<filtering>true</filtering>
-			</resource>
-
-
-		</resources>
-
 		<plugins>
-
 			<plugin>
-			  <groupId>org.apache.maven.plugins</groupId>
-			  <artifactId>maven-war-plugin</artifactId>
-			  <version>3.2.2</version>
-			</plugin>
-
-			<plugin>
-				<groupId>org.apache.tomcat.maven</groupId>
-				<artifactId>tomcat7-maven-plugin</artifactId>
-				<version>7.0</version>
-				<configuration>
-					<url>http://henricor.jvmhost.net/manager/text</url>
-					<server>TomcatServer</server>
-					<path>/portfolio</path>
-				</configuration>
-			</plugin>
-
-			<plugin>
-				<artifactId>maven-resources-plugin</artifactId>
-				<version>3.1.0</version>
-				<configuration>
-	        <nonFilteredFileExtensions>
-						<nonFilteredFileExtension>eot</nonFilteredFileExtension>
-						<nonFilteredFileExtension>svg</nonFilteredFileExtension>
-						<nonFilteredFileExtension>ttf</nonFilteredFileExtension>
-						<nonFilteredFileExtension>woff</nonFilteredFileExtension>
-						<nonFilteredFileExtension>woff2</nonFilteredFileExtension>
-						<nonFilteredFileExtension>ico</nonFilteredFileExtension>
-	        </nonFilteredFileExtensions>
-	      </configuration>
-				<executions>
-					<execution>
-						<id>copy-resources</id>
-						<phase>compile</phase>
-						<goals>
-							<goal>copy-resources</goal>
-						</goals>
-						<configuration>
-							<outputDirectory>${basedir}/public</outputDirectory>
-							<nonFilteredFileExtensions>
-								<nonFilteredFileExtension>eot</nonFilteredFileExtension>
-								<nonFilteredFileExtension>svg</nonFilteredFileExtension>
-								<nonFilteredFileExtension>ttf</nonFilteredFileExtension>
-								<nonFilteredFileExtension>woff</nonFilteredFileExtension>
-								<nonFilteredFileExtension>woff2</nonFilteredFileExtension>
-								<nonFilteredFileExtension>ico</nonFilteredFileExtension>
-					    </nonFilteredFileExtensions>
-							<resources>
-								<resource>
-									<directory>${basedir}/html/dist</directory>
-									<filtering>true</filtering>
-								</resource>
-							</resources>
-						</configuration>
-					</execution>
-					<execution>
-						<id>copy-resources-target</id>
-						<phase>compile</phase>
-						<goals>
-							<goal>copy-resources</goal>
-						</goals>
-						<configuration>
-							<outputDirectory>${basedir}/target/portfolio</outputDirectory>
-							<nonFilteredFileExtensions>
-					      <nonFilteredFileExtension>eot</nonFilteredFileExtension>
-								<nonFilteredFileExtension>svg</nonFilteredFileExtension>
-								<nonFilteredFileExtension>ttf</nonFilteredFileExtension>
-								<nonFilteredFileExtension>woff</nonFilteredFileExtension>
-								<nonFilteredFileExtension>woff2</nonFilteredFileExtension>
-								<nonFilteredFileExtension>ico</nonFilteredFileExtension>
-					    </nonFilteredFileExtensions>
-							<resources>
-								<resource>
-									<directory>${basedir}/html/dist</directory>
-									<filtering>true</filtering>
-								</resource>
-							</resources>
-						</configuration>
-					</execution>
-				</executions>
-			</plugin>
-
-			<plugin>
-
 				<groupId>org.springframework.boot</groupId>
 				<artifactId>spring-boot-maven-plugin</artifactId>
 			</plugin>
-
-			<plugin>
-            <groupId>org.codehaus.mojo</groupId>
-            <artifactId>build-helper-maven-plugin</artifactId>
-            <executions>
-                <execution>
-                    <phase>generate-sources</phase>
-                    <goals>
-                        <goal>add-source</goal>
-                    </goals>
-                    <configuration>
-                        <sources>
-                            <source>src/main/resources</source>
-                        </sources>
-                    </configuration>
-                </execution>
-            </executions>
-        </plugin>
-
-			<plugin>
-				<artifactId>maven-compiler-plugin</artifactId>
-				<version>3.8.1</version>
-			</plugin>
-			<plugin>
-				<groupId>org.codehaus.mojo</groupId>
-				<artifactId>exec-maven-plugin</artifactId>
-				<configuration>
-					<classpathScope>compile</classpathScope>
-					<mainClass>za.co.henrico.portfolio.App</mainClass>
-				</configuration>
-			</plugin>
-
-
-
-
-			<plugin>
-      <groupId>org.apache.maven.plugins</groupId>
-      <artifactId>maven-dependency-plugin</artifactId>
-      <version>3.1.2</version>
-      <executions>
-       <execution>
-        <id>build-classpath</id>
-        <phase>generate-sources</phase>
-        <goals>
-          <goal>build-classpath</goal>
-        </goals>
-         <configuration>
-            <outputFile>.mvnclasspath</outputFile>
-         </configuration>
-       </execution>
-     </executions>
-    </plugin>
-
 		</plugins>
 	</build>
 
-	<packaging>war</packaging>
 </project>

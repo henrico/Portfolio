@@ -2,19 +2,18 @@ package za.co.henrico.portfolio.routes.service;
 
 import java.util.Collection;
 
-import javax.transaction.Transactional;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Component;
 
+import jakarta.transaction.Transactional;
 import za.co.henrico.portfolio.routes.model.Port;
 import za.co.henrico.portfolio.routes.repository.PortRepository;
 import za.co.henrico.portfolio.routes.repository.ProductRepository;
 import za.co.henrico.portfolio.routes.repository.ScheduleRepository;
 
 @Component
-public class PortServiceImpl extends AbstractRestServiceImpl<Port> implements PortService {
+public class PortServiceImpl extends AbstractRestServiceImpl<Port, Long> implements PortService {
 
 	@Autowired
 	private PortRepository portRepository;

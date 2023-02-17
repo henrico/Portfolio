@@ -110,7 +110,7 @@ export default class Orders extends React.Component {
       <Entities
         columns={this.state.columns}
         keyField="id"
-        rest="/rest/order/"
+        rest="/rest/order"
         entityName="Order"
         heading="Orders"
         description="Orders of Products are sent to Ports and are fulfilled by Schedules."

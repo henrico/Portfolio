@@ -132,7 +132,7 @@ export default class Schedules extends React.Component {
       <Entities
         columns={this.state.columns}
         keyField="id"
-        rest="/rest/schedule/"
+        rest="/rest/schedule"
         entityName="Schedule"
         heading="Schedules"
         description="Select an Order to be shipped. Only Ships that can meet the delivery date are available."

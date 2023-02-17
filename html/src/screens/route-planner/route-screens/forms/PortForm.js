@@ -39,7 +39,7 @@ export default class PortForm extends React.Component {
           validation="NAME"
         />
         <IncludeField
-          rest="/rest/product/"
+          rest="/rest/product"
           keyField="id"
           columns={columns}
           label="Products"

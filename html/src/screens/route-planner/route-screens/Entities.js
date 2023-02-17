@@ -40,7 +40,7 @@ export default class Entities extends React.Component {
     NProgress.start();
     $.ajax({
       type: 'PUT',
-      url: server + self.props.rest + update[this.props.keyField],
+      url: server + self.props.rest +'/'+ update[this.props.keyField],
       contentType: 'application/json',
       data: JSON.stringify(update),
       success: function(result) {
@@ -95,7 +95,7 @@ export default class Entities extends React.Component {
     NProgress.start();
     $.ajax({
       type: 'DELETE',
-      url: server + self.props.rest + update[this.props.keyField],
+      url: server + self.props.rest +'/'+ update[this.props.keyField],
       contentType: 'application/json',
       data: JSON.stringify(update),
       success: function(result) {

@@ -4,14 +4,12 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Collection;
 
-import javax.transaction.Transactional;
-
-import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
+import jakarta.transaction.Transactional;
 import za.co.henrico.portfolio.routes.model.Order;
 import za.co.henrico.portfolio.routes.model.Port;
 import za.co.henrico.portfolio.routes.model.Schedule;
@@ -21,10 +19,10 @@ import za.co.henrico.portfolio.routes.service.RestService;
 
 @RestController
 @RequestMapping("/rest/schedule")
-@CrossOrigin(origins = "*")
-public class ScheduleController extends AbstractAppController<Schedule> {
 
-	protected RestService getService() {
+public class ScheduleController extends AbstractAppController<Schedule, Long> {
+
+	protected RestService<Schedule, Long> getService() {
 		return scheduleService;
 	}
 

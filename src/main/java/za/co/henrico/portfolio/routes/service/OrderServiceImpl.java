@@ -2,18 +2,17 @@ package za.co.henrico.portfolio.routes.service;
 
 import java.util.Collection;
 
-import javax.transaction.Transactional;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Component;
 
+import jakarta.transaction.Transactional;
 import za.co.henrico.portfolio.routes.model.Order;
 import za.co.henrico.portfolio.routes.repository.OrderRepository;
 import za.co.henrico.portfolio.routes.repository.ScheduleRepository;
 
 @Component
-public class OrderServiceImpl extends AbstractRestServiceImpl<Order> implements OrderService {
+public class OrderServiceImpl extends AbstractRestServiceImpl<Order, Long> implements OrderService {
 
 	@Autowired
 	private OrderRepository orderRepository;

@@ -2,11 +2,11 @@ package za.co.henrico.portfolio.routes.model;
 
 import java.math.BigDecimal;
 
-import javax.persistence.Basic;
-import javax.persistence.DiscriminatorValue;
-import javax.persistence.Entity;
-
 import com.fasterxml.jackson.annotation.JsonTypeName;
+
+import jakarta.persistence.Basic;
+import jakarta.persistence.DiscriminatorValue;
+import jakarta.persistence.Entity;
 
 @JsonTypeName("EXTERNAL")
 @SuppressWarnings("serial")
@@ -17,7 +17,7 @@ public class ExternalWarehouse extends Warehouse {
 	@Basic
 	private BigDecimal transportCost;
 
-	public ExternalWarehouse(){
+	public ExternalWarehouse() {
 		setType("EXTERNAL");
 	}
 

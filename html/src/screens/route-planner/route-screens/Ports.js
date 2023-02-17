@@ -46,7 +46,7 @@ export default class Ports extends React.Component {
       <Entities
         columns={this.state.columns}
         keyField="id"
-        rest="/rest/port/"
+        rest="/rest/port"
         entityName="Port"
         heading="Ports"
         description="Indicate which Products your Ports produce. Then link Warehouses to a Port."

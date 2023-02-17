@@ -61,7 +61,7 @@ export default class Ships extends React.Component {
       <Entities
         columns={this.state.columns}
         keyField="id"
-        rest="/rest/ship/"
+        rest="/rest/ship"
         entityName="Ship"
         heading="Ships"
         description="Ships are used on Schedules to fulfill product Orders."

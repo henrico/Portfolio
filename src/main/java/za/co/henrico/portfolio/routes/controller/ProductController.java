@@ -1,6 +1,5 @@
 package za.co.henrico.portfolio.routes.controller;
 
-import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -9,10 +8,14 @@ import za.co.henrico.portfolio.routes.service.RestService;
 
 @RestController
 @RequestMapping("/rest/product")
-@CrossOrigin(origins = "*")
-public class ProductController extends AbstractAppController<Product> {
 
-	protected RestService getService() {
+public class ProductController extends AbstractAppController<Product, Long> {
+
+	public ProductController() {
+//		throw new RuntimeException();
+	}
+
+	protected RestService<Product, Long> getService() {
 		return productService;
 	}
 

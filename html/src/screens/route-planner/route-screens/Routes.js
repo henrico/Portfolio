@@ -67,7 +67,7 @@ export default class Routes extends React.Component {
       <Entities
         columns={this.state.columns}
         keyField="id"
-        rest="/rest/route/"
+        rest="/rest/route"
         entityName="Route"
         heading="Routes"
         description="Add Routes to connect two Ports."

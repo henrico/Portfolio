@@ -9,7 +9,7 @@ import za.co.henrico.portfolio.routes.repository.ProductRepository;
 import za.co.henrico.portfolio.routes.repository.ScheduleRepository;
 
 @Component
-public class ProductServiceImpl extends AbstractRestServiceImpl<Product> implements ProductService {
+public class ProductServiceImpl extends AbstractRestServiceImpl<Product, Long> implements ProductService {
 
 	@Autowired
 	private ProductRepository productRepository;

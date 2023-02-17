@@ -8,7 +8,7 @@ import za.co.henrico.portfolio.routes.model.Route;
 import za.co.henrico.portfolio.routes.repository.RouteRepository;
 
 @Component
-public class RouteServiceImpl extends AbstractRestServiceImpl<Route> implements RouteService {
+public class RouteServiceImpl extends AbstractRestServiceImpl<Route, Long> implements RouteService {
 
 	@Autowired
 	private RouteRepository routeRepository;

@@ -6,12 +6,11 @@ import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.List;
 
-import javax.transaction.Transactional;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Component;
 
+import jakarta.transaction.Transactional;
 import za.co.henrico.portfolio.routes.model.Order;
 import za.co.henrico.portfolio.routes.model.Port;
 import za.co.henrico.portfolio.routes.model.Route;
@@ -25,7 +24,7 @@ import za.co.henrico.portfolio.routes.repository.ShipRepository;
 import za.co.henrico.portfolio.routes.utils.Utils;
 
 @Component
-public class ShipServiceImpl extends AbstractRestServiceImpl<Ship> implements ShipService {
+public class ShipServiceImpl extends AbstractRestServiceImpl<Ship, Long> implements ShipService {
 
 	@Autowired
 	private ShipRepository shipRepository;

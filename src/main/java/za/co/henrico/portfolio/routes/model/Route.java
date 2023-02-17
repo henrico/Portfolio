@@ -1,12 +1,12 @@
 package za.co.henrico.portfolio.routes.model;
 
-import javax.persistence.Basic;
-import javax.persistence.Entity;
-import javax.persistence.JoinColumn;
-import javax.persistence.NamedQuery;
-import javax.persistence.OneToOne;
-
 import org.springframework.data.jpa.domain.AbstractPersistable;
+
+import jakarta.persistence.Basic;
+import jakarta.persistence.Entity;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.NamedQuery;
+import jakarta.persistence.OneToOne;
 
 @Entity
 @NamedQuery(name = "Route.findRouteFromPorts", query = "select r from Route r where (r.destinationA = ?1 and r.destinationB = ?2) or (r.destinationA = ?2 and r.destinationB = ?1) order by r.distance desc")

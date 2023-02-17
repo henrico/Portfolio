@@ -2,17 +2,17 @@ package za.co.henrico.portfolio.routes.model;
 
 import java.math.BigDecimal;
 
-import javax.persistence.DiscriminatorValue;
-import javax.persistence.Entity;
-
 import com.fasterxml.jackson.annotation.JsonTypeName;
+
+import jakarta.persistence.DiscriminatorValue;
+import jakarta.persistence.Entity;
 
 @JsonTypeName("INTERNAL")
 @DiscriminatorValue("INTERNAL")
 @Entity
 public class InternalWarehouse extends Warehouse {
 
-	public InternalWarehouse(){
+	public InternalWarehouse() {
 		setType("INTERNAL");
 	}
 

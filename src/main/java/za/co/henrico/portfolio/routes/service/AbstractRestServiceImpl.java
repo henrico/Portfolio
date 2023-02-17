@@ -1,13 +1,14 @@
 package za.co.henrico.portfolio.routes.service;
 
+import java.io.Serializable;
 import java.util.Collection;
-
-import javax.transaction.Transactional;
 
 import org.springframework.data.jpa.domain.AbstractPersistable;
 import org.springframework.data.jpa.repository.JpaRepository;
 
-public abstract class AbstractRestServiceImpl<O extends AbstractPersistable> implements RestService<O> {
+import jakarta.transaction.Transactional;
+
+public abstract class AbstractRestServiceImpl<O extends AbstractPersistable<T>, T extends Serializable> implements RestService<O, T> {
 
 	@Override
 	public Collection<O> getList() {

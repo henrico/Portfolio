@@ -1,6 +1,5 @@
 package za.co.henrico.portfolio.routes.controller;
 
-import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -9,10 +8,10 @@ import za.co.henrico.portfolio.routes.service.RestService;
 
 @RestController
 @RequestMapping("/rest/ship")
-@CrossOrigin(origins = "*")
-public class ShipController extends AbstractAppController<Ship> {
 
-	protected RestService getService() {
+public class ShipController extends AbstractAppController<Ship, Long> {
+
+	protected RestService<Ship, Long> getService() {
 		return shipService;
 	}
 

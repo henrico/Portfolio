@@ -45,7 +45,7 @@ export default class Products extends React.Component {
       <Entities
         columns={this.state.columns}
         keyField="id"
-        rest="/rest/product/"
+        rest="/rest/product"
         entityName="Product"
         heading="Products"
         description="Manage your Products then make them available in a Port."

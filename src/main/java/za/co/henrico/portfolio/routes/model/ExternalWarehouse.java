@@ -9,7 +9,6 @@ import jakarta.persistence.DiscriminatorValue;
 import jakarta.persistence.Entity;
 
 @JsonTypeName("EXTERNAL")
-@SuppressWarnings("serial")
 @DiscriminatorValue("EXTERNAL")
 @Entity
 public class ExternalWarehouse extends Warehouse {

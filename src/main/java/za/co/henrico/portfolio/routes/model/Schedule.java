@@ -1,7 +1,6 @@
 package za.co.henrico.portfolio.routes.model;
 
 import java.math.BigDecimal;
-import java.util.Calendar;
 import java.util.Date;
 import java.util.concurrent.TimeUnit;
 
@@ -17,7 +16,6 @@ import jakarta.persistence.Temporal;
 import jakarta.persistence.TemporalType;
 import jakarta.persistence.Transient;
 
-@SuppressWarnings("serial")
 @Entity
 @NamedQueries({
 		@NamedQuery(name = "Schedule.findDateReleventSchedule", query = "select sc from Schedule sc where sc.collectionDate<?1 and sc.deliveryDate >?2 and ship=?3"),
@@ -112,7 +110,6 @@ public class Schedule extends AbstractPersistable<Long> {
 
 	@Transient
 	public BigDecimal getCost() {
-		Calendar c = Calendar.getInstance();
 		long days = TimeUnit.DAYS.convert(order.getDeliveryDate().getTime() - deliveryDate.getTime(),
 				TimeUnit.MILLISECONDS);
 

@@ -28,7 +28,6 @@ import jakarta.persistence.Transient;
 @JsonSubTypes({ @JsonSubTypes.Type(value = InternalWarehouse.class, name = "INTERNAL"),
 
 		@JsonSubTypes.Type(value = ExternalWarehouse.class, name = "EXTERNAL") })
-@SuppressWarnings("serial")
 @Inheritance(strategy = InheritanceType.SINGLE_TABLE)
 @DiscriminatorColumn(discriminatorType = DiscriminatorType.STRING, name = "type")
 @Entity

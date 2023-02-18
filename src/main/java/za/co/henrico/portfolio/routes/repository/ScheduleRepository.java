@@ -2,6 +2,7 @@ package za.co.henrico.portfolio.routes.repository;
 
 import java.util.Collection;
 import java.util.Date;
+import java.util.Optional;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 
@@ -15,7 +16,7 @@ public interface ScheduleRepository extends JpaRepository<Schedule, Long> {
 
 	Collection<Schedule> findDateReleventSchedule(Date deliverDate, Date collectionDate, Ship current);
 
-	Schedule findLastScheduleRelatedToShip(Ship ship);
+	Optional<Schedule> findLastScheduleRelatedToShip(Ship ship);
 
 	Collection<Schedule> findBySource(Port source);
 
@@ -27,6 +28,6 @@ public interface ScheduleRepository extends JpaRepository<Schedule, Long> {
 
 	Collection<Schedule> findByProduct();
 
-	Schedule findFirstScheduleRelatedToShipFromDate(Ship current, Date endDate);
+	Optional<Schedule> findFirstScheduleRelatedToShipFromDate(Ship current, Date endDate);
 
 }

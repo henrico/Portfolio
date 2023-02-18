@@ -30,27 +30,27 @@ public class ScheduleServiceImpl extends AbstractRestServiceImpl<Schedule, Long>
 	@Transactional
 	public Collection<Schedule> save(Schedule schedule) {
 
-		Port source = schedule.getSource();
-		Port destination = schedule.getOrder().getDestination();
+	    Port source = schedule.getSource();
+	    Port destination = schedule.getOrder().getDestination();
 
-		Route route = routeRepository.findRouteFromPorts(source, destination);
+	    Route route = routeRepository.findRouteFromPorts(source, destination).orElseThrow();
 
-		schedule.setDeliveryDate(utils.getEndDateFromDays(schedule.getCollectionDate(), schedule.getShip(), route));
+	    schedule.setDeliveryDate(utils.getEndDateFromDays(schedule.getCollectionDate(), schedule.getShip(), route));
 
-		Collection<Schedule> existing = scheduleRepository.findBySource(schedule.getSource());
+	    Collection<Schedule> existing = scheduleRepository.findBySource(schedule.getSource());
 
-		int total = 0;
-		for (Schedule cur : existing) {
-			total += cur.getStoredCrates();
-		}
+	    int total = existing.stream()
+	            .mapToInt(Schedule::getStoredCrates)
+	            .sum();
 
-		int remaining = schedule.getOrder().getQuantity() - total;
+	    int remaining = schedule.getOrder().getQuantity() - total;
 
-		schedule.setStoredCrates(
-				remaining < schedule.getShip().getCapacity() ? remaining : schedule.getShip().getCapacity());
+	    schedule.setStoredCrates(
+	            Math.min(remaining, schedule.getShip().getCapacity()));
 
-		return super.save(schedule);
+	    return super.save(schedule);
 	}
+
 
 	protected JpaRepository<Schedule, Long> getRepository() {
 		return scheduleRepository;

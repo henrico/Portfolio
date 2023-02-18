@@ -3,8 +3,6 @@ package za.co.henrico.portfolio.routes.controller;
 import java.io.Serializable;
 import java.util.Collection;
 
-import jakarta.transaction.Transactional;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.jpa.domain.AbstractPersistable;
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -15,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
+import jakarta.transaction.Transactional;
 import za.co.henrico.portfolio.routes.service.OrderService;
 import za.co.henrico.portfolio.routes.service.PortService;
 import za.co.henrico.portfolio.routes.service.ProductService;

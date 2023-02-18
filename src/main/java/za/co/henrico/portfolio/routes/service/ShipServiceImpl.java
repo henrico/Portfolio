@@ -1,9 +1,8 @@
 package za.co.henrico.portfolio.routes.service;
 
 import java.util.Collection;
+import java.util.Collections;
 import java.util.Date;
-import java.util.Iterator;
-import java.util.LinkedList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -56,92 +55,66 @@ public class ShipServiceImpl extends AbstractRestServiceImpl<Ship, Long> impleme
 	protected JpaRepository<Ship, Long> getRepository() {
 		return shipRepository;
 	}
-
+	
 	@Override
 	public Collection<Ship> getAvailibeShipsForOrder(Long orderId, Long sourceId, Date collectionDate) {
+	    Port port = portRepository.findById(sourceId).orElse(null);
+	    Order order = orderRepository.findById(orderId).orElse(null);
 
-		Port port = portRepository.getOne(sourceId);
-		Order order = orderRepository.getOne(orderId);
+	    if (port == null || order == null) {
+	        return Collections.emptyList();
+	    }
 
-		if (port == null || order == null) {
-			return new LinkedList<Ship>();
-		}
+	    List<Ship> ships = shipRepository.findAll();
 
-		List<Ship> ships = shipRepository.findAll();
-		Iterator<Ship> i = ships.iterator();
-		while (i.hasNext()) {
+	    ships.removeIf(ship -> {
+	        Route route;
+	        if (port.getId().equals(order.getDestination().getId())) {
+	            route = new Route();
+	            route.setDistance(0L);
+	        } else {
+	            route = routeRepository.findRouteFromPorts(port, order.getDestination()).orElseThrow();
+	        }
 
-			Ship current = i.next();
+	        Date endDate = utils.getEndDateFromDays(collectionDate, ship, route);
+	        Collection<Schedule> schedules = scheduleRepository.findDateReleventSchedule(endDate, collectionDate, ship);
 
-			Route route;
-			if (port.getId().equals(order.getDestination().getId())) {
-				route = new Route();
-				route.setDistance(0L);
-			} else {
-				route = routeRepository.findRouteFromPorts(port, order.getDestination());
-			}
+	        if (!schedules.isEmpty() || endDate.compareTo(order.getDeliveryDate()) > 0) {
+	            return true;
+	        }
 
-			Date endDate = utils.getEndDateFromDays(collectionDate, current, route);
+	        Schedule lastSchedule = scheduleRepository.findLastScheduleRelatedToShip(ship).orElse(null);
+	        if (lastSchedule != null) {
+	            if (port.getId().equals(lastSchedule.getOrder().getDestination().getId())) {
+	                route = new Route();
+	                route.setDistance(0L);
+	            } else {
+	                route = routeRepository.findRouteFromPorts(lastSchedule.getOrder().getDestination(), port).orElseThrow();
+	            }
+	            Date arrivalDate = utils.getEndDateFromDays(lastSchedule.getDeliveryDate(), ship, route);
+	            if (arrivalDate.compareTo(collectionDate) > 0) {
+	                return true;
+	            }
 
-			Collection<Schedule> schedules = scheduleRepository.findDateReleventSchedule(endDate, collectionDate,
-					current);
+	            Schedule firstSchedule = scheduleRepository.findFirstScheduleRelatedToShipFromDate(ship, endDate).orElse(null);
+	            if (firstSchedule != null) {
+	                if (firstSchedule.getSource().getId().equals(order.getDestination().getId())) {
+	                    route = new Route();
+	                    route.setDistance(0L);
+	                } else {
+	                    route = routeRepository.findRouteFromPorts(firstSchedule.getSource(), order.getDestination()).orElseThrow();
+	                }
+	                arrivalDate = utils.getEndDateFromDays(endDate, ship, route);
+	                if (arrivalDate.compareTo(firstSchedule.getCollectionDate()) > 0) {
+	                    return true;
+	                }
+	            }
+	        }
 
-			if (!schedules.isEmpty()) {
-				i.remove();
-			} else {
+	        return false;
+	    });
 
-				if (endDate.compareTo(order.getDeliveryDate()) > 0) {
-					i.remove();
-				} else {
-
-					Schedule lastSchedule = scheduleRepository.findLastScheduleRelatedToShip(current);
-					if (lastSchedule != null) {
-
-						if (port.getId().equals(lastSchedule.getOrder().getDestination().getId())) {
-							route = new Route();
-							route.setDistance(0L);
-						} else {
-							route = routeRepository.findRouteFromPorts(lastSchedule.getOrder().getDestination(), port);
-						}
-
-						Date arrivalDate = utils.getEndDateFromDays(lastSchedule.getDeliveryDate(), current, route);
-
-						if (arrivalDate.compareTo(collectionDate) > 0) {
-							i.remove();
-						} else {
-
-							Schedule firstSchedule = scheduleRepository.findFirstScheduleRelatedToShipFromDate(current,
-									endDate);
-							if (firstSchedule != null) {
-
-								if (firstSchedule.getSource().getId().equals(order.getDestination().getId())) {
-									route = new Route();
-									route.setDistance(0L);
-								} else {
-									route = routeRepository.findRouteFromPorts(firstSchedule.getSource(),
-											order.getDestination());
-								}
-
-								arrivalDate = utils.getEndDateFromDays(endDate, current, route);
-
-								if (arrivalDate.compareTo(firstSchedule.getCollectionDate()) > 0) {
-									i.remove();
-								}
-
-							}
-
-						}
-
-					}
-
-				}
-
-			}
-
-		}
-
-		return ships;
-
+	    return ships;
 	}
 
 }

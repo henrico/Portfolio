@@ -2,9 +2,10 @@ package za.co.henrico.portfolio.routes.service;
 
 import java.util.Collection;
 import java.util.Date;
-import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Optional;
+import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.jpa.repository.JpaRepository;
@@ -54,6 +55,7 @@ public class WarehousServiceImpl extends AbstractRestServiceImpl<Warehouse, Long
 	public Collection<Warehouse> save(Warehouse warehouse) {
 		if (warehouse.getId() != null)
 			warehouseRepository.delete(warehouse);
+		
 		warehouseRepository.save(warehouse);
 
 		return getList();
@@ -61,51 +63,40 @@ public class WarehousServiceImpl extends AbstractRestServiceImpl<Warehouse, Long
 
 	@Override
 	public Collection<Warehouse> getAvailibeWarehouses(long orderId, long portId, long shipId, Date collectionDate) {
+	    Optional<Ship> ship = shipRepository.findById(shipId);
+	    Optional<Port> port = portRepository.findById(portId);
+	    Optional<Order> order = orderRepository.findById(orderId);
 
-		Ship ship = shipRepository.getOne(shipId);
-		Port port = portRepository.getOne(portId);
-		Order order = orderRepository.getOne(orderId);
+	    if (ship.isEmpty() || port.isEmpty() || order.isEmpty()) {
+	        return new LinkedList<>();
+	    }
 
-		if (ship == null || port == null || order == null) {
-			return new LinkedList<Warehouse>();
-		}
+	    Route route = routeRepository.findRouteFromPorts(port.get(), order.get().getDestination()).orElse(null);
+	    
+	    if (route == null) {
+	    	return new LinkedList<>();
+	    }
 
-		Route route = routeRepository.findRouteFromPorts(port, order.getDestination());
+	    Date endDate = utils.getEndDateFromDays(collectionDate, ship.get(), route);
 
-		Date endDate = utils.getEndDateFromDays(collectionDate, ship, route);
+	    List<Warehouse> allWarehouses = warehouseRepository.findByPort(order.get().getDestination());
 
-		List<Warehouse> allWarehouses = warehouseRepository.findByPort(order.getDestination());
+	    List<Warehouse> availableWarehouses = allWarehouses.stream()
+	            .filter(current -> {
+	                Collection<Schedule> schedules = scheduleRepository.findDateReleventScheduleByWarehouse(order.get().getDeliveryDate(), endDate, current);
 
-		Iterator<Warehouse> i = allWarehouses.iterator();
-		while (i.hasNext()) {
-			Warehouse current = i.next();
+	                int totalStored = schedules.stream().mapToInt(Schedule::getStoredCrates).sum();
 
-			Collection<Schedule> schedules = scheduleRepository
-					.findDateReleventScheduleByWarehouse(order.getDeliveryDate(), endDate, current);
+	                schedules = scheduleRepository.findByOrder(order.get());
+	                int totalOrder = schedules.stream().mapToInt(Schedule::getStoredCrates).sum();
 
-			int totalStored = 0;
+	                int needToStore = Math.min(order.get().getQuantity() - totalOrder, ship.get().getCapacity());
 
-			for (Schedule schedule : schedules) {
-				totalStored += schedule.getStoredCrates();
-			}
+	                return current.getCapacity() - totalStored >= needToStore;
+	            })
+	            .collect(Collectors.toList());
 
-			schedules = scheduleRepository.findByOrder(order);
-
-			int totalOrder = 0;
-			for (Schedule schedule : schedules) {
-				totalOrder += schedule.getStoredCrates();
-			}
-
-			int needToStore = order.getQuantity() - totalOrder < ship.getCapacity() ? order.getQuantity() - totalOrder
-					: ship.getCapacity();
-
-			if (current.getCapacity() - totalStored < needToStore) {
-				i.remove();
-			}
-
-		}
-
-		return allWarehouses;
+	    return availableWarehouses;
 	}
 
 	protected JpaRepository<Warehouse, Long> getRepository() {

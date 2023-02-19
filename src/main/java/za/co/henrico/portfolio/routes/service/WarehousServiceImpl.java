@@ -54,7 +54,7 @@ public class WarehousServiceImpl extends AbstractRestServiceImpl<Warehouse, Long
 	@Transactional
 	public Collection<Warehouse> save(Warehouse warehouse) {
 		if (warehouse.getId() != null)
-			warehouseRepository.delete(warehouse);
+			warehouseRepository.deleteById(warehouse.getId());
 		
 		warehouseRepository.save(warehouse);
 

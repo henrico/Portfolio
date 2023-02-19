@@ -33,6 +33,14 @@ import jakarta.persistence.Transient;
 @Entity
 public abstract class Warehouse extends AbstractPersistable<Long> {
 
+	public Warehouse() {
+		super();
+	}
+
+	public Warehouse(Long id) {
+		setId(id);
+	}
+
 	public String getName() {
 		return name;
 	}

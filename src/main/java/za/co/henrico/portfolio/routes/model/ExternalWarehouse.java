@@ -20,6 +20,11 @@ public class ExternalWarehouse extends Warehouse {
 		setType("EXTERNAL");
 	}
 
+	public ExternalWarehouse(Long id) {
+		super(id);
+		setType("EXTERNAL");
+	}
+
 	public BigDecimal getTransportCost() {
 		return transportCost;
 	}

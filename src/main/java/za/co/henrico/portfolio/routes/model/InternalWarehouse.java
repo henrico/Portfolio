@@ -16,6 +16,11 @@ public class InternalWarehouse extends Warehouse {
 		setType("INTERNAL");
 	}
 
+	public InternalWarehouse(Long id) {
+		super(id);
+		setType("INTERNAL");
+	}
+
 	@Override
 	protected BigDecimal getAditionalCost() {
 		return BigDecimal.ZERO;

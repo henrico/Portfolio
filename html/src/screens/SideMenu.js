@@ -23,10 +23,6 @@ export default class SideMenu extends React.Component {
           </li>
 
           <li>
-            <a onClick={() => this.setActive(Screens.NEURALNET)}>Neural Net</a>
-          </li>
-
-          <li>
             <a href="javascript:window.open('https://github.com/henrico/Portfolio')">
               Source Code
             </a>

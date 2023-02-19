@@ -115,3 +115,16 @@ a:hover {
 .nav-wizard .container-fluid {
   font-size: 20px !important;
 }*/
+
+.home{
+	margin-left:20px;
+}
+
+.home p{
+	padding-left:15px;
+	padding-bottom:20px;
+}
+
+.home h4{
+	padding-left:7px;
+}

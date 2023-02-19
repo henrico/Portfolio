@@ -1,52 +1,41 @@
 export default class Introduction extends React.Component {
-  render() {
-    return (
-      <div>
-        <h2>Overview</h2>
-        <p>My name is Henrico Robinson.</p>
+	render() {
+		return (
+			<div class="home">
+				<h2>Overview</h2>
+				<p>My name is Henrico Robinson, and I am a skilled full-stack software developer.</p>
 
-        <p>
-          I've created some examples to illustrate my capabilities as a
-          full-stack software developer.
-        </p>
+				<p>
+					As part of my portfolio, I have created the below example that demonstrate my abilities
+					in software development.
+				</p>
 
-        <h2>Route Planner</h2>
-        <p>
-          This is a simple fictitious application that makes extensive use of
-          Java EE and REST interfaces for the back-end, mainly using
-          Spring-based frameworks.
-        </p>
+				<h2>Route Planner</h2>
+				<p>
+					One example of my work is a fictitious application that I developed using Java EE and REST
+					interfaces on the back-end, primarily using Spring-based frameworks. The user interface was
+					created with React and styled with Bootstrap.
+				</p>
 
-        <p>The user-interface is written in React using Bootstrap.</p>
+				<h4>How to use it</h4>
 
-        <h4>How to use it</h4>
+				<p>
+					This application is designed to schedule routes for trade ships. Users can add elements to a
+					product shipping route, and once all items have been added, a schedule can be created. The
+					application then uses speed and availability to determine the warehouse and ship that will
+					fulfill and deliver the order on time.
+				</p>
 
-        <p>
-          It schedules routes for trade ships. Once all elements to a product
-          shipping route have been added, can a schedule be created. The
-          application determines the warehouse and ship that will fulfil and
-          deliver the order in time based on speed and availability.
-        </p>
-        <h2>Neural Net</h2>
-        <p>
-          I've written a color scheme generator using a Perceptron Neural
-          Network.
-        </p>
-
-        <p>
-          This neural net learns how to generate a color scheme by analyzing the
-          relationships between a color's red, green and blue values.
-        </p>
-
-        <h2>Source Code</h2>
-        <p>
-          All sources can be found at{' '}
-          <a href="javascript:window.open('https://github.com/henrico/Portfolio')">
-            GitHub
-          </a>
-          .
-        </p>
-      </div>
-    );
-  }
+				<h2>Source Code</h2>
+				<p>
+					If you are interested in exploring the source code for this and other projects that I have worked
+					on, you can find them on my GitHub profile:<br/>
+					<a href="https://github.com/henrico/Portfolio" target="_blank" rel="noopener noreferrer">
+						https://github.com/henrico/Portfolio
+					</a>
+					.
+				</p>
+			</div>
+		);
+	}
 }

@@ -1,13 +1,10 @@
 package za.co.henrico.portfolio.routes.controller;
 
-import org.modelmapper.PropertyMap;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import za.co.henrico.portfolio.dto.ProductDTO;
-import za.co.henrico.portfolio.dto.RouteDTO;
 import za.co.henrico.portfolio.routes.model.Product;
-import za.co.henrico.portfolio.routes.model.Route;
 import za.co.henrico.portfolio.routes.service.RestService;
 
 @RestController
@@ -35,10 +32,10 @@ public class ProductController extends AbstractAppController<Product, Long, Prod
 
 	@Override
 	protected Product mapChildren(Product entity, ProductDTO dto) {
-		
+
 		return entity;
 	}
-	
+
 	@Override
 	protected void applyMappingRules() {
 	}

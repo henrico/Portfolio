@@ -9,12 +9,13 @@ import org.springframework.data.jpa.repository.JpaRepository;
 
 import jakarta.transaction.Transactional;
 
-public abstract class AbstractRestServiceImpl<O extends AbstractPersistable<T>, T extends Serializable> implements RestService<O, T> {
+public abstract class AbstractRestServiceImpl<O extends AbstractPersistable<T>, T extends Serializable>
+		implements RestService<O, T> {
 
 	public Optional<O> getById(T id) {
 		return getRepository().findById(id);
 	}
-	
+
 	@Override
 	public Collection<O> getList() {
 		return getRepository().findAll();

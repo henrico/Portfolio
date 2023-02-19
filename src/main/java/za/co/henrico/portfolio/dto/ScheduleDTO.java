@@ -2,22 +2,9 @@ package za.co.henrico.portfolio.dto;
 
 import java.math.BigDecimal;
 import java.util.Date;
-import java.util.concurrent.TimeUnit;
-
-import org.springframework.data.jpa.domain.AbstractPersistable;
-
-import jakarta.persistence.Basic;
-import jakarta.persistence.Entity;
-import jakarta.persistence.JoinColumn;
-import jakarta.persistence.ManyToOne;
-import jakarta.persistence.NamedQueries;
-import jakarta.persistence.NamedQuery;
-import jakarta.persistence.Temporal;
-import jakarta.persistence.TemporalType;
-import jakarta.persistence.Transient;
 
 public class ScheduleDTO {
-	
+
 	private Long id;
 
 	private OrderSimpleDTO order;
@@ -33,7 +20,7 @@ public class ScheduleDTO {
 	private WarehouseSimpleDTO warehouse;
 
 	private Integer storedCrates;
-	
+
 	private BigDecimal cost;
 
 	public Long getId() {

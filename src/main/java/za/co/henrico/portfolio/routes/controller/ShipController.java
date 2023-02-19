@@ -1,13 +1,10 @@
 package za.co.henrico.portfolio.routes.controller;
 
-import org.modelmapper.PropertyMap;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import za.co.henrico.portfolio.dto.ShipDTO;
-import za.co.henrico.portfolio.dto.WarehouseDTO;
 import za.co.henrico.portfolio.routes.model.Ship;
-import za.co.henrico.portfolio.routes.model.Warehouse;
 import za.co.henrico.portfolio.routes.service.RestService;
 
 @RestController
@@ -34,7 +31,7 @@ public class ShipController extends AbstractAppController<Ship, Long, ShipDTO> {
 
 		return entity;
 	}
-	
+
 	@Override
 	protected void applyMappingRules() {
 	}

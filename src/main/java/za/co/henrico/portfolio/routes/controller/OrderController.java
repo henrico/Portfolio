@@ -5,9 +5,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import za.co.henrico.portfolio.dto.OrderDTO;
-import za.co.henrico.portfolio.dto.PortDTO;
 import za.co.henrico.portfolio.routes.model.Order;
-import za.co.henrico.portfolio.routes.model.Port;
 import za.co.henrico.portfolio.routes.service.RestService;
 
 @RestController
@@ -35,16 +33,16 @@ public class OrderController extends AbstractAppController<Order, Long, OrderDTO
 		entity.setProduct(productService.getById(dto.getProduct().getId()).orElseThrow());
 		return entity;
 	}
-	
+
 	@Override
 	protected void applyMappingRules() {
 		modelMapper.addMappings(new PropertyMap<OrderDTO, Order>() {
-            @Override
-            protected void configure() {
-                skip(destination.getDestination());
-                skip(destination.getProduct());
-            }
-        });
+			@Override
+			protected void configure() {
+				skip(destination.getDestination());
+				skip(destination.getProduct());
+			}
+		});
 	}
 
 }

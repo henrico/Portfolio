@@ -36,16 +36,13 @@ public class ScheduleController extends AbstractAppController<Schedule, Long, Sc
 	@RequestMapping("/unfilledOrders")
 	@Transactional
 	public @ResponseBody Collection<OrderSimpleDTO> getUnfilledOrders() {
-		return orderService.findUnfilledOrders().stream()
-				.map(this::convertToOrdersDto)
-				.collect(Collectors.toList());
+		return orderService.findUnfilledOrders().stream().map(this::convertToOrdersDto).collect(Collectors.toList());
 	}
 
 	@RequestMapping("/portsProducingProduct/{productId}")
 	@Transactional
 	public @ResponseBody Collection<PortSimpleDTO> getPortsProducingProduct(@PathVariable("productId") long id) {
-		return portService.getPortsProducingProduct(id).stream()
-				.map(this::convertToPortsDto)
+		return portService.getPortsProducingProduct(id).stream().map(this::convertToPortsDto)
 				.collect(Collectors.toList());
 	}
 
@@ -55,8 +52,7 @@ public class ScheduleController extends AbstractAppController<Schedule, Long, Sc
 			@PathVariable("portId") long portId, @PathVariable("date") String date) throws ParseException {
 		SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
 		return shipService.getAvailibeShipsForOrder(orderId, portId, dateFormat.parse(date)).stream()
-				.map(this::convertToShipsDto)
-				.collect(Collectors.toList());
+				.map(this::convertToShipsDto).collect(Collectors.toList());
 	}
 
 	@RequestMapping("/warehousesForOrder/{orderId}/{portId}/{shipId}/{date}")
@@ -66,8 +62,7 @@ public class ScheduleController extends AbstractAppController<Schedule, Long, Sc
 			throws ParseException {
 		SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
 		return warehouseService.getAvailibeWarehouses(orderId, portId, shipId, dateFormat.parse(date)).stream()
-				.map(this::convertToWarehousesDto)
-				.collect(Collectors.toList());
+				.map(this::convertToWarehousesDto).collect(Collectors.toList());
 	}
 
 	@Override
@@ -92,30 +87,30 @@ public class ScheduleController extends AbstractAppController<Schedule, Long, Sc
 	@Override
 	protected void applyMappingRules() {
 		modelMapper.addMappings(new PropertyMap<ScheduleDTO, Schedule>() {
-            @Override
-            protected void configure() {
-                skip(destination.getWarehouse());
-                skip(destination.getSource());
-                skip(destination.getShip());
-                skip(destination.getOrder());
-            }
-        });
+			@Override
+			protected void configure() {
+				skip(destination.getWarehouse());
+				skip(destination.getSource());
+				skip(destination.getShip());
+				skip(destination.getOrder());
+			}
+		});
 	}
-	
+
 	protected OrderSimpleDTO convertToOrdersDto(Order entity) {
-        return modelMapper.map(entity, OrderSimpleDTO.class);
-    }
-	
+		return modelMapper.map(entity, OrderSimpleDTO.class);
+	}
+
 	protected PortSimpleDTO convertToPortsDto(Port entity) {
-        return modelMapper.map(entity, PortSimpleDTO.class);
-    }
-	
+		return modelMapper.map(entity, PortSimpleDTO.class);
+	}
+
 	protected ShipSimpleDTO convertToShipsDto(Ship entity) {
-        return modelMapper.map(entity, ShipSimpleDTO.class);
-    }
-	
+		return modelMapper.map(entity, ShipSimpleDTO.class);
+	}
+
 	protected WarehouseSimpleDTO convertToWarehousesDto(Warehouse entity) {
-        return modelMapper.map(entity, WarehouseSimpleDTO.class);
-    }
+		return modelMapper.map(entity, WarehouseSimpleDTO.class);
+	}
 
 }

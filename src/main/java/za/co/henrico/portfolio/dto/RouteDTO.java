@@ -1,9 +1,7 @@
 package za.co.henrico.portfolio.dto;
 
-import org.springframework.data.jpa.domain.AbstractPersistable;
-
 public class RouteDTO {
-	
+
 	private Long id;
 
 	private PortSimpleDTO destinationA;
@@ -11,7 +9,7 @@ public class RouteDTO {
 	private PortSimpleDTO destinationB;
 
 	private Long distance;
-	
+
 	public Long getId() {
 		return id;
 	}

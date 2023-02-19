@@ -1,26 +1,11 @@
 package za.co.henrico.portfolio.dto;
 
-import java.util.Collection;
 import java.util.Date;
 
-import org.springframework.data.jpa.domain.AbstractPersistable;
-
-import jakarta.persistence.Basic;
-import jakarta.persistence.CascadeType;
-import jakarta.persistence.Entity;
-import jakarta.persistence.EnumType;
-import jakarta.persistence.Enumerated;
-import jakarta.persistence.FetchType;
-import jakarta.persistence.JoinColumn;
-import jakarta.persistence.NamedQuery;
-import jakarta.persistence.OneToMany;
-import jakarta.persistence.OneToOne;
-import jakarta.persistence.Temporal;
-import jakarta.persistence.TemporalType;
 import za.co.henrico.portfolio.routes.model.OrderStatus;
 
 public class OrderDTO {
-	
+
 	private Long id;
 
 	private PortSimpleDTO destination;

@@ -6,7 +6,7 @@ export default class Introduction extends React.Component {
 				<p>My name is Henrico Robinson, and I am a skilled full-stack software developer.</p>
 
 				<p>
-					As part of my portfolio, I have created the below example that demonstrate my abilities
+					As part of my portfolio, I have created the below example that demonstrates my abilities
 					in software development.
 				</p>
 

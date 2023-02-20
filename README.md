@@ -2,6 +2,8 @@
 
 As part of my portfolio, I have created this example that demonstrates my abilities in software development.
 
+This application is designed to schedule routes for trade ships. Users can add elements to a product shipping route, and once all items have been added, a schedule can be created. The application then uses speed and availability to determine the warehouse and ship that will fulfill and deliver the order on time.
+
 ## Setting up the Backend
 
 ### Prerequisites
@@ -20,8 +22,6 @@ The following are required to set up the backend:
 ### Running the Backend
 
 To start the backend, run `mvn exec:java` in the root directory of the backend using the command line.
-
-This application is designed to schedule routes for trade ships. Users can add elements to a product shipping route, and once all items have been added, a schedule can be created. The application then uses speed and availability to determine the warehouse and ship that will fulfill and deliver the order on time.
 
 ### Database
 

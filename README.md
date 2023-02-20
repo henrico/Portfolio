@@ -1,6 +1,6 @@
 # Portfolio
 
-As part of my portfolio, I have created the below example that demonstrates my abilities in software development.
+As part of my portfolio, I have created this example that demonstrates my abilities in software development.
 
 ## Setting up the Backend
 
@@ -29,15 +29,14 @@ The backend currently runs on an in-memory database.
 
 ### Prerequisites
 
-The following are required to set up the frontend:
+The following is required to set up the frontend:
 
 - Node version 16.0.0
 
 ### Installation
 
-1. Navigate to the root directory of the frontend using the command line: /html
+1. Navigate to the root directory(/html) of the frontend using the command line.
 2. Run `npm install` to install the required dependencies.
-3. Run `npm start` to start the frontend service on port 3000.
 
 ### Running the Frontend
 

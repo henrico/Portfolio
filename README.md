@@ -21,6 +21,8 @@ The following are required to set up the backend:
 
 To start the backend, run `mvn exec:java` in the root directory of the backend using the command line.
 
+This application is designed to schedule routes for trade ships. Users can add elements to a product shipping route, and once all items have been added, a schedule can be created. The application then uses speed and availability to determine the warehouse and ship that will fulfill and deliver the order on time.
+
 ### Database
 
 The backend currently runs on an in-memory database.

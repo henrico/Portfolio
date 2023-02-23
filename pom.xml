@@ -56,9 +56,75 @@
 
 	<build>
 		<plugins>
+			
+	        <plugin>
+			  <groupId>org.codehaus.mojo</groupId>
+			  <artifactId>exec-maven-plugin</artifactId>
+			  <version>3.0.0</version>
+			  <executions>
+			    <execution>
+			      <id>npm-build</id>
+			      <goals>
+			        <goal>exec</goal>
+			      </goals>
+			      <phase>process-resources</phase>
+			      <configuration>
+			        <executable>npm</executable>
+			        <workingDirectory>${project.basedir}/html</workingDirectory>
+			        <arguments>
+			          <argument>run</argument>
+			          <argument>build</argument>
+			        </arguments>
+			      </configuration>
+			    </execution>
+			  </executions>
+			</plugin>
+			
 			<plugin>
+		      <groupId>org.apache.maven.plugins</groupId>
+		      <artifactId>maven-resources-plugin</artifactId>
+		      <version>3.2.0</version>
+		      <executions>
+		        <execution>
+		          <id>copy-static-files</id>
+		          <phase>process-resources</phase>
+		          <goals>
+		            <goal>copy-resources</goal>
+		          </goals>
+		          <configuration>
+		            <outputDirectory>${project.build.outputDirectory}/static</outputDirectory>
+		            <resources>
+		              <resource>
+		                <directory>html/dist</directory>
+		                <includes>
+		                  <include>**/*</include>
+		                </includes>
+		              </resource>
+		            </resources>
+		          </configuration>
+		        </execution>
+		      </executions>
+		    </plugin>
+			
+			<!--<plugin>
+		      <groupId>org.apache.maven.plugins</groupId>
+		      <artifactId>maven-jar-plugin</artifactId>
+		      <version>3.2.0</version>
+		      <configuration>
+		        <includes>
+		          <include>static/**/*</include>
+		        </includes>
+		      </configuration>
+		    </plugin>-->
+		    
+		    
+		    
+		    <plugin>
 				<groupId>org.springframework.boot</groupId>
 				<artifactId>spring-boot-maven-plugin</artifactId>
+				<configuration>
+	                <mainClass>za.co.henrico.portfolio.App</mainClass>
+	            </configuration>
 			</plugin>
 			<plugin>
 	            <groupId>org.codehaus.mojo</groupId>

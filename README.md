@@ -4,6 +4,13 @@ As part of my portfolio, I have created this example that demonstrates my abilit
 
 This application is designed to schedule routes for trade ships. Users can add elements to a product shipping route, and once all items have been added, a schedule can be created. The application then uses speed and availability to determine the warehouse and ship that will fulfill and deliver the order on time.
 
+# Running the application from the jar file:
+Download the jar from:
+https://github.com/henrico/Portfolio/releases/tag/0.0.1
+Then start the jar file, and navigate to http:localhost:8080 in the browser.
+
+# Running the code:
+
 ## Setting up the Backend
 
 ### Prerequisites

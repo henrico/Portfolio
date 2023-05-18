@@ -6,7 +6,7 @@ This application is designed to schedule routes for trade ships. Users can add e
 
 # Running the application from the jar file:
 Download the jar from:
-https://github.com/henrico/Portfolio/releases/tag/0.0.1
+https://github.com/henrico/Portfolio/releases/tag/r0.0.1
 Then start the jar file, and navigate to http:localhost:8080 in the browser.
 
 # Running the code:
